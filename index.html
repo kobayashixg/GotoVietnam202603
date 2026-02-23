@@ -40,6 +40,104 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    html.is-locked body {
+      overflow: hidden;
+    }
+
+    html.is-locked .navbar,
+    html.is-locked .page-wrapper {
+      pointer-events: none;
+      user-select: none;
+      filter: blur(6px);
+      opacity: 0.55;
+    }
+
+    .auth-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(5, 8, 20, 0.86);
+      backdrop-filter: blur(16px);
+    }
+
+    html.is-locked .auth-gate {
+      display: flex;
+    }
+
+    .auth-card {
+      width: min(520px, 100%);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(13, 16, 32, 0.96), rgba(5, 8, 20, 0.98));
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: var(--shadow-soft);
+      padding: 22px 18px 18px;
+    }
+
+    .auth-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      margin-bottom: 10px;
+    }
+
+    .auth-sub {
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .auth-form {
+      display: grid;
+      gap: 10px;
+    }
+
+    .auth-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .auth-input {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(9, 14, 40, 0.86);
+      color: var(--text-main);
+      padding: 12px 12px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .auth-input:focus {
+      border-color: rgba(255, 235, 59, 0.65);
+    }
+
+    .auth-button {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 12px;
+      font-weight: 800;
+      color: #101016;
+      background: linear-gradient(90deg, rgba(255, 235, 59, 0.95), rgba(255, 112, 67, 0.90));
+      cursor: pointer;
+      transition: transform 0.12s ease, filter 0.2s ease;
+    }
+
+    .auth-button:hover {
+      filter: brightness(1.02);
+      transform: translateY(-1px);
+    }
+
+    .auth-error {
+      color: var(--accent-yellow);
+      font-size: 0.84rem;
+      line-height: 1.5;
+    }
+
     .page-wrapper {
       max-width: 1120px;
       margin: 0 auto;
@@ -846,6 +944,10 @@
         padding-top: 12px;
       }
 
+      .auth-gate {
+        display: none !important;
+      }
+
       .hero-card,
       .section-card,
       .member-group,
@@ -872,8 +974,34 @@
       }
     }
   </style>
+
+  <script>
+    (function () {
+      const KEY = 'hba_vn_2026_auth';
+      try {
+        if (sessionStorage.getItem(KEY) !== '1') {
+          document.documentElement.classList.add('is-locked');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('is-locked');
+      }
+    })();
+  </script>
 </head>
 <body>
+  <div class="auth-gate" id="auth-gate" aria-hidden="true">
+    <div class="auth-card" role="dialog" aria-modal="true" aria-label="パスワード入力">
+      <div class="auth-title">このページはパスワード保護されています</div>
+      <div class="auth-sub">パスワードを入力すると閲覧できます（簡易保護：高度なアクセス制御ではありません）。</div>
+      <form class="auth-form" id="auth-form">
+        <label class="auth-label" for="auth-password">パスワード</label>
+        <input class="auth-input" id="auth-password" type="password" inputmode="text" autocomplete="current-password" required />
+        <button class="auth-button" type="submit">開く</button>
+        <div class="auth-error" id="auth-error" hidden>パスワードが違います。</div>
+      </form>
+    </div>
+  </div>
+
   <nav class="navbar">
     <div class="nav-inner">
       <div class="nav-logo">
@@ -2156,6 +2284,82 @@
   </script>
 
   <script>
+    // Password gate (client-side)
+    (function () {
+      const KEY = 'hba_vn_2026_auth';
+      const EXPECTED_SHA256 = '30b1efc688fd3bf48c8d0bed9fba3ac5cf730deab406ed3aae1c3c7582afbcfb';
+
+      function setLocked(locked) {
+        document.documentElement.classList.toggle('is-locked', !!locked);
+        const gate = document.getElementById('auth-gate');
+        if (gate) gate.setAttribute('aria-hidden', locked ? 'false' : 'true');
+      }
+
+      function isUnlocked() {
+        try {
+          return sessionStorage.getItem(KEY) === '1';
+        } catch (e) {
+          return false;
+        }
+      }
+
+      function markUnlocked() {
+        try {
+          sessionStorage.setItem(KEY, '1');
+        } catch (e) {
+          // ignore
+        }
+      }
+
+      async function sha256Hex(text) {
+        if (!window.crypto?.subtle) return '';
+        const data = new TextEncoder().encode(text);
+        const digest = await window.crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(digest))
+          .map((b) => b.toString(16).padStart(2, '0'))
+          .join('');
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        if (isUnlocked()) {
+          setLocked(false);
+          return;
+        }
+
+        setLocked(true);
+
+        const form = document.getElementById('auth-form');
+        const input = document.getElementById('auth-password');
+        const error = document.getElementById('auth-error');
+        if (!form || !input) return;
+
+        setTimeout(() => input.focus(), 0);
+
+        form.addEventListener('submit', async (ev) => {
+          ev.preventDefault();
+          if (error) error.hidden = true;
+
+          const hash = await sha256Hex(input.value || '');
+          if (hash && hash === EXPECTED_SHA256) {
+            markUnlocked();
+            input.value = '';
+            setLocked(false);
+            return;
+          }
+
+          if (error) {
+            error.hidden = false;
+            if (!window.crypto?.subtle) {
+              error.textContent = 'このブラウザでは検証できません（Web Crypto未対応）。';
+            } else {
+              error.textContent = 'パスワードが違います。';
+            }
+          }
+          input.select();
+        });
+      });
+    })();
+
     // Countdown timer
     (function () {
       const target = new Date('2026-02-26T00:00:00+09:00').getTime();
