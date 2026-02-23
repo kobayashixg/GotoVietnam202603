@@ -1,0 +1,2386 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HBA Vietnam Business Trip 2026</title>
+  <style>
+    :root {
+      --bg-main: #050814;
+      --bg-elevated: #0d1020;
+      --bg-elevated-soft: #121527;
+      --accent-red: #e53935;
+      --accent-yellow: #ffeb3b;
+      --accent-soft: #ff7043;
+      --text-main: #f5f7ff;
+      --text-muted: #a3acc9;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.65);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --nav-height: 64px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #101633 0, #050814 45%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page-wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: calc(var(--nav-height) + 24px) 20px 40px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to right, rgba(5, 8, 20, 0.94), rgba(2, 3, 8, 0.96));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-inner {
+      width: 100%;
+      max-width: 1120px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .nav-logo em {
+      font-style: normal;
+      font-weight: 600;
+      color: var(--accent-yellow);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+
+    .nav-link {
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .nav-link span {
+      display: none;
+    }
+
+    .nav-link:hover {
+      background: rgba(229, 57, 53, 0.16);
+      border-color: rgba(229, 57, 53, 0.8);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .nav-link.nav-primary {
+      background: linear-gradient(135deg, var(--accent-red), #ff9800);
+      color: #050814;
+      font-weight: 600;
+    }
+
+    .nav-link.nav-primary:hover {
+      filter: brightness(1.05);
+    }
+
+    @media (min-width: 768px) {
+      .nav-link span {
+        display: inline;
+      }
+    }
+
+    /* Hero */
+    .hero-card {
+      background: radial-gradient(circle at top left, rgba(229, 57, 53, 0.16) 0, rgba(229, 57, 53, 0.0) 55%),
+        radial-gradient(circle at bottom right, rgba(255, 235, 59, 0.18) 0, rgba(255, 235, 59, 0.0) 60%),
+        linear-gradient(135deg, rgba(11, 16, 40, 0.9), rgba(5, 8, 20, 0.98));
+      border-radius: 28px;
+      padding: 28px 24px 24px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(3, 12, 50, 0.78);
+      border-radius: var(--radius-pill);
+      padding: 5px 10px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      margin-bottom: 10px;
+    }
+
+    .hero-pill strong {
+      color: var(--accent-yellow);
+      font-weight: 600;
+    }
+
+    .hero-main {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .hero-text {
+      max-width: 620px;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-size: clamp(1.7rem, 2.4vw + 1.2rem, 2.4rem);
+      letter-spacing: 0.03em;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.35em;
+    }
+
+    .hero-title span.main {
+      font-weight: 700;
+    }
+
+    .hero-title span.year {
+      font-size: 0.9em;
+      font-weight: 500;
+      color: var(--accent-yellow);
+    }
+
+    .hero-subtitle {
+      margin-top: 8px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .hero-route {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .hero-route strong {
+      color: #fff;
+    }
+
+    .hero-highlights {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.8rem;
+    }
+
+    .hero-tag {
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(8, 18, 64, 0.84);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-tag strong {
+      color: var(--accent-soft);
+      font-weight: 600;
+    }
+
+    .hero-timer {
+      margin-left: auto;
+      background: rgba(3, 12, 50, 0.92);
+      border-radius: 20px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      min-width: 230px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-self: flex-start;
+      z-index: 1;
+    }
+
+    .timer-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .timer-label strong {
+      color: #fff;
+    }
+
+    .timer-label span.date-label {
+      font-size: 0.72rem;
+      opacity: 0.85;
+    }
+
+    .timer-values {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .timer-box {
+      flex: 1;
+      background: linear-gradient(145deg, rgba(4, 12, 40, 0.96), rgba(10, 26, 80, 0.96));
+      border-radius: 12px;
+      padding: 6px 4px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .timer-box span.value {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .timer-box span.unit {
+      display: block;
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    .timer-status {
+      font-size: 0.78rem;
+      color: var(--accent-yellow);
+      text-align: right;
+      min-height: 1.2em;
+    }
+
+    .hero-orbit {
+      position: absolute;
+      inset: -80px -120px auto auto;
+      pointer-events: none;
+      opacity: 0.14;
+    }
+
+    .hero-orbit::before,
+    .hero-orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px dashed rgba(255, 255, 255, 0.22);
+      transform-origin: center;
+      animation: orbit-spin linear infinite;
+    }
+
+    .hero-orbit::before {
+      width: 220px;
+      height: 220px;
+      right: 40px;
+      top: -40px;
+      animation-duration: 46s;
+    }
+
+    .hero-orbit::after {
+      width: 150px;
+      height: 150px;
+      right: 120px;
+      top: 12px;
+      animation-duration: 32s;
+      animation-direction: reverse;
+    }
+
+    @keyframes orbit-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .hero-main {
+        flex-direction: row;
+        align-items: stretch;
+      }
+
+      .hero-timer {
+        align-self: center;
+      }
+    }
+
+    /* Sections */
+    section {
+      margin-top: 32px;
+    }
+
+    .section-card {
+      background: linear-gradient(145deg, rgba(7, 10, 30, 0.98), rgba(4, 6, 18, 0.98));
+      border-radius: var(--radius-lg);
+      padding: 20px 18px 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title span.emoji {
+      font-size: 1.25rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Members */
+    .member-groups {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .member-group {
+      border-radius: var(--radius-md);
+      background: radial-gradient(circle at top left, rgba(229, 57, 53, 0.12) 0, rgba(229, 57, 53, 0.0) 55%),
+        rgba(9, 11, 30, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 12px 12px 10px;
+    }
+
+    .member-group-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .member-group-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .member-group-meta {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .member-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .member-card {
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(5, 9, 26, 0.98);
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .member-card span.badge {
+      font-size: 0.75rem;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--accent-yellow);
+    }
+
+    /* Schedule tabs */
+    .schedule-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .tab-button {
+      flex: 1 1 72px;
+      min-width: 0;
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(5, 9, 26, 0.9);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .tab-button strong {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .tab-button.active {
+      background: linear-gradient(135deg, var(--accent-red), #ff9800);
+      color: #050814;
+      border-color: transparent;
+      transform: translateY(-1px);
+    }
+
+    .tab-button.active strong {
+      color: #050814;
+    }
+
+    .schedule-panels {
+      border-radius: 16px;
+      background: rgba(3, 8, 30, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 14px 14px 10px;
+      max-height: 460px;
+      overflow: auto;
+      scrollbar-width: thin;
+    }
+
+    .schedule-panel {
+      display: none;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .schedule-panel.active {
+      display: block;
+    }
+
+    .schedule-header-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .schedule-header-line h3 {
+      font-size: 0.96rem;
+    }
+
+    .schedule-header-line span.date-label {
+      font-size: 0.78rem;
+      color: var(--accent-yellow);
+    }
+
+    .schedule-header-line span.location-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .schedule-list {
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      font-size: 0.84rem;
+    }
+
+    .schedule-item {
+      padding: 7px 9px;
+      border-radius: 10px;
+      background: rgba(9, 14, 40, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 4px solid rgba(255, 255, 255, 0.14);
+      display: flex;
+      gap: 8px;
+    }
+
+    .schedule-item[data-kind="gather"] {
+      border-left-color: var(--accent-red);
+    }
+
+    .schedule-item[data-kind="move"] {
+      border-left-color: var(--accent-yellow);
+    }
+
+    .schedule-item[data-kind="meal"] {
+      border-left-color: var(--accent-soft);
+    }
+
+    .schedule-item[data-kind="meeting"] {
+      border-left-color: var(--accent-soft);
+    }
+
+    .schedule-item[data-kind="sightseeing"] {
+      border-left-color: var(--accent-yellow);
+    }
+
+    .schedule-item[data-kind="stay"] {
+      border-left-color: var(--text-muted);
+    }
+
+    .schedule-time {
+      min-width: 60px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .schedule-desc {
+      flex: 1;
+    }
+
+    .schedule-desc strong {
+      color: var(--accent-soft);
+      font-weight: 600;
+    }
+
+    .schedule-note {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      white-space: pre-line;
+    }
+
+    .schedule-item.is-group {
+      background: linear-gradient(135deg, rgba(229, 57, 53, 0.55), rgba(5, 8, 20, 0.92));
+      border-color: rgba(255, 255, 255, 0.14);
+      border-left-color: var(--accent-red);
+      font-size: 0.9rem;
+    }
+
+    .schedule-item.is-group:not(:first-child) {
+      margin-top: 12px;
+    }
+
+    .schedule-item.is-group .schedule-time {
+      color: var(--accent-yellow);
+      font-weight: 700;
+    }
+
+    .schedule-item.is-group .schedule-desc strong {
+      color: var(--accent-yellow);
+    }
+
+    .schedule-item.is-group .schedule-note {
+      color: var(--accent-yellow);
+    }
+
+    /* Important info */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .info-card {
+      background: rgba(7, 10, 28, 0.98);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      padding: 10px 11px 9px;
+      font-size: 0.84rem;
+    }
+
+    .info-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .info-card-title {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .info-list {
+      list-style: none;
+      display: grid;
+      gap: 3px;
+    }
+
+    .info-list li {
+      color: var(--text-muted);
+    }
+
+    .info-list strong {
+      color: #fff;
+    }
+
+    /* Gifts table */
+    .table-wrapper {
+      margin-top: 6px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(4, 8, 26, 0.96);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+
+    thead {
+      background: linear-gradient(135deg, rgba(229, 57, 53, 0.95), rgba(255, 152, 0, 0.95));
+      color: #050814;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 7px 10px;
+      font-weight: 600;
+    }
+
+    tbody tr:nth-child(odd) {
+      background: rgba(2, 6, 22, 0.95);
+    }
+
+    tbody tr:nth-child(even) {
+      background: rgba(10, 14, 34, 0.98);
+    }
+
+    tbody td {
+      padding: 7px 10px;
+      color: var(--text-muted);
+    }
+
+    tbody td strong {
+      color: #fff;
+    }
+
+    /* Maps */
+    .map-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .map-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 9px 11px;
+      border-radius: 12px;
+      text-decoration: none;
+      background: radial-gradient(circle at top left, rgba(229, 57, 53, 0.25) 0, rgba(229, 57, 53, 0.0) 60%),
+        rgba(5, 9, 28, 0.98);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff;
+      font-size: 0.82rem;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+    }
+
+    .map-button .label {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .map-button span.main {
+      font-weight: 600;
+    }
+
+    .map-button span.sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .map-button span.icon-right {
+      font-size: 1rem;
+    }
+
+    .map-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8);
+      border-color: rgba(255, 235, 59, 0.9);
+      background: radial-gradient(circle at top left, rgba(255, 235, 59, 0.26) 0, rgba(255, 235, 59, 0.0) 60%),
+        rgba(5, 9, 28, 0.98);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 26px;
+      padding: 14px 4px 4px;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .footer-main {
+      margin-bottom: 4px;
+    }
+
+    .footer-updated span.label {
+      opacity: 0.8;
+    }
+
+    .footer-updated span.value {
+      color: var(--accent-yellow);
+    }
+
+    /* Scroll fade-in */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .fade-section.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 599px) {
+      .hero-card {
+        padding: 22px 18px 18px;
+      }
+
+      .hero-timer {
+        width: 100%;
+      }
+
+      .section-card {
+        padding: 16px 14px 14px;
+      }
+
+      .schedule-time {
+        min-width: 52px;
+      }
+    }
+
+    /* Print (white background, simple) */
+    @media print {
+      :root {
+        --bg-main: #ffffff;
+        --bg-elevated: #ffffff;
+        --bg-elevated-soft: #ffffff;
+        --text-main: #000000;
+        --text-muted: #333333;
+        --border-subtle: #cccccc;
+        --shadow-soft: none;
+      }
+
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+
+      .navbar {
+        position: static;
+        background: #ffffff !important;
+        border-bottom: 1px solid #cccccc;
+        box-shadow: none;
+      }
+
+      .page-wrapper {
+        padding-top: 12px;
+      }
+
+      .hero-card,
+      .section-card,
+      .member-group,
+      .schedule-panels,
+      .info-card,
+      .table-wrapper,
+      .map-button {
+        background: #ffffff !important;
+        box-shadow: none !important;
+        border-color: #cccccc !important;
+      }
+
+      .hero-orbit {
+        display: none !important;
+      }
+
+      .fade-section {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      a {
+        color: #000000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span>🇻🇳</span>
+        <span><em>HBA</em> Vietnam Trip 2026</span>
+      </div>
+      <div class="nav-links">
+        <a href="#members" class="nav-link">👥<span>メンバー</span></a>
+        <a href="#schedule" class="nav-link">🗓<span>スケジュール</span></a>
+        <a href="#info" class="nav-link">ℹ️<span>重要情報</span></a>
+        <a href="#gifts" class="nav-link">🎁<span>手土産</span></a>
+        <a href="#maps" class="nav-link">🗺<span>マップ</span></a>
+        <a href="#top" class="nav-link nav-primary">⬆️<span>TOP</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-wrapper" id="top">
+    <header class="hero fade-section">
+      <div class="hero-card">
+        <div class="hero-orbit"></div>
+        <div class="hero-pill">✈️ <span>Business Trip</span> <strong>Hanoi → Da Nang → Ho Chi Minh</strong></div>
+        <div class="hero-main">
+          <div class="hero-text">
+            <h1 class="hero-title">
+              <span class="main">🇻🇳 HBA Vietnam Business Trip</span>
+              <span class="year">2026</span>
+            </h1>
+            <p class="hero-subtitle">Feb 26 (Thu) - Mar 4 (Wed)</p>
+            <p class="hero-route">🗺 <strong>Route:</strong> Hanoi → Da Nang → Ho Chi Minh</p>
+            <div class="hero-highlights">
+              <div class="hero-tag">👨‍💼 <strong>企業訪問</strong> &amp; オフショア打合せ</div>
+              <div class="hero-tag">👪 父母会 &amp; 学生顔合わせ</div>
+              <div class="hero-tag">🌏 観光 &amp; チームビルディング</div>
+            </div>
+          </div>
+          <aside class="hero-timer" aria-label="カウントダウンタイマー">
+            <div class="timer-label">
+              <strong>出発までカウントダウン</strong>
+              <span class="date-label">2026-02-26 (JST)</span>
+            </div>
+            <div class="timer-values" id="countdown-values">
+              <div class="timer-box">
+                <span class="value" id="cd-days">--</span>
+                <span class="unit">Days</span>
+              </div>
+              <div class="timer-box">
+                <span class="value" id="cd-hours">--</span>
+                <span class="unit">Hours</span>
+              </div>
+              <div class="timer-box">
+                <span class="value" id="cd-minutes">--</span>
+                <span class="unit">Minutes</span>
+              </div>
+              <div class="timer-box">
+                <span class="value" id="cd-seconds">--</span>
+                <span class="unit">Seconds</span>
+              </div>
+            </div>
+            <div class="timer-status" id="countdown-status"></div>
+          </aside>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Members -->
+      <section id="members" class="fade-section">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title"><span class="emoji">👥</span>メンバー一覧</h2>
+            <p class="section-subtitle">チーム別に確認できます</p>
+          </div>
+          <div class="member-groups">
+            <div class="member-group">
+              <div class="member-group-header">
+                <div class="member-group-title">ハノイ先発隊（Day1 木曜）</div>
+                <div class="member-group-meta">✈️ 成田 → ハノイ</div>
+              </div>
+              <div class="member-cards">
+                <div class="member-card">🚀 脇坂</div>
+                <div class="member-card">🚀 坂見</div>
+                <div class="member-card">🚀 野田</div>
+                <div class="member-card">🚀 藤原</div>
+                <div class="member-card">🚀 稲穂</div>
+              </div>
+            </div>
+
+            <div class="member-group">
+              <div class="member-group-header">
+                <div class="member-group-title">ダナン隊（Day2 金曜）</div>
+                <div class="member-group-meta">🌊 ダナン入り</div>
+              </div>
+              <div class="member-cards">
+                <div class="member-card">🌴 高野</div>
+                <div class="member-card">🌴 南</div>
+              </div>
+            </div>
+
+            <div class="member-group">
+              <div class="member-group-header">
+                <div class="member-group-title">ホーチミン隊（Day3 土曜）</div>
+                <div class="member-group-meta">🏙 成田 → ホーチミン</div>
+              </div>
+              <div class="member-cards">
+                <div class="member-card">🏙 森岡</div>
+                <div class="member-card">🏙 渡辺</div>
+                <div class="member-card">🏙 小林</div>
+              </div>
+            </div>
+
+            <div class="member-group">
+              <div class="member-group-header">
+                <div class="member-group-title">ハノイ→合流（Day2 金曜夜）</div>
+                <div class="member-group-meta">🌙 夜ハノイ到着</div>
+              </div>
+              <div class="member-cards">
+                <div class="member-card"><span class="badge">合流</span> 高橋</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Schedule -->
+      <section id="schedule" class="fade-section">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title"><span class="emoji">🗓</span>7日間スケジュール</h2>
+            <p class="section-subtitle">タブをクリックして各日程を表示</p>
+          </div>
+
+          <div class="schedule-tabs" role="tablist" aria-label="7日間スケジュール">
+            <button class="tab-button active" data-target="day1" role="tab" aria-selected="true" aria-controls="panel-day1">
+              <strong>Day1</strong> 2/26 (木)
+            </button>
+            <button class="tab-button" data-target="day2" role="tab" aria-selected="false" aria-controls="panel-day2">
+              <strong>Day2</strong> 2/27 (金)
+            </button>
+            <button class="tab-button" data-target="day3" role="tab" aria-selected="false" aria-controls="panel-day3">
+              <strong>Day3</strong> 2/28 (土)
+            </button>
+            <button class="tab-button" data-target="day4" role="tab" aria-selected="false" aria-controls="panel-day4">
+              <strong>Day4</strong> 3/1 (日)
+            </button>
+            <button class="tab-button" data-target="day5" role="tab" aria-selected="false" aria-controls="panel-day5">
+              <strong>Day5</strong> 3/2 (月)
+            </button>
+            <button class="tab-button" data-target="day6" role="tab" aria-selected="false" aria-controls="panel-day6">
+              <strong>Day6</strong> 3/3 (火)
+            </button>
+            <button class="tab-button" data-target="day7" role="tab" aria-selected="false" aria-controls="panel-day7">
+              <strong>Day7</strong> 3/4 (水)
+            </button>
+          </div>
+
+          <div class="schedule-panels">
+            <!-- Day1 -->
+            <div class="schedule-panel active" id="panel-day1" data-panel="day1" role="tabpanel" aria-labelledby="day1">
+              <div class="schedule-header-line">
+                <h3>Day 1（2/26 (木)）ハノイ到着</h3>
+                <span class="date-label">✈️ 成田 → ハノイ</span>
+              </div>
+              <ul class="schedule-list" data-schedule-list="day1"></ul>
+            </div>
+
+            <!-- Day2 -->
+            <div class="schedule-panel" id="panel-day2" data-panel="day2" role="tabpanel" aria-labelledby="day2">
+              <div class="schedule-header-line">
+                <h3>Day 2（2/27 (金)）ハノイ &amp; ダナン</h3>
+                <span class="location-label">ハノイ組 / ダナン組 / 高橋常務</span>
+              </div>
+              <ul class="schedule-list" data-schedule-list="day2"></ul>
+            </div>
+
+            <!-- Day3 -->
+            <div class="schedule-panel" id="panel-day3" data-panel="day3" role="tabpanel" aria-labelledby="day3">
+              <div class="schedule-header-line">
+                <h3>Day 3（2/28 (土)）ハノイ→ホーチミン移動日</h3>
+              </div>
+              <ul class="schedule-list" data-schedule-list="day3"></ul>
+            </div>
+
+            <!-- Day4 -->
+            <div class="schedule-panel" id="panel-day4" data-panel="day4" role="tabpanel" aria-labelledby="day4">
+              <div class="schedule-header-line">
+                <h3>Day 4（3/1 (日)）ホーチミン</h3>
+              </div>
+              <ul class="schedule-list" data-schedule-list="day4"></ul>
+            </div>
+
+            <!-- Day5 -->
+            <div class="schedule-panel" id="panel-day5" data-panel="day5" role="tabpanel" aria-labelledby="day5">
+              <div class="schedule-header-line">
+                <h3>Day 5（3/2 (月)）ホーチミン</h3>
+              </div>
+              <ul class="schedule-list" data-schedule-list="day5"></ul>
+            </div>
+
+            <!-- Day6 -->
+            <div class="schedule-panel" id="panel-day6" data-panel="day6" role="tabpanel" aria-labelledby="day6">
+              <div class="schedule-header-line">
+                <h3>Day 6（3/3 (火)）ホーチミン</h3>
+                <span class="location-label">チームA / チームB</span>
+              </div>
+              <ul class="schedule-list" data-schedule-list="day6"></ul>
+            </div>
+
+            <!-- Day7 -->
+            <div class="schedule-panel" id="panel-day7" data-panel="day7" role="tabpanel" aria-labelledby="day7">
+              <div class="schedule-header-line">
+                <h3>Day 7（3/4 (水)）帰国</h3>
+              </div>
+              <ul class="schedule-list" data-schedule-list="day7"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Important info -->
+      <section id="info" class="fade-section">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title"><span class="emoji">ℹ️</span>重要情報</h2>
+            <p class="section-subtitle">現地で迷わないためのポイント</p>
+          </div>
+          <div class="info-grid">
+            <article class="info-card">
+              <div class="info-card-header">
+                <div class="info-card-title">🏨 ホテル情報</div>
+              </div>
+              <ul class="info-list">
+                <li><strong>ハノイ:</strong> デュ パルク ハノイ（84 P. Trần Nhân Tông）</li>
+                <li><strong>ダナン:</strong> フォーポイントバイシェラトン・ダナン</li>
+                <li><strong>ホーチミン:</strong> 相鉄グランドフレッサ サイゴン（8 Lý Tự Trọng, Quận 1）</li>
+              </ul>
+            </article>
+
+            <article class="info-card">
+              <div class="info-card-header">
+                <div class="info-card-title">🚕 移動手段</div>
+              </div>
+              <ul class="info-list">
+                <li>JTB手配の送迎車（サイン: HBA）</li>
+                <li>市内移動は<strong>Grab</strong>推奨</li>
+              </ul>
+            </article>
+
+            <article class="info-card">
+              <div class="info-card-header">
+                <div class="info-card-title">💱 両替</div>
+              </div>
+              <ul class="info-list">
+                <li>Buyingの数字が一番大きい所で両替</li>
+                <li>目安: <strong>1万円 ≈ 1,785,714 VND</strong></li>
+              </ul>
+            </article>
+
+            <article class="info-card">
+              <div class="info-card-header">
+                <div class="info-card-title">📱 通信</div>
+              </div>
+              <ul class="info-list">
+                <li>データローミングONでOK</li>
+                <li>Grab用に個人SIM / ポケットWi-Fi手配済</li>
+              </ul>
+            </article>
+
+            <article class="info-card">
+              <div class="info-card-header">
+                <div class="info-card-title">🔌 コンセント</div>
+              </div>
+              <ul class="info-list">
+                <li>Aタイプ(日本と同じ)が基本</li>
+                <li>電圧<strong>220V</strong>なので充電器の対応電圧を確認</li>
+              </ul>
+            </article>
+
+            <article class="info-card">
+              <div class="info-card-header">
+                <div class="info-card-title">💳 支払い</div>
+              </div>
+              <ul class="info-list">
+                <li><strong>VISA / Master</strong>が便利</li>
+                <li>JCB / AMEX は使えない店が多い</li>
+              </ul>
+            </article>
+
+            <article class="info-card">
+              <div class="info-card-header">
+                <div class="info-card-title">👔 服装</div>
+              </div>
+              <ul class="info-list">
+                <li>基本は<strong>オフィスカジュアル</strong>（ジャケット持参）</li>
+                <li>Cu Chiは汚れてもよい服装 &amp; スニーカー推奨</li>
+              </ul>
+            </article>
+
+            <article class="info-card">
+              <div class="info-card-header">
+                <div class="info-card-title">🌡️ 気温（2月目安）</div>
+              </div>
+              <ul class="info-list">
+                <li>ハノイ: <strong>16–22℃</strong></li>
+                <li>ホーチミン: <strong>23–33℃</strong></li>
+                <li>ダナン: <strong>19–25℃</strong></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gifts -->
+      <section id="gifts" class="fade-section">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title"><span class="emoji">🎁</span>手土産リスト</h2>
+            <p class="section-subtitle">渡す先・品物・担当をひと目でチェック</p>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>渡す先</th>
+                  <th>品物</th>
+                  <th>担当</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>父母会（ハノイ/ダナン/ホーチミン各回）</td>
+                  <td>白い恋人（18枚入）</td>
+                  <td>坂見 / 南 / 坂見</td>
+                </tr>
+                <tr>
+                  <td>リッケイ（ハノイ/ホーチミン）</td>
+                  <td>白い恋人54枚缶入</td>
+                  <td>藤原 / 小林</td>
+                </tr>
+                <tr>
+                  <td>ベトナムOCC</td>
+                  <td>白い恋人54枚缶入</td>
+                  <td>脇坂</td>
+                </tr>
+                <tr>
+                  <td>ICD</td>
+                  <td>白い恋人54枚缶入</td>
+                  <td>小林</td>
+                </tr>
+                <tr>
+                  <td>オロベトナム</td>
+                  <td>白い恋人54枚缶入</td>
+                  <td>野田</td>
+                </tr>
+                <tr>
+                  <td>北陸銀行/ウィザス</td>
+                  <td>小さい何か</td>
+                  <td>野田</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Maps -->
+      <section id="maps" class="fade-section">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title"><span class="emoji">🗺</span>訪問先マップ</h2>
+            <p class="section-subtitle">タップでGoogle Mapsを開く</p>
+          </div>
+          <div class="map-buttons">
+            <a class="map-button" href="https://maps.app.goo.gl/qe4xpoobQkq82XdR6" target="_blank" rel="noopener noreferrer">
+              <div class="label">
+                <span class="main">相鉄グランドフレッサ サイゴン</span>
+                <span class="sub">Sotetsu Grand Fresa Saigon</span>
+              </div>
+              <span class="icon-right">📍</span>
+            </a>
+
+            <a class="map-button" href="https://maps.app.goo.gl/NWe4vLenymhFVMLF9" target="_blank" rel="noopener noreferrer">
+              <div class="label">
+                <span class="main">Sachi Garden（父母会）</span>
+                <span class="sub">Ho Chi Minh</span>
+              </div>
+              <span class="icon-right">📍</span>
+            </a>
+
+            <a class="map-button" href="https://maps.app.goo.gl/i6fGk2T4zkn8okGY7" target="_blank" rel="noopener noreferrer">
+              <div class="label">
+                <span class="main">Tib Hue Restaurant</span>
+                <span class="sub">Hue Cuisine</span>
+              </div>
+              <span class="icon-right">📍</span>
+            </a>
+
+            <a class="map-button" href="https://maps.app.goo.gl/FJ5WoWxnQvJUdec6A" target="_blank" rel="noopener noreferrer">
+              <div class="label">
+                <span class="main">Phở Miến gà Kỳ Đồng</span>
+                <span class="sub">ミシュラン選出フォー</span>
+              </div>
+              <span class="icon-right">📍</span>
+            </a>
+
+            <a class="map-button" href="https://maps.app.goo.gl/xhg256MhUk6tLiXA9" target="_blank" rel="noopener noreferrer">
+              <div class="label">
+                <span class="main">ICD</span>
+                <span class="sub">Ho Chi Minh</span>
+              </div>
+              <span class="icon-right">📍</span>
+            </a>
+
+            <a class="map-button" href="https://maps.app.goo.gl/B4Z8qcR2qMZFLfG9A" target="_blank" rel="noopener noreferrer">
+              <div class="label">
+                <span class="main">オロベトナム</span>
+                <span class="sub">Ho Chi Minh</span>
+              </div>
+              <span class="icon-right">📍</span>
+            </a>
+
+            <a class="map-button" href="https://maps.app.goo.gl/HhHBrsPdzCuQjJEc8" target="_blank" rel="noopener noreferrer">
+              <div class="label">
+                <span class="main">デュ パルク ハノイ</span>
+                <span class="sub">Hanoi</span>
+              </div>
+              <span class="icon-right">📍</span>
+            </a>
+
+            <a class="map-button" href="https://maps.app.goo.gl/iV3xA13FL5CzAjUg7" target="_blank" rel="noopener noreferrer">
+              <div class="label">
+                <span class="main">フォーポイントバイシェラトン ダナン</span>
+                <span class="sub">Da Nang</span>
+              </div>
+              <span class="icon-right">📍</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="fade-section">
+      <div class="footer-main">HBA Vietnam Business Trip 2026 | Have a great trip! 🇻🇳</div>
+      <div class="footer-updated"><span class="label">最終更新:</span> <span class="value" id="last-updated">--</span></div>
+    </footer>
+  </div>
+
+  <script type="application/json" id="schedule-data">
+
+{
+  "day1": {
+    "d": "2026-02-26",
+    "i": [
+      {
+        "s": "16:00",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "🧳集合",
+        "a": "成田空港第2ターミナル3F集合\nJALのカウンター付近",
+        "m": "eチケットは念のため野田が印刷しておく\n服装はオフィスカジュアルでOK\nFace Express（顔認証による搭乗手続き）\n→パスポートかざしてチェックイン"
+      },
+      {
+        "s": "18:05",
+        "e": "22:30",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "👣移動",
+        "a": "✈️成田→ハノイ\n移動手段: ✈️飛行機"
+      },
+      {
+        "s": "22:30",
+        "e": "23:00",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "a": "入国手続き"
+      },
+      {
+        "s": "23:00",
+        "e": "23:15",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "a": "両替",
+        "m": "街中の両替所は22:00頃にはほとんど閉まっている\n到着ロビー(第二ターミナル)は狭いため、両替所はすぐわかる\n→Buyingの数字が一番大きい所で両替する\n高橋常務分も両替する"
+      },
+      {
+        "s": "23:15",
+        "e": "00:00",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "👣移動",
+        "a": "空港→ホテル デュ パルク ハノイ\n移動手段: 🚕送迎専用車",
+        "m": "JTBにて送迎車を手配完了\nサイン：HBA\n乗車人数：5名\n車種：バン　最大15名\n\n住所：84 P. Trần Nhân Tông, Nguyễn Du, Hai Bà Trưng, Hà Nội 100000 ベトナム\n場所：https://maps.app.goo.gl/HhHBrsPdzCuQjJEc8"
+      },
+      {
+        "s": "00:00",
+        "e": "00:15",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "a": "ホテルチェックイン"
+      },
+      {
+        "s": "00:30",
+        "e": "01:00",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "a": "コンビニ買い出し\nCircle K （徒歩8分：600m）"
+      },
+      {
+        "s": "00:30",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "🏨宿泊",
+        "a": "解散"
+      }
+    ]
+  },
+  "day2": {
+    "d": "2026-02-27",
+    "i": [
+      {
+        "s": "09:15",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "🧳集合",
+        "a": "ホテルエントランス"
+      },
+      {
+        "s": "09:15",
+        "e": "09:45",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "👣移動",
+        "a": "ホテル→Rikkeisoft\n移動手段: 🚕タクシー",
+        "m": "当日Grabを呼ぶ"
+      },
+      {
+        "s": "09:45",
+        "e": "10:00",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "a": "バッファ（渋滞考慮）"
+      },
+      {
+        "s": "10:00",
+        "e": "11:20",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "📅打合",
+        "a": "リッケイ\n\n手土産の購入（５千円くらい）\n　＝白い恋人54枚缶入\n手土産: 藤原",
+        "m": "「Vinacomin Tower」\n住所：3th, 14th & 18th Floor, Vinacomin Tower, Duong Dinh Nghe St., Cau Giay District, Hanoi\n\n・学生顔合わせ（担当者：野田）\n　 - 内定者研修の依頼と内定者紹介\n　 - 内定者の自己紹介とメンターの自己紹介\n　 - メンターから内定者へヒアリング、質疑応答\n　 - 内定者研修で利用する現場の視察\n\n関係者:\n＜リッケイ＞\n・BrSE\n・副部長\n・カンさん（札幌支店長）\n・チンさん\n\n＜内定者＞\n・グエン"
+      },
+      {
+        "s": "11:20",
+        "e": "11:30",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "👣移動",
+        "a": "移動"
+      },
+      {
+        "s": "11:30",
+        "e": "12:30",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "🍴食事",
+        "a": "ランチ",
+        "m": "店名：Làng Niêu & Nướng　（個室）\n場所：https://maps.app.goo.gl/UAYW1oMHPDDUgkgu5\n※リッケイオフィスからGrabで10分程度"
+      },
+      {
+        "s": "12:30",
+        "e": "13:40",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "👣移動",
+        "a": "移動"
+      },
+      {
+        "s": "13:40",
+        "e": "15:30",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "📅打合",
+        "a": "リッケイ",
+        "m": "・ロボット開発（担当者：藤原）\n　 - リッケイの進捗・課題の共有\n　 - HBAからの依頼事項と情報共有\n・ドローン開発（担当者：坂見）\n　 - リッケイの進捗・課題の共有\n　 - HBAからの依頼事項と情報共有\n・Cobolマイグレーション（担当者：脇坂）\n　 - リッケイの進捗・課題の共有\n　 - HBAからの依頼事項と情報共有\n・新規オフショア（担当者：稲穂）\n　 - 新規オフショアの検討状況の共有と懸念点相談"
+      },
+      {
+        "s": "15:30",
+        "e": "16:00",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "👣移動",
+        "a": "Rikkeisoft→ホテル"
+      },
+      {
+        "s": "16:00",
+        "e": "17:30",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "a": "荷物整理・休憩"
+      },
+      {
+        "s": "17:30",
+        "e": "18:00",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "👣移動",
+        "a": "移動\n移動手段: 🚕タクシー",
+        "m": "当日Grabを呼ぶ"
+      },
+      {
+        "s": "18:00",
+        "e": "20:00",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "k": "🍴食事",
+        "m": "店名：Phố Ngon 37\n場所：https://maps.app.goo.gl/J6THEUMr14ws1tZz7\n\n→技本負担で調整済（福島さん経由）\n予算：5千円/人\n\n関係者:\nHBA5名\n内定者1名\nリッケイ6名\n・カンさん（札幌支店長）\n・チンさん"
+      },
+      {
+        "s": "20:00",
+        "e": "20:30",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "a": "懇親会場→ホテル"
+      },
+      {
+        "s": "20:30",
+        "g": "脇坂・坂見・野田\n藤原・稲穂",
+        "a": "解散"
+      },
+      {
+        "s": "16:00",
+        "g": "高橋",
+        "a": "空港チェックイン→ラウンジ"
+      },
+      {
+        "s": "18:05",
+        "e": "22:30",
+        "g": "高橋",
+        "k": "👣移動",
+        "a": "✈️成田→ハノイ\n移動手段: ✈️飛行機"
+      },
+      {
+        "s": "22:30",
+        "e": "23:00",
+        "g": "高橋",
+        "a": "入国手続き",
+        "m": "※両替は前日到着組が予め対応"
+      },
+      {
+        "s": "23:00",
+        "e": "00:00",
+        "g": "高橋",
+        "k": "👣移動",
+        "a": "空港→ホテル デュ パルク ハノイ\n移動手段: 🚕送迎専用車",
+        "m": "JTB手配完了\nサイン：HBA\n乗車人数：1名\n車種: セダン（トヨタカムリまたは同等）最大3名\n空港到着ロビーのゲート出口前でドライバーがサインボード\n（表記：HBA）を持っています\n\n住所：84 P. Trần Nhân Tông, Nguyễn Du, Hai Bà Trưng, Hà Nội 100000 ベトナム\n場所：https://maps.app.goo.gl/HhHBrsPdzCuQjJEc8"
+      },
+      {
+        "s": "00:00",
+        "e": "00:15",
+        "g": "高橋",
+        "a": "ホテルチェックイン"
+      },
+      {
+        "s": "00:30",
+        "e": "01:00",
+        "g": "高橋",
+        "a": "コンビニ買い出し\nCircle K （徒歩8分：600m）"
+      },
+      {
+        "s": "00:30",
+        "g": "高橋",
+        "k": "🏨宿泊",
+        "a": "解散"
+      },
+      {
+        "s": "18:00",
+        "e": "19:46",
+        "g": "高野・南",
+        "k": "👣移動",
+        "a": "（前日）新千歳→羽田",
+        "m": "羽田第三ターミナルJALカウンター前で集合"
+      },
+      {
+        "s": "01:30",
+        "e": "05:55",
+        "g": "高野・南",
+        "k": "👣移動",
+        "a": "✈️羽田→ホーチミン"
+      },
+      {
+        "s": "05:55",
+        "e": "09:05",
+        "g": "高野・南",
+        "a": "トランジット"
+      },
+      {
+        "s": "09:05",
+        "e": "10:25",
+        "g": "高野・南",
+        "k": "👣移動",
+        "a": "✈️ホーチミン→ダナン"
+      },
+      {
+        "s": "10:25",
+        "e": "11:30",
+        "g": "高野・南",
+        "a": "入国手続き"
+      },
+      {
+        "s": "11:30",
+        "e": "12:00",
+        "g": "高野・南",
+        "k": "👣移動",
+        "a": "空港→ホテル\n移動手段: 🚕タクシー",
+        "m": "当日Grabを呼ぶ\n※Grab呼ぶ専用の場所があります\n参考：https://note.com/yu_tokidoki_trip/n/n80a95633cb87"
+      },
+      {
+        "s": "12:00",
+        "e": "12:15",
+        "g": "高野・南",
+        "a": "ホテルチェックイン",
+        "m": "フォーポイントバイシェラトン・ダナン\n住所：118 - 120 Võ Nguyên Giáp, An Hải, Sơn Trà, Đà Nẵng 550000 ベトナム\n場所：https://maps.app.goo.gl/iV3xA13FL5CzAjUg7\n公式HP：https://app.marriott.com/Ew5ZKzwuHZb"
+      },
+      {
+        "s": "12:30",
+        "e": "13:00",
+        "g": "高野・南",
+        "k": "👣移動",
+        "a": "移動（ホテル→昼食会場）\n移動手段: 🚕タクシー",
+        "m": "当日Grabを呼ぶ\n※ホテルからGrabで10分"
+      },
+      {
+        "s": "13:00",
+        "e": "14:30",
+        "g": "高野・南",
+        "k": "🍴食事",
+        "a": "父母会＠ダナン\n\n　 - HBAの会社説明（南）\n　 - イノベの紹介（高野）\n　 - 質疑応答対応\n　※会社案内のベトナム語ver持参\n\n　※コースではないため、事前にメニュー確認しておく\n\n　手土産の購入\n　＝白い恋人（18枚入程度）\n手土産: 南",
+        "m": "【父母会会場】\n住所：54 Nguyễn Du, Thạch Thang, Hải Châu, Đà Nẵng 550000 ベトナム\n場所：赤太陽　※日本食\n　　　https://maps.app.goo.gl/nNRkWf8maSK3JpCD7\n人数：５名\n　　　 - HBA：高野・南\n　　　 - 学生：DAT\n　　　 - 母親：NGUYEN THI BE THAO ( グエン・ティ・ベ・タオ)\n　　　 - リッケイ：フンさん（ダナン支社長）\n予約名：DAT\n予約電話番号：090-7420-213（sun*タムさんの番号）\n\n【食事情報】\nアレルギー：本人・母ともになし\n食事制限：母は生もの不可"
+      },
+      {
+        "s": "14:30",
+        "e": "15:00",
+        "g": "高野・南",
+        "k": "👣移動",
+        "a": "移動（昼食会場→リッケイオフィス）\n移動手段: 🚕タクシー",
+        "m": "当日Grabを呼ぶ\n※リッケイのフンさんと学生のダットさんとともに移動\n※このタイミングで母親のタオさんは解散"
+      },
+      {
+        "s": "15:00",
+        "e": "16:30",
+        "g": "高野・南",
+        "k": "📅打合",
+        "a": "リッケイ\n　手土産の購入（５千円くらい）\n　＝白い恋人54枚缶入\n手土産: 南",
+        "m": "「VietNam News Agency Building」\n住所：7th Floor & 11th Floor, VietNam News Agency Building, 81 Quang Trung St., Hai Chau District, Danang\n\n・学生顔合わせ（担当者：高野・南）\n　 - 内定者研修の依頼と内定者紹介\n　 - 内定者の自己紹介とメンターの自己紹介\n　 - メンターから内定者へヒアリング、質疑応答\n　 - 内定者研修で利用する現場の視察 \n＜学生の自己紹介資料＞\nhttps://www.canva.com/design/DAHBQ1tIspQ/ANeL2tWk0gJ8gcVWa5trEQ/edit?utm_content=DAHBQ1tIspQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+      },
+      {
+        "s": "16:30",
+        "g": "高野・南",
+        "a": "フリー"
+      },
+      {
+        "s": "16:30",
+        "e": "18:00",
+        "g": "高野・南",
+        "k": "👣移動",
+        "a": "移動\n移動手段: 🚕タクシー",
+        "m": "当日Grabを呼ぶ"
+      },
+      {
+        "s": "18:00",
+        "g": "高野・南",
+        "k": "🍴食事",
+        "a": "夕食",
+        "m": "店名：Bep Cuon Da Nang\nMaps: https://maps.app.goo.gl/cRaTYWHGBzb1BBAe6\nジャンル：ベトナム料理\n雰囲気：バインセオや生春巻きなど、ベトナムの巻き料理で特に有名です。"
+      }
+    ]
+  },
+  "day3": {
+    "d": "2026-02-28",
+    "i": [
+      {
+        "s": "06:00",
+        "g": "高野・南",
+        "k": "🍴食事",
+        "a": "各自朝食（6:00-10:30)"
+      },
+      {
+        "s": "11:10",
+        "g": "高橋・脇坂\n坂見・野田",
+        "k": "🧳集合",
+        "a": "ホテルエントランス",
+        "m": "※荷物をホテルに預ける"
+      },
+      {
+        "s": "11:10",
+        "e": "11:30",
+        "g": "高橋・脇坂\n坂見・野田",
+        "k": "👣移動",
+        "a": "移動 1km\n移動手段: 🚶徒歩"
+      },
+      {
+        "s": "11:30",
+        "e": "13:00",
+        "g": "高橋・脇坂\n坂見・野田",
+        "k": "🍴食事",
+        "a": "父母会＠ハノイ\n\n　 - HBAの会社説明（野田）\n　 - イノベの紹介（坂見）\n　 - 質疑応答対応\n　※会社案内のベトナム語ver持参\n\n　※コースではないため、事前にメニュー確認しておく\n\n　手土産の購入\n　＝白い恋人（18枚入程度）\n手土産: 坂見",
+        "m": "【予約情報】\n住所：65 P. Triệu Việt Vương, Nguyễn Du, Hai Bà Trưng, Hà Nội, ベトナム\n場所：日本料理 しんばし　※日本食\n　　　https://maps.app.goo.gl/43TfFcwXS5j16Js18\n　　　※ホテルから徒歩15分\n人数：８名\n　　　 - HBA：高橋・脇坂・坂見・野田\n　　　 - 学生：NGUYEN\n　　　 - 父親：NGUYEN TIEN DAT ( グエン・ティエン・ダット)\n　　　 - 母親：TRINH THI HONG GAM ( チン・ティ・ホン・ガム)\n　　　 - サンアスタリスク：タム\n予約名：NGUYEN\n予約電話番号：090-7420-213（sun*タムさんの番号）\n\n【食事情報】\nアレルギー：本人はエビ・カニ・イカにアレルギーあり\n食事制限：母は生もの不可"
+      },
+      {
+        "s": "13:00",
+        "e": "14:00",
+        "g": "高橋・脇坂\n坂見・野田",
+        "k": "👣移動",
+        "a": "移動（ホテル→空港）\n移動手段: 🚕送迎専用車",
+        "m": "JTB手配完了\nサイン：HBA\n乗車人数：5名（チンさんも同席）\n車種：ミニバン（フォードトランジットまたは同等）　最大15名"
+      },
+      {
+        "s": "14:00",
+        "e": "15:30",
+        "g": "高橋・脇坂\n坂見・野田",
+        "a": "空港チェックイン",
+        "m": "eチケットは野田が印刷しておく"
+      },
+      {
+        "s": "15:30",
+        "e": "15:30",
+        "g": "高橋・脇坂\n坂見・野田"
+      },
+      {
+        "s": "15:30",
+        "e": "17:40",
+        "g": "高橋・脇坂\n坂見・野田",
+        "k": "👣移動",
+        "a": "✈️ハノイ→ホーチミン\n移動手段: ✈️飛行機",
+        "m": "高橋：一人がけ席(SOLO SEAT) 05A\n脇坂：通路側 31D\n坂見：通路側 36F\n野田：通路側 33F\n※チンさんも同じ便で移動"
+      },
+      {
+        "s": "17:40",
+        "g": "高橋・脇坂\n坂見・野田",
+        "k": "🧳集合",
+        "a": "空港合流",
+        "m": "ターミナル3"
+      },
+      {
+        "g": "高野・南",
+        "a": "フリー"
+      },
+      {
+        "s": "13:30",
+        "e": "14:00",
+        "g": "高野・南",
+        "k": "👣移動",
+        "a": "移動（ホテル→空港）",
+        "m": "当日Grabを手配する"
+      },
+      {
+        "s": "14:00",
+        "e": "15:25",
+        "g": "高野・南",
+        "a": "空港チェックイン"
+      },
+      {
+        "s": "15:25",
+        "e": "17:10",
+        "g": "高野・南",
+        "k": "👣移動",
+        "a": "✈️ダナン→ホーチミン\n移動手段: ✈️飛行機",
+        "m": "高野：通路側 31C\n南：通路側 35C"
+      },
+      {
+        "s": "17:10",
+        "g": "高野・南",
+        "k": "🧳集合",
+        "a": "空港合流",
+        "m": "ターミナル3"
+      },
+      {
+        "s": "18:30",
+        "e": "19:30",
+        "g": "高橋・高野・南\n脇坂・坂見\n野田",
+        "k": "👣移動",
+        "a": "空港→ホテル\n移動手段: 🚕送迎専用車",
+        "m": "JTB手配完了\nサイン：HBA\n乗車人数：7名（チンさんも同席）\n車種：ミニバン（フォードトランジットまたは同等）　最大15名"
+      },
+      {
+        "s": "19:30",
+        "e": "19:45",
+        "g": "高橋・高野・南\n脇坂・坂見\n野田",
+        "a": "ホテルチェックイン",
+        "m": "相鉄グランドフレッサ サイゴン\n住所：8 Lý Tự Trọng, Phường Sài Gòn, Quận 1, Thành phố Hồ Chí Minh 700000 ベトナム\n場所：https://maps.app.goo.gl/qe4xpoobQkq82XdR6"
+      },
+      {
+        "s": "19:45",
+        "e": "20:00",
+        "g": "高橋・高野・南\n脇坂・坂見\n野田",
+        "k": "👣移動",
+        "a": "移動"
+      },
+      {
+        "s": "20:00",
+        "g": "高橋・高野・南\n脇坂・坂見\n野田",
+        "k": "🍴食事",
+        "a": "夕食",
+        "m": "お店を決める【担当者：坂見】\n　 - ジャンル：ベトナム料理\n　 - その他必要情報：屋台以外で"
+      },
+      {
+        "s": "15:30",
+        "g": "森岡・渡辺\n小林",
+        "k": "🧳集合",
+        "a": "成田集合→ラウンジ"
+      },
+      {
+        "s": "17:45",
+        "e": "22:25",
+        "g": "森岡・渡辺\n小林",
+        "k": "👣移動",
+        "a": "✈️成田→ホーチミン"
+      },
+      {
+        "s": "22:25",
+        "e": "23:00",
+        "g": "森岡・渡辺\n小林",
+        "a": "入国手続き"
+      },
+      {
+        "s": "23:00",
+        "e": "23:30",
+        "g": "森岡・渡辺\n小林",
+        "a": "両替",
+        "m": "Buyingの数字が一番大きい所で両替する"
+      },
+      {
+        "s": "23:30",
+        "e": "00:30",
+        "g": "森岡・渡辺\n小林",
+        "k": "👣移動",
+        "a": "空港→ホテル\n移動手段: 🚕送迎専用車",
+        "m": "JTB手配完了\nサイン：HBA\n乗車人数：3名\n車種：MPV（トヨタイノーバまたは同等）最大6名\n\n空港到着ロビーのゲート出口前でドライバーがサインボード\n（表記：HBA）を持っています"
+      },
+      {
+        "s": "00:30",
+        "e": "00:45",
+        "g": "森岡・渡辺\n小林",
+        "a": "ホテルチェックイン",
+        "m": "相鉄グランドフレッサ サイゴン\n住所：8 Lý Tự Trọng, Phường Sài Gòn, Quận 1, Thành phố Hồ Chí Minh 700000 ベトナム\n場所：https://maps.app.goo.gl/qe4xpoobQkq82XdR6"
+      },
+      {
+        "s": "00:45",
+        "e": "01:00",
+        "g": "森岡・渡辺\n小林",
+        "a": "コンビニ買い出し（徒歩3分）\n・ミニストップ\n・ファミリーマート\n・セブンイレブン",
+        "m": "希望者のみ買い出し"
+      },
+      {
+        "s": "01:00",
+        "g": "森岡・渡辺\n小林",
+        "a": "解散"
+      }
+    ]
+  },
+  "day4": {
+    "d": "2026-03-01",
+    "i": [
+      {
+        "s": "06:00",
+        "g": "森岡・渡辺\n小林",
+        "k": "🍴食事",
+        "a": "各自朝食（6:00-10:30)"
+      },
+      {
+        "s": "10:50",
+        "g": "森岡・渡辺\n小林",
+        "k": "🧳集合",
+        "a": "ホテルエントランス"
+      },
+      {
+        "s": "10:50",
+        "e": "11:20",
+        "g": "森岡・渡辺\n小林",
+        "k": "👣移動",
+        "a": "移動（ホテル→昼食会場）\n移動手段: 🚕送迎専用車",
+        "m": "JTB手配完了\nサイン：HBA\n乗車人数：9名\n車種：ミニバン（フォードトランジットまたは同等）最大15名\n\n※ホテルから15分＋渋滞考慮"
+      },
+      {
+        "s": "11:30",
+        "e": "13:00",
+        "g": "森岡・渡辺\n小林",
+        "k": "🍴食事",
+        "a": "父母会＠ホーチミン\n\n　 - HBAの会社説明（野田）\n　 - イノベの紹介（坂見）\n　 - 質疑応答対応\n　※会社案内のベトナム語ver持参\n\n　※コースではないため、事前にメニュー確認しておく\n\n　手土産の購入\n　＝白い恋人（18枚入程度）\n手土産: 坂見",
+        "m": "【予約情報】\n住所：109 Võ Nguyên Giáp, Thảo Điền, Quận 2, Thành phố Hồ Chí Minh, ベトナム\n場所：Sachi Garden\n　　　https://maps.app.goo.gl/NWe4vLenymhFVMLF9\n人数：１５名\n　　　 - HBA：高橋・高野・南・森岡・渡辺・小林・脇坂・坂見・野田\n　　　 - 学生①：DUY\n　　　 - 父親①：TRIEU VAN MANH ( チエウ・ヴァン・マン )\n　　　 - 母親①：DO THI THANH TRANG ( ドー・ティ・タイン・チャン )\n　　　 - 学生②：TRANG\n　　　 - 母親②：LE THI NGA ( レー・ティ・ガー)\n　　　 - リッケイ：チンさん\n予約名：TRANG\n予約電話番号：090-7420-213（sun*タムさんの番号）\n\n【食事情報】\nアレルギー：母親①は卵にアレルギーあり\n食事制限：なし"
+      },
+      {
+        "s": "13:00",
+        "e": "14:30",
+        "g": "森岡・渡辺\n小林",
+        "k": "👣移動",
+        "a": "移動（昼食会場→Ben Dinh）"
+      },
+      {
+        "s": "14:30",
+        "e": "15:00",
+        "g": "森岡・渡辺\n小林",
+        "k": "📷観光",
+        "a": "ベンディン（Ben Dinh）\n\n入場料：1人あたり110,000VND\nチップ：50,000VNDが必須とのこと",
+        "m": "戦争の歴史と地下トンネルについて学ぶ\n\n施設：観光向けに整備されている\nトンネル：やや広く、安全に体験可能\n※暑いので、飲み物や軽い服装を準備してください。\n\n札幌支店長カンさん合流\n\n関係者:\nリッケイ\n・カンさん（札幌支店長）\n・チンさん"
+      },
+      {
+        "s": "15:00",
+        "e": "16:15",
+        "g": "森岡・渡辺\n小林",
+        "k": "📷観光",
+        "a": "Cu Chiトンネル見学",
+        "m": "ガイドの案内で主な見どころを見学：\n実際のトンネルを体験（短いコース／長いコースを選択可能）\n当時の罠の展示\nホアンカム式の地下かまど\n地下生活スペース\n指令室・野戦病院跡\n\n注意：狭い場所が苦手な方は、短い距離だけ体験するのがおすすめです。\n歩きやすいスニーカーが便利です。"
+      },
+      {
+        "s": "16:15",
+        "e": "17:00",
+        "g": "森岡・渡辺\n小林",
+        "k": "📷観光",
+        "a": "自由体験\n\nAK47：10発600,000VND\nその他：「ライフル射撃値段」シート参照",
+        "m": "以下のアクティビティから選択できます：\n🔫 射撃体験（AK・M16など／別料金）\n🌽 ゆでたキャッサバ＋ごま塩の試食（当時の食事体験）\n🚶 森の中を散策し、昔の農村生活の再現エリアを見学"
+      },
+      {
+        "s": "17:00",
+        "e": "18:30",
+        "g": "森岡・渡辺\n小林",
+        "k": "👣移動",
+        "a": "移動（Ben Dinh→懇親会場）"
+      },
+      {
+        "s": "18:30",
+        "e": "20:30",
+        "g": "森岡・渡辺\n小林",
+        "k": "🍴食事",
+        "a": "会社負担のメンバー懇親会\n　支払担当者：高野\n　負担先：役員",
+        "m": "↓チンさんおすすめ\n店名：Tib Hue Restaurant\n場所：https://maps.app.goo.gl/i6fGk2T4zkn8okGY7\nジャンル：ベトナム料理（中部に位置するフエの料理）\n予算：5千円～6千円/人 前後\n別日に食べる(であろう)王道のベトナム料理と被らないよう、中部に位置するフエの郷土料理のお店を選んでくれました。\n\nHBA9名＋リッケイ2名＝11名\nチンさんも同席可能とのこと\n\n関係者:\nリッケイ\n・カンさん（札幌支店長）\n・チンさん"
+      }
+    ]
+  },
+  "day5": {
+    "d": "2026-03-02",
+    "i": [
+      {
+        "s": "06:00",
+        "g": "森岡・渡辺\n小林",
+        "k": "🍴食事",
+        "a": "各自朝食（6:00-10:30)"
+      },
+      {
+        "s": "09:20",
+        "g": "森岡・渡辺\n小林",
+        "k": "🧳集合",
+        "a": "ホテルエントランス"
+      },
+      {
+        "s": "09:20",
+        "e": "09:50",
+        "g": "森岡・渡辺\n小林",
+        "k": "👣移動",
+        "a": "移動（ホテル→リッケイ）\n移動手段: 🚕送迎専用車",
+        "m": "JTB手配完了\nサイン：HBA\n乗車人数：9名\n車種：ミニバン（フォードトランジットまたは同等）最大15名\n\n※ホテルから15分＋渋滞考慮"
+      },
+      {
+        "s": "09:50",
+        "e": "12:00",
+        "g": "森岡・渡辺\n小林",
+        "k": "📅打合",
+        "a": "リッケイ\n　手土産の購入（５千円くらい）\n　＝白い恋人54枚缶入\n手土産: 小林",
+        "m": "「Dali Tower Building」\n住所：2nd Floor Dali Tower Building, 24C Phan Dang Luu St, Binh Thanh District, Ho Chi Minh City\n\n・学生顔合わせ（担当者：野田）\n　 - 内定者研修のお願いと内定者紹介\n　 - 内定者の自己紹介、メンターの自己紹介\n　 - メンターから内定者へのヒアリング、質疑応答\n　 - インターンで利用する現場の視察\n・オフショア打ち合わせ（担当者：小林）\n　 - 自治体本部紹介と新規オフショアの検討状況説明と疑問点解消(？)\n　 - エンタとイノベは無し\n・現場視察\n\n関係者:\nリッケイ\n・カンさん（札幌支店長）\n・チンさん"
+      },
+      {
+        "s": "12:00",
+        "e": "12:30",
+        "g": "森岡・渡辺\n小林",
+        "k": "👣移動",
+        "a": "移動（リッケイ→昼食会場）"
+      },
+      {
+        "s": "12:30",
+        "e": "13:30",
+        "g": "森岡・渡辺\n小林",
+        "k": "🍴食事",
+        "a": "昼食",
+        "m": "店名：Phở Miến gà Kỳ Đồng\n場所：https://maps.app.goo.gl/FJ5WoWxnQvJUdec6A\nジャンル：フォー\n\n綺麗なレストランというよりローカルなお店ですが、「美味しいフォーで有名」で、ミシュランにも選ばれているそうです。当日はリッケイさんが案内してくださり、注文もお任せくださいとのこと。"
+      },
+      {
+        "s": "13:30",
+        "e": "14:10",
+        "g": "森岡・渡辺\n小林",
+        "a": "移動",
+        "m": "Grabで3グループに分かれて乗車\nVietnamOCCが空港の北側に位置しており遠いため、先に移動"
+      },
+      {
+        "s": "14:10",
+        "e": "15:00",
+        "g": "森岡・渡辺\n小林",
+        "m": "1FのHighlands Coffeeで休憩"
+      },
+      {
+        "s": "15:00",
+        "e": "16:30",
+        "g": "森岡・渡辺\n小林",
+        "k": "📅打合",
+        "a": "ベトナムOCC\n　手土産の購入（５千円くらい）\n　＝白い恋人54枚缶入\n手土産: 脇坂",
+        "m": "「QTSC1 Building」\n住所：8F, QTSC1 Building, Street No.14, Quang Trung Software City, Tan Chanh Hiep Ward, District 12\n\n・HBAがベトナムOCCに期待すること（資料作成：坂見、説明：坂見）\n・オフショアでやっている案件説明（資料作成：坂見、説明：坂見）\n・イノベ紹介（資料作成：長濱、説明：坂見）\n\n関係者:\nOCCベトナム\n・比嘉社長\n・ハンスウェーさん"
+      },
+      {
+        "s": "16:30",
+        "e": "17:00",
+        "g": "森岡・渡辺\n小林",
+        "k": "👣移動",
+        "a": "移動"
+      },
+      {
+        "s": "17:00",
+        "e": "19:00",
+        "g": "森岡・渡辺\n小林",
+        "k": "🍴食事",
+        "a": "ベトナムOCC懇親\n　HBA負担　支払担当：高野\n　負担先：役員",
+        "m": "お店：ベトナム料理のお店でベトナムOCCが選定中\n\n関係者:\nOCCベトナム\n・比嘉社長\n・ハンスウェーさん"
+      }
+    ]
+  },
+  "day6": {
+    "d": "2026-03-03",
+    "i": [
+      {
+        "s": "06:00",
+        "g": "森岡・渡辺\n小林",
+        "k": "🍴食事",
+        "a": "各自朝食（6:00-10:30)"
+      },
+      {
+        "s": "09:30",
+        "g": "高橋・森岡\n渡辺・脇坂\n小林・坂見",
+        "k": "🧳集合",
+        "a": "ホテルエントランス"
+      },
+      {
+        "g": "高橋・森岡\n渡辺・脇坂\n小林・坂見",
+        "k": "📷観光",
+        "a": "フリー",
+        "m": "空いた時間どうするか決める【担当者：小林】\n６名なので全員で行動するのが良いかと思います。\n→お土産を購入する時間も忘れずに！"
+      },
+      {
+        "s": "13:50",
+        "e": "14:20",
+        "g": "高橋・森岡\n渡辺・脇坂\n小林・坂見",
+        "k": "👣移動",
+        "a": "移動（ホテル→ICD）\n移動手段: 🚕送迎専用車",
+        "m": "JTB手配完了\nサイン：HBA\n乗車人数：9名\n車種：ミニバン（フォードトランジットまたは同等）最大15名"
+      },
+      {
+        "s": "14:20",
+        "e": "16:30",
+        "g": "高橋・森岡\n渡辺・脇坂\n小林・坂見",
+        "k": "📅打合",
+        "a": "ICD\n　手土産の購入（５千円くらい）\n　＝白い恋人54枚缶入\n手土産: 小林",
+        "m": "場所：https://maps.app.goo.gl/xhg256MhUk6tLiXA9\n住所：90/88B Nguyễn Đình Chiểu, Đa Kao, Quận 1, Thành phố Hồ Chí Minh, ベトナム\n\n・自治体\n　 - 組織紹介\n　 - 見積内容についての認識合わせ\n・エンタ\n　 - コボル案件のヒアリング\n・現場視察"
+      },
+      {
+        "s": "16:30",
+        "e": "17:00",
+        "g": "高橋・森岡\n渡辺・脇坂\n小林・坂見",
+        "k": "👣移動",
+        "a": "移動",
+        "m": "下記が当社からレストランまでのルートです。\nhttps://maps.app.goo.gl/vTCdNM7UZqhQs2pA9\n\n16時30分に出発し、17時あたりにはついているかと思います。\n※車が拾えない、もしくは、渋滞が起きない限り（基本的には16:50くらいからとても車が混み合います）\nお店に時間前に到着できた場合は、ちょっと早く始めさせてもらう流れとなりそうです。"
+      },
+      {
+        "s": "17:00",
+        "g": "高橋・森岡\n渡辺・脇坂\n小林・坂見",
+        "k": "🍴食事",
+        "a": "ICD懇親\n　HBA負担　支払担当：森岡\n　負担先：役員",
+        "m": "HBA6名＋ICD5名\n\nお店：bếp cuốn sài gòn\nhttps://www.tripadvisor.com.vn/Restaurant_Review-g293925-d25378127-Reviews-B_p_Cu_n_Sai_Gon-Ho_Chi_Minh_City.html\n\n小林発案でここをICDの渡邊さんに予約していただきました！\n渡邊さんいわく↓\nbếp cuốn sài gònはベトナム南部の家庭料理を提供してくれるレストランです。\n美味しいです。\nビールを片手にほうばって、「うっまー！！！！」とできるような雰囲気があり、庶民の胃袋を掴んでやまないレストランです。\n\n表現的に期待大です！\n\n関係者:\nICD\n・加藤烈　ICDVN代表取締役社長、ICD執行役員\n・渡邊賢　ICDVN部長、オフショア事業本部 部長　PM\n・Nguyen Quoc Duy　ICDVN テクニカルマネージャ\n・Truong Minh Tam　ICDVN 開発リーダー\n・Pham Thi Le　ICDVN ブリッジSE\n私とベトナム人スタッフの3名は貴社のラボに参画しているメンバーになります。"
+      },
+      {
+        "s": "10:15",
+        "g": "高野・南・野田",
+        "k": "🧳集合",
+        "a": "ホテルエントランス"
+      },
+      {
+        "s": "10:15",
+        "e": "10:30",
+        "g": "高野・南・野田",
+        "a": "移動",
+        "m": "徒歩10分"
+      },
+      {
+        "s": "10:30",
+        "e": "11:30",
+        "g": "高野・南・野田",
+        "k": "📅打合",
+        "a": "北陸銀行/株式会社ウィザス\n　手土産の購入\n　＝小さい何か\n手土産: 野田",
+        "m": "「Saigon Tower」\n住所：Suite 1709, 17th Floor, Saigon Tower, 29 Le Duan Street, Ben Nghe Ward, District 1, Ho Chi Minh City, Vietnam\nウィザス：IT人材紹介会社"
+      },
+      {
+        "s": "11:30",
+        "e": "12:30",
+        "g": "高野・南・野田",
+        "k": "🍴食事",
+        "a": "昼食",
+        "m": "北陸銀行さんと食事"
+      },
+      {
+        "s": "12:30",
+        "e": "13:30",
+        "g": "高野・南・野田",
+        "k": "👣移動",
+        "a": "移動　※渋滞考慮"
+      },
+      {
+        "s": "13:30",
+        "e": "15:00",
+        "g": "高野・南・野田",
+        "k": "📅打合",
+        "a": "ESUHAI GROUP\n手土産: 野田",
+        "m": "住所：40/14 Đ. Ấp Bắc, Phường Tân Bình, Tân Bình, Thành phố Hồ Chí Minh, ベトナム\n日本語学校を運営されている人材送出機関"
+      },
+      {
+        "s": "15:00",
+        "e": "15:30",
+        "g": "高野・南・野田",
+        "a": "バッファ"
+      },
+      {
+        "s": "15:30",
+        "e": "16:00",
+        "g": "高野・南・野田",
+        "k": "👣移動",
+        "a": "移動"
+      },
+      {
+        "s": "16:00",
+        "e": "17:30",
+        "g": "高野・南・野田",
+        "k": "📅打合",
+        "a": "オロベトナム\n　手土産の購入（５千円くらい）\n　＝白い恋人54枚缶入\n手土産: 野田",
+        "m": "oRo Vietnam Co., Ltd.\n住所：89 Phan Dinh Phung Street, Ward 17,Phu Nhuan District\n場所：https://maps.app.goo.gl/B4Z8qcR2qMZFLfG9A\nベトナムでビジネスしている会計ソフト会社\n開発拠点"
+      },
+      {
+        "s": "17:30",
+        "e": "18:00",
+        "g": "高野・南・野田",
+        "k": "👣移動",
+        "a": "移動"
+      },
+      {
+        "s": "18:00",
+        "g": "高野・南・野田",
+        "k": "🍴食事",
+        "a": "北陸銀行懇親"
+      }
+    ]
+  },
+  "day7": {
+    "d": "2026-03-04",
+    "i": [
+      {
+        "s": "05:15",
+        "g": "高野・南・野田",
+        "k": "🧳集合",
+        "a": "ホテルエントランス"
+      },
+      {
+        "s": "05:15",
+        "e": "06:00",
+        "g": "高野・南・野田",
+        "k": "👣移動",
+        "a": "移動（ホテル→空港）\n移動手段: 🚕送迎専用車",
+        "m": "JTB手配完了\nサイン：HBA\n乗車人数：9名\n車種：ミニバン（フォードトランジットまたは同等）最大15名"
+      },
+      {
+        "s": "06:00",
+        "g": "高野・南・野田",
+        "a": "空港チェックイン→ラウンジ？"
+      },
+      {
+        "s": "07:50",
+        "e": "15:20",
+        "g": "高野・南・野田",
+        "k": "👣移動",
+        "a": "✈️ホーチミン→成田\n移動手段: ✈️飛行機"
+      },
+      {
+        "s": "15:20",
+        "e": "16:00",
+        "g": "高野・南・野田",
+        "a": "入国手続き"
+      },
+      {
+        "s": "16:00",
+        "g": "高野・南・野田",
+        "a": "解散",
+        "m": "空港着き次第、各自解散"
+      }
+    ]
+  }
+}
+
+  </script>
+
+  <script>
+    // Countdown timer
+    (function () {
+      const target = new Date('2026-02-26T00:00:00+09:00').getTime();
+      const daysEl = document.getElementById('cd-days');
+      const hoursEl = document.getElementById('cd-hours');
+      const minutesEl = document.getElementById('cd-minutes');
+      const secondsEl = document.getElementById('cd-seconds');
+      const statusEl = document.getElementById('countdown-status');
+
+      function updateCountdown() {
+        const now = Date.now();
+        const diff = target - now;
+
+        if (diff <= 0) {
+          daysEl.textContent = '0';
+          hoursEl.textContent = '0';
+          minutesEl.textContent = '0';
+          secondsEl.textContent = '0';
+
+          const endOfTrip = new Date('2026-03-04T23:59:59+09:00').getTime();
+          if (now <= endOfTrip) {
+            statusEl.textContent = '✈️ 出発済み：現在トリップ期間中です';
+          } else {
+            statusEl.textContent = '✅ 出張は終了しました。お疲れさまでした！';
+          }
+          return;
+        }
+
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / (3600 * 24));
+        const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        daysEl.textContent = String(days);
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minutesEl.textContent = String(minutes).padStart(2, '0');
+        secondsEl.textContent = String(seconds).padStart(2, '0');
+
+        if (days === 0 && hours <= 24) {
+          statusEl.textContent = '⏰ いよいよ出発直前です！';
+        } else {
+          statusEl.textContent = '';
+        }
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
+
+    // Schedule renderer (Excel-derived)
+    (function () {
+      const scheduleScript = document.getElementById('schedule-data');
+      if (!scheduleScript) return;
+
+      let scheduleData;
+      try {
+        scheduleData = JSON.parse(scheduleScript.textContent);
+      } catch (e) {
+        return;
+      }
+
+      const rendered = new Set();
+
+      function escapeHtml(value) {
+        return String(value ?? '')
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#39;');
+      }
+
+      function formatTime(start, end) {
+        const s = (start || '').trim();
+        const e = (end || '').trim();
+        if (!s && !e) return '—';
+        if (s && e) return `${s}–${e}`;
+        return s || e;
+      }
+
+      function inferKind(item) {
+        const source = `${String(item?.k ?? '')}\n${String(item?.a ?? '')}`;
+        if (source.includes('🏨') || /宿泊/.test(source)) return 'stay';
+        if (source.includes('🧳') || /集合/.test(source)) return 'gather';
+        if (source.includes('👣') || source.includes('✈️') || /移動/.test(source)) return 'move';
+        if (source.includes('🍴') || /食事|朝食|昼食|夕食|ランチ|ディナー/.test(source)) return 'meal';
+        if (source.includes('📅') || /打合|会議|商談|ミーティング|MTG/.test(source)) return 'meeting';
+        if (source.includes('📷') || /観光|見学|視察|自由体験/.test(source)) return 'sightseeing';
+        return '';
+      }
+
+      function renderDay(dayKey) {
+        if (!dayKey || rendered.has(dayKey)) return;
+        const day = scheduleData?.[dayKey];
+        const list = document.querySelector(`[data-schedule-list="${dayKey}"]`);
+        if (!day || !Array.isArray(day.i) || !list) return;
+
+        list.innerHTML = '';
+
+        let lastGroup = null;
+        day.i.forEach((item) => {
+          const group = (item.g || '').trim();
+          if (group && group !== lastGroup) {
+            const li = document.createElement('li');
+            li.className = 'schedule-item is-group';
+            li.innerHTML = `
+              <div class="schedule-time">👥</div>
+              <div class="schedule-desc">
+                <strong>参加者</strong>
+                <div class="schedule-note">${escapeHtml(group)}</div>
+              </div>
+            `;
+            list.appendChild(li);
+            lastGroup = group;
+          }
+
+          const li = document.createElement('li');
+          li.className = 'schedule-item';
+
+          const kind = inferKind(item);
+          if (kind) {
+            li.setAttribute('data-kind', kind);
+          }
+
+          const activityRaw = String(item.a ?? '').replace(/\r\n/g, '\n');
+          const activityLines = activityRaw.split('\n');
+          const activityTitle = (activityLines.shift() || '').trim();
+          const activityDetail = activityLines.join('\n').trim();
+          const title = `${(item.k || '').trim() ? `${String(item.k).trim()} ` : ''}${activityTitle || '（詳細未記入）'}`;
+          const memo = (item.m || '').trim();
+
+          const detailBlocks = [];
+          if (activityDetail) detailBlocks.push(`<div class="schedule-note">${escapeHtml(activityDetail)}</div>`);
+          if (memo) detailBlocks.push(`<div class="schedule-note">${escapeHtml(memo)}</div>`);
+
+          li.innerHTML = `
+            <div class="schedule-time">${escapeHtml(formatTime(item.s, item.e))}</div>
+            <div class="schedule-desc">
+              <strong>${escapeHtml(title)}</strong>
+              ${detailBlocks.join('')}
+            </div>
+          `;
+          list.appendChild(li);
+        });
+
+        rendered.add(dayKey);
+      }
+
+      // Expose to tabs handler
+      window.__renderScheduleDay = renderDay;
+
+      // Initial render
+      renderDay('day1');
+    })();
+
+    // Schedule tabs
+    (function () {
+      const tabs = document.querySelectorAll('.tab-button');
+      const panels = document.querySelectorAll('.schedule-panel');
+
+      function activate(target) {
+        tabs.forEach((tab) => {
+          const isActive = tab.getAttribute('data-target') === target;
+          tab.classList.toggle('active', isActive);
+          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        panels.forEach((panel) => {
+          const isActive = panel.getAttribute('data-panel') === target;
+          panel.classList.toggle('active', isActive);
+        });
+
+        if (typeof window.__renderScheduleDay === 'function') {
+          window.__renderScheduleDay(target);
+        }
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const target = tab.getAttribute('data-target');
+          if (!target) return;
+          activate(target);
+        });
+      });
+    })();
+
+    // Scroll fade-in using IntersectionObserver
+    (function () {
+      const sections = document.querySelectorAll('.fade-section');
+      if (!('IntersectionObserver' in window) || sections.length === 0) {
+        sections.forEach((el) => el.classList.add('in-view'));
+        return;
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.18,
+          rootMargin: '0px 0px -10% 0px',
+        }
+      );
+
+      sections.forEach((el) => observer.observe(el));
+    })();
+
+    // Last updated
+    (function () {
+      const el = document.getElementById('last-updated');
+      if (!el) return;
+      try {
+        const modified = document.lastModified;
+        el.textContent = modified || '--';
+      } catch (e) {
+        el.textContent = '--';
+      }
+    })();
+  </script>
+</body>
+</html>
+
