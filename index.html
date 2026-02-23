@@ -755,6 +755,89 @@
         rgba(5, 9, 28, 0.98);
     }
 
+    /* QR codes */
+    .qr-block {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .qr-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .qr-header h3 {
+      font-size: 1.02rem;
+      letter-spacing: 0.02em;
+    }
+
+    .qr-header p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .qr-groups {
+      display: grid;
+      gap: 14px;
+    }
+
+    .qr-group-title {
+      font-size: 0.9rem;
+      color: var(--accent-yellow);
+      margin-bottom: 8px;
+    }
+
+    .qr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+
+    .qr-card {
+      display: grid;
+      gap: 8px;
+      text-decoration: none;
+      padding: 10px 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(4, 8, 26, 0.96);
+      transition: transform 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+      color: inherit;
+    }
+
+    .qr-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 235, 59, 0.7);
+      background: rgba(6, 12, 34, 0.98);
+    }
+
+    .qr-image-frame {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.18);
+    }
+
+    .qr-image-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .qr-title {
+      font-size: 0.82rem;
+      color: #fff;
+      font-weight: 600;
+      line-height: 1.35;
+      white-space: pre-line;
+    }
+
     /* Footer */
     footer {
       margin-top: 26px;
@@ -1247,8 +1330,8 @@
                 </tr>
                 <tr>
                   <td>リッケイ（ハノイ/ホーチミン）</td>
-                  <td>白い恋人54枚缶入</td>
-                  <td>藤原 / 小林</td>
+                  <td>白い恋人以外の予定</td>
+                  <td>小林</td>
                 </tr>
                 <tr>
                   <td>ベトナムOCC</td>
@@ -1257,7 +1340,7 @@
                 </tr>
                 <tr>
                   <td>ICD</td>
-                  <td>白い恋人54枚缶入</td>
+                  <td>白い恋人以外の予定</td>
                   <td>小林</td>
                 </tr>
                 <tr>
@@ -1347,6 +1430,14 @@
               </div>
               <span class="icon-right">📍</span>
             </a>
+          </div>
+
+          <div class="qr-block" aria-label="QRコード一覧">
+            <div class="qr-header">
+              <h3>📱 QRコード</h3>
+              <p>タップ/クリックで別タブに拡大表示</p>
+            </div>
+            <div id="qr-groups" class="qr-groups"></div>
           </div>
         </div>
       </section>
@@ -1797,34 +1888,34 @@
       },
       {
         "s": "15:30",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "🧳集合",
         "a": "成田集合→ラウンジ"
       },
       {
         "s": "17:45",
         "e": "22:25",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "👣移動",
         "a": "✈️成田→ホーチミン"
       },
       {
         "s": "22:25",
         "e": "23:00",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "a": "入国手続き"
       },
       {
         "s": "23:00",
         "e": "23:30",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "a": "両替",
         "m": "Buyingの数字が一番大きい所で両替する"
       },
       {
         "s": "23:30",
         "e": "00:30",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "👣移動",
         "a": "空港→ホテル\n移動手段: 🚕送迎専用車",
         "m": "JTB手配完了\nサイン：HBA\n乗車人数：3名\n車種：MPV（トヨタイノーバまたは同等）最大6名\n\n空港到着ロビーのゲート出口前でドライバーがサインボード\n（表記：HBA）を持っています"
@@ -1832,20 +1923,20 @@
       {
         "s": "00:30",
         "e": "00:45",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "a": "ホテルチェックイン",
         "m": "相鉄グランドフレッサ サイゴン\n住所：8 Lý Tự Trọng, Phường Sài Gòn, Quận 1, Thành phố Hồ Chí Minh 700000 ベトナム\n場所：https://maps.app.goo.gl/qe4xpoobQkq82XdR6"
       },
       {
         "s": "00:45",
         "e": "01:00",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "a": "コンビニ買い出し（徒歩3分）\n・ミニストップ\n・ファミリーマート\n・セブンイレブン",
         "m": "希望者のみ買い出し"
       },
       {
         "s": "01:00",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "a": "解散"
       }
     ]
@@ -1855,20 +1946,20 @@
     "i": [
       {
         "s": "06:00",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "🍴食事",
         "a": "各自朝食（6:00-10:30)"
       },
       {
         "s": "10:50",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "🧳集合",
         "a": "ホテルエントランス"
       },
       {
         "s": "10:50",
         "e": "11:20",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "👣移動",
         "a": "移動（ホテル→昼食会場）\n移動手段: 🚕送迎専用車",
         "m": "JTB手配完了\nサイン：HBA\n乗車人数：9名\n車種：ミニバン（フォードトランジットまたは同等）最大15名\n\n※ホテルから15分＋渋滞考慮"
@@ -1876,7 +1967,7 @@
       {
         "s": "11:30",
         "e": "13:00",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "🍴食事",
         "a": "父母会＠ホーチミン\n\n　 - HBAの会社説明（野田）\n　 - イノベの紹介（坂見）\n　 - 質疑応答対応\n　※会社案内のベトナム語ver持参\n\n　※コースではないため、事前にメニュー確認しておく\n\n　手土産の購入\n　＝白い恋人（18枚入程度）\n手土産: 坂見",
         "m": "【予約情報】\n住所：109 Võ Nguyên Giáp, Thảo Điền, Quận 2, Thành phố Hồ Chí Minh, ベトナム\n場所：Sachi Garden\n　　　https://maps.app.goo.gl/NWe4vLenymhFVMLF9\n人数：１５名\n　　　 - HBA：高橋・高野・南・森岡・渡辺・小林・脇坂・坂見・野田\n　　　 - 学生①：DUY\n　　　 - 父親①：TRIEU VAN MANH ( チエウ・ヴァン・マン )\n　　　 - 母親①：DO THI THANH TRANG ( ドー・ティ・タイン・チャン )\n　　　 - 学生②：TRANG\n　　　 - 母親②：LE THI NGA ( レー・ティ・ガー)\n　　　 - リッケイ：チンさん\n予約名：TRANG\n予約電話番号：090-7420-213（sun*タムさんの番号）\n\n【食事情報】\nアレルギー：母親①は卵にアレルギーあり\n食事制限：なし"
@@ -1884,14 +1975,14 @@
       {
         "s": "13:00",
         "e": "14:30",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "👣移動",
         "a": "移動（昼食会場→Ben Dinh）"
       },
       {
         "s": "14:30",
         "e": "15:00",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "📷観光",
         "a": "ベンディン（Ben Dinh）\n\n入場料：1人あたり110,000VND\nチップ：50,000VNDが必須とのこと",
         "m": "戦争の歴史と地下トンネルについて学ぶ\n\n施設：観光向けに整備されている\nトンネル：やや広く、安全に体験可能\n※暑いので、飲み物や軽い服装を準備してください。\n\n札幌支店長カンさん合流\n\n関係者:\nリッケイ\n・カンさん（札幌支店長）\n・チンさん"
@@ -1899,7 +1990,7 @@
       {
         "s": "15:00",
         "e": "16:15",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "📷観光",
         "a": "Cu Chiトンネル見学",
         "m": "ガイドの案内で主な見どころを見学：\n実際のトンネルを体験（短いコース／長いコースを選択可能）\n当時の罠の展示\nホアンカム式の地下かまど\n地下生活スペース\n指令室・野戦病院跡\n\n注意：狭い場所が苦手な方は、短い距離だけ体験するのがおすすめです。\n歩きやすいスニーカーが便利です。"
@@ -1907,7 +1998,7 @@
       {
         "s": "16:15",
         "e": "17:00",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "📷観光",
         "a": "自由体験\n\nAK47：10発600,000VND\nその他：「ライフル射撃値段」シート参照",
         "m": "以下のアクティビティから選択できます：\n🔫 射撃体験（AK・M16など／別料金）\n🌽 ゆでたキャッサバ＋ごま塩の試食（当時の食事体験）\n🚶 森の中を散策し、昔の農村生活の再現エリアを見学"
@@ -1915,14 +2006,14 @@
       {
         "s": "17:00",
         "e": "18:30",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "👣移動",
         "a": "移動（Ben Dinh→懇親会場）"
       },
       {
         "s": "18:30",
         "e": "20:30",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "🍴食事",
         "a": "会社負担のメンバー懇親会\n　支払担当者：高野\n　負担先：役員",
         "m": "↓チンさんおすすめ\n店名：Tib Hue Restaurant\n場所：https://maps.app.goo.gl/i6fGk2T4zkn8okGY7\nジャンル：ベトナム料理（中部に位置するフエの料理）\n予算：5千円～6千円/人 前後\n別日に食べる(であろう)王道のベトナム料理と被らないよう、中部に位置するフエの郷土料理のお店を選んでくれました。\n\nHBA9名＋リッケイ2名＝11名\nチンさんも同席可能とのこと\n\n関係者:\nリッケイ\n・カンさん（札幌支店長）\n・チンさん"
@@ -1934,20 +2025,20 @@
     "i": [
       {
         "s": "06:00",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "🍴食事",
         "a": "各自朝食（6:00-10:30)"
       },
       {
         "s": "09:20",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "🧳集合",
         "a": "ホテルエントランス"
       },
       {
         "s": "09:20",
         "e": "09:50",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "👣移動",
         "a": "移動（ホテル→リッケイ）\n移動手段: 🚕送迎専用車",
         "m": "JTB手配完了\nサイン：HBA\n乗車人数：9名\n車種：ミニバン（フォードトランジットまたは同等）最大15名\n\n※ホテルから15分＋渋滞考慮"
@@ -1955,7 +2046,7 @@
       {
         "s": "09:50",
         "e": "12:00",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "📅打合",
         "a": "リッケイ\n　手土産の購入（５千円くらい）\n　＝白い恋人54枚缶入\n手土産: 小林",
         "m": "「Dali Tower Building」\n住所：2nd Floor Dali Tower Building, 24C Phan Dang Luu St, Binh Thanh District, Ho Chi Minh City\n\n・学生顔合わせ（担当者：野田）\n　 - 内定者研修のお願いと内定者紹介\n　 - 内定者の自己紹介、メンターの自己紹介\n　 - メンターから内定者へのヒアリング、質疑応答\n　 - インターンで利用する現場の視察\n・オフショア打ち合わせ（担当者：小林）\n　 - 自治体本部紹介と新規オフショアの検討状況説明と疑問点解消(？)\n　 - エンタとイノベは無し\n・現場視察\n\n関係者:\nリッケイ\n・カンさん（札幌支店長）\n・チンさん"
@@ -1963,14 +2054,14 @@
       {
         "s": "12:00",
         "e": "12:30",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "👣移動",
         "a": "移動（リッケイ→昼食会場）"
       },
       {
         "s": "12:30",
         "e": "13:30",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "🍴食事",
         "a": "昼食",
         "m": "店名：Phở Miến gà Kỳ Đồng\n場所：https://maps.app.goo.gl/FJ5WoWxnQvJUdec6A\nジャンル：フォー\n\n綺麗なレストランというよりローカルなお店ですが、「美味しいフォーで有名」で、ミシュランにも選ばれているそうです。当日はリッケイさんが案内してくださり、注文もお任せくださいとのこと。"
@@ -1978,20 +2069,20 @@
       {
         "s": "13:30",
         "e": "14:10",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "a": "移動",
         "m": "Grabで3グループに分かれて乗車\nVietnamOCCが空港の北側に位置しており遠いため、先に移動"
       },
       {
         "s": "14:10",
         "e": "15:00",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "m": "1FのHighlands Coffeeで休憩"
       },
       {
         "s": "15:00",
         "e": "16:30",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "📅打合",
         "a": "ベトナムOCC\n　手土産の購入（５千円くらい）\n　＝白い恋人54枚缶入\n手土産: 脇坂",
         "m": "「QTSC1 Building」\n住所：8F, QTSC1 Building, Street No.14, Quang Trung Software City, Tan Chanh Hiep Ward, District 12\n\n・HBAがベトナムOCCに期待すること（資料作成：坂見、説明：坂見）\n・オフショアでやっている案件説明（資料作成：坂見、説明：坂見）\n・イノベ紹介（資料作成：長濱、説明：坂見）\n\n関係者:\nOCCベトナム\n・比嘉社長\n・ハンスウェーさん"
@@ -1999,14 +2090,14 @@
       {
         "s": "16:30",
         "e": "17:00",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "👣移動",
         "a": "移動"
       },
       {
         "s": "17:00",
         "e": "19:00",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "🍴食事",
         "a": "ベトナムOCC懇親\n　HBA負担　支払担当：高野\n　負担先：役員",
         "m": "お店：ベトナム料理のお店でベトナムOCCが選定中\n\n関係者:\nOCCベトナム\n・比嘉社長\n・ハンスウェーさん"
@@ -2018,7 +2109,7 @@
     "i": [
       {
         "s": "06:00",
-        "g": "森岡・渡辺\n小林",
+        "g": "森岡・渡辺・小林",
         "k": "🍴食事",
         "a": "各自朝食（6:00-10:30)"
       },
@@ -2192,6 +2283,98 @@
 
   </script>
 
+  <script type="application/json" id="qr-data">
+{
+  "groups": [
+    {
+      "title": "【2月28日、空港、ホテル】",
+      "items": [
+        {
+          "title": "ホーチミン空港入国手続",
+          "image": "QRコードセット.files/image001.png"
+        },
+        {
+          "title": "相鉄グランドフレッサ サイゴン",
+          "image": "QRコードセット.files/image002.png"
+        },
+        {
+          "title": "近辺のコンビニ",
+          "image": "QRコードセット.files/image003.png"
+        }
+      ]
+    },
+    {
+      "title": "【3月1日】",
+      "items": [
+        {
+          "title": "父母会",
+          "image": "QRコードセット.files/image004.png"
+        },
+        {
+          "title": "ベンディン",
+          "image": "QRコードセット.files/image005.png"
+        },
+        {
+          "title": "懇親会",
+          "image": "QRコードセット.files/image006.png"
+        }
+      ]
+    },
+    {
+      "title": "【3月2日】",
+      "items": [
+        {
+          "title": "リッケイ",
+          "image": "QRコードセット.files/image007.png"
+        },
+        {
+          "title": "昼食会",
+          "image": "QRコードセット.files/image008.png"
+        },
+        {
+          "title": "OCC",
+          "image": "QRコードセット.files/image009.png"
+        }
+      ]
+    },
+    {
+      "title": "【3月3日】",
+      "items": [
+        {
+          "title": "ICDベトナム",
+          "image": "QRコードセット.files/image010.png"
+        },
+        {
+          "title": "OCC懇親会",
+          "image": "QRコードセット.files/image011.png"
+        },
+        {
+          "title": "おまけ",
+          "image": "QRコードセット.files/image012.png"
+        }
+      ]
+    },
+    {
+      "title": "【お土産】",
+      "items": [
+        {
+          "title": "アンナムグルメマーケット\n\n7:00-21:00",
+          "image": "QRコードセット.files/image013.png"
+        },
+        {
+          "title": "高島屋\n\n9:30-21:30",
+          "image": "QRコードセット.files/image014.png"
+        },
+        {
+          "title": "サイゴンエコクラフト\n\n8:00-22:00",
+          "image": "QRコードセット.files/image015.png"
+        }
+      ]
+    }
+  ]
+}
+  </script>
+
   <script>
     // Countdown timer
     (function () {
@@ -2257,6 +2440,35 @@
 
       const rendered = new Set();
 
+      const GROUP_ALL_9 = '高橋・高野・南\n森岡・渡辺・小林\n脇坂・坂見・野田';
+      const GROUP_OTHER_6 = '高橋・森岡\n渡辺・脇坂\n小林・坂見';
+
+      function normalizeGroup(dayKey, group, item) {
+        const g = String(group ?? '').trim();
+        if (!g) return '';
+
+        if (dayKey === 'day4' || dayKey === 'day5') {
+          return GROUP_ALL_9;
+        }
+
+        if (dayKey === 'day6') {
+          if (g === '森岡・渡辺・小林' || g === '森岡・渡辺\n小林') {
+            return GROUP_OTHER_6;
+          }
+          return g;
+        }
+
+        if (dayKey === 'day3') {
+          const activity = String(item?.a ?? '');
+          if (g === '高野・南' && /各自朝食/.test(activity)) {
+            return '';
+          }
+          return g;
+        }
+
+        return g;
+      }
+
       function escapeHtml(value) {
         return String(value ?? '')
           .replaceAll('&', '&amp;')
@@ -2295,7 +2507,7 @@
 
         let lastGroup = null;
         day.i.forEach((item) => {
-          const group = (item.g || '').trim();
+          const group = normalizeGroup(dayKey, item.g || '', item);
           if (group && group !== lastGroup) {
             const li = document.createElement('li');
             li.className = 'schedule-item is-group';
@@ -2347,6 +2559,63 @@
 
       // Initial render
       renderDay('day1');
+    })();
+
+    // QR renderer (Excel-derived)
+    (function () {
+      const container = document.getElementById('qr-groups');
+      const qrScript = document.getElementById('qr-data');
+      if (!container || !qrScript) return;
+
+      let qrData;
+      try {
+        qrData = JSON.parse(qrScript.textContent);
+      } catch (e) {
+        return;
+      }
+
+      const groups = Array.isArray(qrData?.groups) ? qrData.groups : [];
+      if (groups.length === 0) return;
+
+      function escapeHtml(value) {
+        return String(value ?? '')
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#39;');
+      }
+
+      container.innerHTML = groups
+        .map((g) => {
+          const title = escapeHtml(g?.title ?? '');
+          const items = Array.isArray(g?.items) ? g.items : [];
+          const cards = items
+            .map((item) => {
+              const image = String(item?.image ?? '').trim();
+              if (!image) return '';
+              const cardTitle = escapeHtml(item?.title ?? image);
+              const href = escapeHtml(image);
+              const src = escapeHtml(image);
+              return `
+                <a class="qr-card" href="${href}" target="_blank" rel="noopener noreferrer">
+                  <div class="qr-image-frame"><img src="${src}" alt="${cardTitle}"></div>
+                  <div class="qr-title">${cardTitle}</div>
+                </a>
+              `;
+            })
+            .join('');
+
+          if (!cards.trim()) return '';
+
+          return `
+            <div class="qr-group">
+              <div class="qr-group-title">${title}</div>
+              <div class="qr-grid">${cards}</div>
+            </div>
+          `;
+        })
+        .join('');
     })();
 
     // Schedule tabs
