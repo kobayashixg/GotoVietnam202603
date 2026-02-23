@@ -670,6 +670,131 @@
       background: rgba(4, 8, 26, 0.96);
     }
 
+    /* Vietnam cautions accordion */
+    .accordion-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .accordion-item {
+      background: rgba(7, 10, 28, 0.98);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 0;
+      cursor: pointer;
+      color: #fff;
+      background: rgba(229, 57, 53, 0.08);
+      border-left: 4px solid var(--accent-red);
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    .accordion-header .left {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .accordion-header .title {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .accordion-header .chev {
+      flex: 0 0 auto;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .accordion-header .chev::before {
+      content: "▼";
+    }
+
+    .accordion-item.is-open .accordion-header .chev::before {
+      content: "▲";
+    }
+
+    .accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.28s ease;
+    }
+
+    .accordion-item.is-open .accordion-panel {
+      max-height: 2400px;
+    }
+
+    .accordion-inner {
+      padding: 10px 12px 12px;
+    }
+
+    .accordion-inner .table-wrapper {
+      margin-top: 0;
+    }
+
+    .accordion-inner table {
+      font-size: 0.82rem;
+    }
+
+    .accordion-inner thead th {
+      padding: 7px 10px;
+    }
+
+    .accordion-inner tbody td {
+      vertical-align: top;
+      padding: 7px 10px;
+    }
+
+    .accordion-inner tbody td:first-child {
+      color: #fff;
+      font-weight: 650;
+      width: 34%;
+    }
+
+    .emergency-grid {
+      margin-top: 12px;
+    }
+
+    .emergency-grid .info-card {
+      background: linear-gradient(135deg, rgba(229, 57, 53, 0.22), rgba(7, 10, 28, 0.98));
+      border-color: rgba(229, 57, 53, 0.25);
+    }
+
+    .emergency-grid .info-card-title {
+      color: var(--accent-yellow);
+    }
+
+    .emergency-number {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      color: #fff;
+      margin-top: 4px;
+    }
+
+    .subsection-header {
+      margin-top: 14px;
+    }
+
+    .subsection-title {
+      font-size: 1.05rem;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -1004,6 +1129,7 @@
         <a href="#members" class="nav-link">👥<span>メンバー</span></a>
         <a href="#schedule" class="nav-link">🗓<span>スケジュール</span></a>
         <a href="#info" class="nav-link">ℹ️<span>重要情報</span></a>
+        <a href="#cautions" class="nav-link">🚨<span>注意点</span></a>
         <a href="#gifts" class="nav-link">🎁<span>手土産</span></a>
         <a href="#maps" class="nav-link">🗺<span>マップ</span></a>
         <a href="#top" class="nav-link nav-primary">⬆️<span>TOP</span></a>
@@ -1301,6 +1427,276 @@
                 <li>ホーチミン: <strong>23–33℃</strong></li>
                 <li>ダナン: <strong>19–25℃</strong></li>
               </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Vietnam cautions -->
+      <section id="cautions" class="fade-section">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title"><span class="emoji">🚨</span>ベトナム注意点</h2>
+            <p class="section-subtitle">安全・衛生・マナーなど出発前に必ず確認</p>
+          </div>
+
+          <div class="accordion-list" aria-label="ベトナム注意点アコーディオン">
+            <div class="accordion-item">
+              <button class="accordion-header" type="button">
+                <span class="left"><span class="icon">🏍️</span><span class="title">安全・治安</span></span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+              <div class="accordion-panel">
+                <div class="accordion-inner">
+                  <div class="table-wrapper">
+                    <table>
+                      <thead>
+                        <tr><th>注意点</th><th>詳細</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>バイクが最大の危険</td><td>信号無視が当たり前。横断歩道でも止まらない。渡る時は一定速度でゆっくり歩く（急に止まるとぶつかる）。</td></tr>
+                        <tr><td>道路横断のコツ</td><td>手を軽く上げて「渡るよ」アピール。バイクの流れを見て一定ペースで歩く。走らない・止まらない。</td></tr>
+                        <tr><td>歩道もバイクが走る</td><td>歩道を歩いていても後ろからバイクが来る。常に周囲を確認。</td></tr>
+                        <tr><td>ぼったくりタクシー</td><td>流しのタクシーは避ける。必ずGrabを使う。</td></tr>
+                        <tr><td>Grabの注意点</td><td>乗車前にナンバープレートと運転手の顔を確認。違う車に乗らない。</td></tr>
+                        <tr><td>バイクひったくり</td><td>スマホを手に持って歩かない。バッグは道路と反対側の手で持つ。</td></tr>
+                        <tr><td>リュックは前に</td><td>人混みではリュックを前に抱える。ファスナーに注意。</td></tr>
+                        <tr><td>ポケットに貴重品NG</td><td>パスポート・大金はホテルのセーフティボックスに。</td></tr>
+                        <tr><td>歩きスマホ厳禁</td><td>バイクから奪われる事例が非常に多い。特にiPhone。</td></tr>
+                        <tr><td>カフェでも置かない</td><td>テーブルのスマホをひったくられる事例あり。</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" type="button">
+                <span class="left"><span class="icon">🍽️</span><span class="title">食事・飲み物</span></span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+              <div class="accordion-panel">
+                <div class="accordion-inner">
+                  <div class="table-wrapper">
+                    <table>
+                      <thead>
+                        <tr><th>注意点</th><th>詳細</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>水道水は絶対飲まない</td><td>ペットボトルの水を購入。歯磨きも念のためミネラルウォーターで。</td></tr>
+                        <tr><td>屋台の氷は注意</td><td>レストランの氷はOKだが、路上屋台の氷は水道水の可能性あり。</td></tr>
+                        <tr><td>屋台の生野菜は避ける</td><td>水道水で洗っている可能性。レストランならほぼ大丈夫。</td></tr>
+                        <tr><td>初日は屋台を避ける</td><td>お腹が慣れるまで2日目以降に。衛生状態を目で確認。</td></tr>
+                        <tr><td>調味料に注意</td><td>テーブルの唐辛子ソースは見た目以上に辛い。</td></tr>
+                        <tr><td>ビールは安い</td><td>333ビール等は1本50円〜。飲みすぎ注意。</td></tr>
+                        <tr><td>氷の量に注意</td><td>氷でかさ増ししている場合も。水の衛生面も確認。</td></tr>
+                        <tr><td>コーヒーは練乳入りが標準</td><td>ブラックが欲しい場合は「cà phê đen không đường」と伝える。</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" type="button">
+                <span class="left"><span class="icon">🏥</span><span class="title">健康・衛生</span></span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+              <div class="accordion-panel">
+                <div class="accordion-inner">
+                  <div class="table-wrapper">
+                    <table>
+                      <thead>
+                        <tr><th>注意点</th><th>詳細</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>下痢対策は必須</td><td>正露丸・ストッパなど持参。環境の変化だけでもお腹を壊す。</td></tr>
+                        <tr><td>常備薬を持参</td><td>頭痛薬、風邪薬、胃腸薬、絆創膏、虫除けスプレー。</td></tr>
+                        <tr><td>デング熱リスク</td><td>蚊に刺されないよう虫除け必須。特にCu Chi（屋外）は注意。</td></tr>
+                        <tr><td>紫外線が強い</td><td>日焼け止め・帽子・サングラス推奨。ホーチミンは特に暑い。</td></tr>
+                        <tr><td>熱中症に注意</td><td>ペットボトルを常に持ち歩く。Cu Chi観光は特に注意。</td></tr>
+                        <tr><td>海外旅行保険必須</td><td>クレジットカード付帯の保険を確認。現地の病院は高額。</td></tr>
+                        <tr><td>排気ガス</td><td>バイクの排気ガスが多い。気になる人はマスク持参。</td></tr>
+                        <tr><td>日焼け止めSPF50推奨</td><td>3月のホーチミンは真夏。こまめに塗り直す。</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" type="button">
+                <span class="left"><span class="icon">💰</span><span class="title">お金・買い物</span></span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+              <div class="accordion-panel">
+                <div class="accordion-inner">
+                  <div class="table-wrapper">
+                    <table>
+                      <thead>
+                        <tr><th>注意点</th><th>詳細</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>0が多くて混乱する</td><td>100,000VND ≈ 560円。慣れるまで下3桁を隠して「100」=560円と覚える。</td></tr>
+                        <tr><td>簡易換算方法</td><td>VNDの金額を200で割る≈日本円（例: 200,000VND ÷ 200 = 1,000円）。</td></tr>
+                        <tr><td>スキミング注意</td><td>怪しいATMは使わない。カードは目の前で切ってもらう。</td></tr>
+                        <tr><td>VISA/Masterが安心</td><td>JCB・AMEXは使えない店が多い。</td></tr>
+                        <tr><td>おつりを誤魔化される</td><td>桁数が多いので受け取り時に必ず確認。</td></tr>
+                        <tr><td>観光地は吹っかけてくる</td><td>市場やお土産屋では3〜5割引が相場。最初の提示価格で買わない。</td></tr>
+                        <tr><td>コンビニ・スーパーは定価</td><td>ミニストップ、ファミマ、セブンは定価販売で安心。</td></tr>
+                        <tr><td>レストランで確認</td><td>観光客価格で上乗せされる場合あり。注文と合っているか確認。</td></tr>
+                        <tr><td>チップは基本不要</td><td>高級レストランは5〜10%。マッサージは20,000〜50,000VND程度。</td></tr>
+                        <tr><td>ATM手数料に注意</td><td>1回22,000〜55,000VNDの手数料。まとめて引き出す。</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" type="button">
+                <span class="left"><span class="icon">📱</span><span class="title">通信・アプリ</span></span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+              <div class="accordion-panel">
+                <div class="accordion-inner">
+                  <div class="table-wrapper">
+                    <table>
+                      <thead>
+                        <tr><th>注意点</th><th>詳細</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>Grab必須</td><td>ベトナムのタクシー代わり。日本で登録・インストールしておく。</td></tr>
+                        <tr><td>Grab現金払いも可</td><td>クレカ登録 or 現金（Cash）が選べる。</td></tr>
+                        <tr><td>Google Mapsオフライン地図</td><td>ホーチミン・ハノイ・ダナンのオフラインマップを事前にDL。</td></tr>
+                        <tr><td>Google翻訳ベトナム語DL</td><td>オフラインでも使えるようにDL。カメラ翻訳が便利。</td></tr>
+                        <tr><td>社内VPN</td><td>社内VPN接続が必要な場合は事前テスト。</td></tr>
+                        <tr><td>フリーWi-Fiは危険</td><td>カフェやホテルのWi-Fiで機密情報は扱わない。</td></tr>
+                        <tr><td>国番号+84</td><td>ベトナムから日本へ: +81-XX-XXXX-XXXX（最初の0を取る）。</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" type="button">
+                <span class="left"><span class="icon">🛃</span><span class="title">入出国・法律</span></span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+              <div class="accordion-panel">
+                <div class="accordion-inner">
+                  <div class="table-wrapper">
+                    <table>
+                      <thead>
+                        <tr><th>注意点</th><th>詳細</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>45日以内はビザ不要</td><td>日本国籍なら観光・商用ともにビザ不要。</td></tr>
+                        <tr><td>パスポート残存6ヶ月以上</td><td>入国時にパスポート残存期間6ヶ月以上が必要。</td></tr>
+                        <tr><td>入国カードは機内で配布</td><td>ボールペン持参。ホテルの住所を控えておく。</td></tr>
+                        <tr><td>屋内禁煙</td><td>罰金あり。ホテルの喫煙ルームを確認。</td></tr>
+                        <tr><td>軍事施設の撮影NG</td><td>空港内の一部・軍事関連施設は撮影禁止。</td></tr>
+                        <tr><td>政治批判をしない</td><td>ベトナムは社会主義国。政治的な話題は避ける。</td></tr>
+                        <tr><td>薬物は厳罰（死刑あり）</td><td>薬物関連は絶対に関わらない。</td></tr>
+                        <tr><td>路上の賭博に関わらない</td><td>外国人カジノは合法だが路上賭博はNG。</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" type="button">
+                <span class="left"><span class="icon">🌤️</span><span class="title">気候・服装</span></span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+              <div class="accordion-panel">
+                <div class="accordion-inner">
+                  <div class="table-wrapper">
+                    <table>
+                      <thead>
+                        <tr><th>注意点</th><th>詳細</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>突然のスコール</td><td>3月は乾季だが稀にスコールあり。折りたたみ傘推奨。</td></tr>
+                        <tr><td>都市で10℃差</td><td>ハノイ16〜22℃（涼しい）、ホーチミン23〜33℃（暑い）。</td></tr>
+                        <tr><td>寺院では肌の露出NG</td><td>膝と肩を隠す服装が必要。</td></tr>
+                        <tr><td>室内は冷房で寒い</td><td>レストランやモールは冷房がきつい。薄手の上着を持ち歩く。</td></tr>
+                        <tr><td>歩道が凸凹</td><td>ヒールは危険。スニーカー推奨。</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header" type="button">
+                <span class="left"><span class="icon">🤝</span><span class="title">マナー・文化</span></span>
+                <span class="chev" aria-hidden="true"></span>
+              </button>
+              <div class="accordion-panel">
+                <div class="accordion-inner">
+                  <div class="table-wrapper">
+                    <table>
+                      <thead>
+                        <tr><th>注意点</th><th>詳細</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>挨拶「シンチャオ」</td><td>xin chào（シンチャオ）= こんにちは。</td></tr>
+                        <tr><td>感謝「カムオン」</td><td>cảm ơn（カムオン）= ありがとう。</td></tr>
+                        <tr><td>手招きは手のひら下向き</td><td>手のひらを上にして指を曲げるのは犬を呼ぶ仕草で失礼。</td></tr>
+                        <tr><td>子供の頭を触らない</td><td>頭は神聖な部分。</td></tr>
+                        <tr><td>麺類をすするのはOK</td><td>音を立てても問題なし。</td></tr>
+                        <tr><td>手土産は両手で渡す</td><td>片手で渡すのは失礼。</td></tr>
+                        <tr><td>人を撮る前に許可</td><td>特にお年寄りや子供。無断撮影はトラブルの元。</td></tr>
+                        <tr><td>パスポートを預けることがある</td><td>チェックイン時（コピーを渡すのもOK）。</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-header subsection-header">
+            <h3 class="section-title subsection-title"><span class="emoji">🆘</span>緊急連絡先</h3>
+          </div>
+          <div class="info-grid emergency-grid">
+            <article class="info-card">
+              <div class="info-card-header"><div class="info-card-title">🚔 警察</div></div>
+              <div class="emergency-number">113</div>
+            </article>
+            <article class="info-card">
+              <div class="info-card-header"><div class="info-card-title">🚑 救急車</div></div>
+              <div class="emergency-number">115</div>
+            </article>
+            <article class="info-card">
+              <div class="info-card-header"><div class="info-card-title">🔥 消防</div></div>
+              <div class="emergency-number">114</div>
+            </article>
+            <article class="info-card">
+              <div class="info-card-header"><div class="info-card-title">🇯🇵 在ホーチミン日本国総領事館</div></div>
+              <div class="emergency-number">+84-28-3933-3510</div>
+            </article>
+            <article class="info-card">
+              <div class="info-card-header"><div class="info-card-title">🇯🇵 在ハノイ日本国大使館</div></div>
+              <div class="emergency-number">+84-24-3846-3000</div>
+            </article>
+            <article class="info-card">
+              <div class="info-card-header"><div class="info-card-title">🇯🇵 在ダナン領事事務所</div></div>
+              <div class="emergency-number">+84-236-3555-535</div>
+            </article>
+            <article class="info-card">
+              <div class="info-card-header"><div class="info-card-title">📞 JTB緊急連絡先</div></div>
+              <div class="emergency-number">JTB手配書に記載の番号を確認</div>
             </article>
           </div>
         </div>
@@ -2746,6 +3142,20 @@
           const target = tab.getAttribute('data-target');
           if (!target) return;
           activate(target);
+        });
+      });
+    })();
+
+    // Cautions accordion
+    (function () {
+      const headers = document.querySelectorAll('.accordion-header');
+      if (!headers || headers.length === 0) return;
+
+      headers.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.accordion-item');
+          if (!item) return;
+          item.classList.toggle('is-open');
         });
       });
     })();
