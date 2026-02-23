@@ -1,0 +1,89 @@
+{
+  "groups": [
+    {
+      "title": "【2月28日、空港、ホテル】",
+      "items": [
+        {
+          "title": "ホーチミン空港入国手続",
+          "image": "QRコードセット.files/image001.png"
+        },
+        {
+          "title": "相鉄グランドフレッサ サイゴン",
+          "image": "QRコードセット.files/image002.png"
+        },
+        {
+          "title": "近辺のコンビニ",
+          "image": "QRコードセット.files/image003.png"
+        }
+      ]
+    },
+    {
+      "title": "【3月1日】",
+      "items": [
+        {
+          "title": "父母会",
+          "image": "QRコードセット.files/image004.png"
+        },
+        {
+          "title": "ベンディン",
+          "image": "QRコードセット.files/image005.png"
+        },
+        {
+          "title": "懇親会",
+          "image": "QRコードセット.files/image006.png"
+        }
+      ]
+    },
+    {
+      "title": "【3月2日】",
+      "items": [
+        {
+          "title": "リッケイ",
+          "image": "QRコードセット.files/image007.png"
+        },
+        {
+          "title": "昼食会",
+          "image": "QRコードセット.files/image008.png"
+        },
+        {
+          "title": "OCC",
+          "image": "QRコードセット.files/image009.png"
+        }
+      ]
+    },
+    {
+      "title": "【3月3日】",
+      "items": [
+        {
+          "title": "ICDベトナム",
+          "image": "QRコードセット.files/image010.png"
+        },
+        {
+          "title": "OCC懇親会",
+          "image": "QRコードセット.files/image011.png"
+        },
+        {
+          "title": "おまけ",
+          "image": "QRコードセット.files/image012.png"
+        }
+      ]
+    },
+    {
+      "title": "【お土産】",
+      "items": [
+        {
+          "title": "アンナムグルメマーケット\n\n7:00-21:00",
+          "image": "QRコードセット.files/image013.png"
+        },
+        {
+          "title": "高島屋\n\n9:30-21:30",
+          "image": "QRコードセット.files/image014.png"
+        },
+        {
+          "title": "サイゴンエコクラフト\n\n8:00-22:00",
+          "image": "QRコードセット.files/image015.png"
+        }
+      ]
+    }
+  ]
+}
