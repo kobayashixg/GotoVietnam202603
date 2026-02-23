@@ -1435,7 +1435,7 @@
           <div class="qr-block" aria-label="QRコード一覧">
             <div class="qr-header">
               <h3>📱 QRコード</h3>
-              <p>タップ/クリックで別タブに拡大表示</p>
+              <p>URLは別タブで開く（未対応の場合は画像表示）</p>
             </div>
             <div id="qr-groups" class="qr-groups"></div>
           </div>
@@ -2577,6 +2577,66 @@
       const groups = Array.isArray(qrData?.groups) ? qrData.groups : [];
       if (groups.length === 0) return;
 
+      const prefersSameTab = (() => {
+        try {
+          const coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+          const narrow = window.matchMedia && window.matchMedia('(max-width: 899px)').matches;
+          return Boolean(coarse || narrow);
+        } catch (e) {
+          return false;
+        }
+      })();
+
+      const hasBarcodeDetector = typeof window.BarcodeDetector === 'function';
+      const qrDetector = (() => {
+        if (!hasBarcodeDetector) return null;
+        try {
+          return new window.BarcodeDetector({ formats: ['qr_code'] });
+        } catch (e) {
+          return null;
+        }
+      })();
+
+      function safeUrl(value) {
+        const raw = String(value ?? '').trim();
+        if (!raw) return '';
+        if (/^https?:\/\//i.test(raw)) return raw;
+        return '';
+      }
+
+      function openUrl(url) {
+        const safe = safeUrl(url);
+        if (!safe) return false;
+        window.open(safe, '_blank', 'noopener');
+        return true;
+      }
+
+      function openImageFallback(imageUrl) {
+        const safe = String(imageUrl ?? '').trim();
+        if (!safe) return;
+        if (prefersSameTab) {
+          window.location.href = safe;
+          return;
+        }
+        window.open(safe, '_blank', 'noopener');
+      }
+
+      async function decodeQrFromImageUrl(imageUrl) {
+        if (!qrDetector) return '';
+        try {
+          const res = await fetch(imageUrl, { cache: 'force-cache' });
+          if (!res.ok) return '';
+          const blob = await res.blob();
+          const bitmap = await createImageBitmap(blob);
+          const results = await qrDetector.detect(bitmap);
+          const first = Array.isArray(results) && results.length ? results[0] : null;
+          const value = first && (first.rawValue || first.data || '');
+          return String(value ?? '').trim();
+        } catch (e) {
+          return '';
+        }
+      }
+
       function escapeHtml(value) {
         return String(value ?? '')
           .replaceAll('&', '&amp;')
@@ -2597,8 +2657,10 @@
               const cardTitle = escapeHtml(item?.title ?? image);
               const href = escapeHtml(image);
               const src = escapeHtml(image);
+              const targetAttr = prefersSameTab ? '' : ' target="_blank"';
+              const relAttr = prefersSameTab ? '' : ' rel="noopener noreferrer"';
               return `
-                <a class="qr-card" href="${href}" target="_blank" rel="noopener noreferrer">
+                <a class="qr-card" href="${href}" data-qr-image="${href}"${targetAttr}${relAttr}>
                   <div class="qr-image-frame"><img src="${src}" alt="${cardTitle}"></div>
                   <div class="qr-title">${cardTitle}</div>
                 </a>
@@ -2616,6 +2678,41 @@
           `;
         })
         .join('');
+
+      // Click: try decode QR -> open URL; fallback to opening the image
+      container.addEventListener('click', async (e) => {
+        const anchor = e.target && e.target.closest ? e.target.closest('a.qr-card') : null;
+        if (!anchor) return;
+
+        const cached = safeUrl(anchor.dataset.decodedUrl);
+        if (cached) {
+          // Let browser handle default navigation.
+          return;
+        }
+
+        const imageUrl = anchor.getAttribute('data-qr-image') || anchor.getAttribute('href') || '';
+        if (!imageUrl) return;
+
+        if (!qrDetector) {
+          // No decode support: default behavior (open image) is fine.
+          return;
+        }
+
+        e.preventDefault();
+        const decoded = await decodeQrFromImageUrl(imageUrl);
+        const url = safeUrl(decoded);
+
+        if (url) {
+          anchor.dataset.decodedUrl = url;
+          anchor.href = url;
+          anchor.target = '_blank';
+          anchor.rel = 'noopener noreferrer';
+          openUrl(url);
+          return;
+        }
+
+        openImageFallback(imageUrl);
+      });
     })();
 
     // Schedule tabs
