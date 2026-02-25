@@ -989,6 +989,12 @@
       opacity: 0;
       transform: translateY(22px);
       transition: opacity 0.55s ease, transform 0.55s ease;
+      scroll-margin-top: calc(var(--nav-height) + 12px);
+    }
+
+    .fade-section:target {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .fade-section.in-view {
@@ -1128,6 +1134,7 @@
       <div class="nav-links">
         <a href="#members" class="nav-link">👥<span>メンバー</span></a>
         <a href="#schedule" class="nav-link">🗓<span>スケジュール</span></a>
+        <a href="#tour-33" class="nav-link">📷<span>3/3観光</span></a>
         <a href="#info" class="nav-link">ℹ️<span>重要情報</span></a>
         <a href="#cautions" class="nav-link">🚨<span>注意点</span></a>
         <a href="#gifts" class="nav-link">🎁<span>手土産</span></a>
@@ -1335,6 +1342,46 @@
               </div>
               <ul class="schedule-list" data-schedule-list="day7"></ul>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3/3 Morning tour plan -->
+      <section id="tour-33" class="fade-section">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title"><span class="emoji">📷</span>3/3 午前 観光プラン</h2>
+            <p class="section-subtitle">別ページで詳細タイムラインを確認</p>
+          </div>
+
+          <div class="map-buttons">
+            <a class="map-button" href="33kankou.html" target="_blank" rel="noopener noreferrer">
+              <div class="label">
+                <span class="main">観光スケジュールを開く（3/3 ホーチミン）</span>
+                <span class="sub">33kankou.html</span>
+              </div>
+              <span class="icon-right">📄</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Parents meeting schedule -->
+      <section id="parents" class="fade-section">
+        <div class="section-card">
+          <div class="section-header">
+            <h2 class="section-title"><span class="emoji">👪</span>父母会スケジュール</h2>
+            <p class="section-subtitle">Excelから自動生成（シートはタブ切替）</p>
+          </div>
+
+          <div class="map-buttons">
+            <a class="map-button" href="parents_meeting.html" target="_blank" rel="noopener noreferrer">
+              <div class="label">
+                <span class="main">父母会スケジュールを開く</span>
+                <span class="sub">parents_meeting.html</span>
+              </div>
+              <span class="icon-right">📄</span>
+            </a>
           </div>
         </div>
       </section>
@@ -2158,12 +2205,6 @@
     "d": "2026-02-28",
     "i": [
       {
-        "s": "06:00",
-        "g": "高野・南",
-        "k": "🍴食事",
-        "a": "各自朝食（6:00-10:30)"
-      },
-      {
         "s": "11:10",
         "g": "高橋・脇坂\n坂見・野田",
         "k": "🧳集合",
@@ -2341,12 +2382,6 @@
     "d": "2026-03-01",
     "i": [
       {
-        "s": "06:00",
-        "g": "森岡・渡辺・小林",
-        "k": "🍴食事",
-        "a": "各自朝食（6:00-10:30)"
-      },
-      {
         "s": "10:50",
         "g": "森岡・渡辺・小林",
         "k": "🧳集合",
@@ -2419,12 +2454,6 @@
   "day5": {
     "d": "2026-03-02",
     "i": [
-      {
-        "s": "06:00",
-        "g": "森岡・渡辺・小林",
-        "k": "🍴食事",
-        "a": "各自朝食（6:00-10:30)"
-      },
       {
         "s": "09:20",
         "g": "森岡・渡辺・小林",
@@ -2504,13 +2533,7 @@
     "d": "2026-03-03",
     "i": [
       {
-        "s": "06:00",
-        "g": "森岡・渡辺・小林",
-        "k": "🍴食事",
-        "a": "各自朝食（6:00-10:30)"
-      },
-      {
-        "s": "09:30",
+        "s": "08:30",
         "g": "高橋・森岡\n渡辺・脇坂\n小林・坂見",
         "k": "🧳集合",
         "a": "ホテルエントランス"

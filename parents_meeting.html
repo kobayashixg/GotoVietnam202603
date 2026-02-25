@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>父母会スケジュール</title>
+  <style>
+    :root {
+      --bg-main: #050814;
+      --bg-elevated: #0d1020;
+      --bg-elevated-soft: #121527;
+      --accent-red: #e53935;
+      --accent-yellow: #ffeb3b;
+      --accent-soft: #ff7043;
+      --text-main: #f5f7ff;
+      --text-muted: #a3acc9;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.65);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --nav-height: 64px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, #101633 0, #050814 45%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to right, rgba(5, 8, 20, 0.94), rgba(2, 3, 8, 0.96));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-inner {
+      width: 100%;
+      max-width: 1120px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .nav-logo em { font-style: normal; font-weight: 600; color: var(--accent-yellow); }
+
+    .nav-link {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+      background: rgba(5, 9, 26, 0.9);
+    }
+
+    .nav-link:hover {
+      background: rgba(229, 57, 53, 0.16);
+      border-color: rgba(229, 57, 53, 0.8);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .page-wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: calc(var(--nav-height) + 18px) 20px 40px;
+    }
+
+    .section-card {
+      background: linear-gradient(145deg, rgba(7, 10, 30, 0.98), rgba(4, 6, 18, 0.98));
+      border-radius: var(--radius-lg);
+      padding: 20px 18px 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title span.emoji { font-size: 1.25rem; }
+
+    .section-subtitle { font-size: 0.78rem; color: var(--text-muted); }
+
+    .schedule-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .tab-button {
+      flex: 1 1 140px;
+      min-width: 0;
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(5, 9, 26, 0.9);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+
+    .tab-button strong { font-weight: 600; color: #fff; }
+
+    .tab-button.active {
+      background: linear-gradient(135deg, var(--accent-red), #ff9800);
+      color: #050814;
+      border-color: transparent;
+      transform: translateY(-1px);
+    }
+
+    .tab-button.active strong { color: #050814; }
+
+    .schedule-panels {
+      border-radius: 16px;
+      background: rgba(3, 8, 30, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 14px 14px 10px;
+      max-height: calc(100vh - 220px);
+      overflow: auto;
+      scrollbar-width: thin;
+    }
+
+    .schedule-panel { display: none; animation: fadeIn 0.25s ease-out; }
+    .schedule-panel.active { display: block; }
+
+    .table-wrapper {
+      margin-top: 0;
+      border-radius: 14px;
+      overflow: auto;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(4, 8, 26, 0.96);
+    }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+
+    thead {
+      background: linear-gradient(135deg, rgba(229, 57, 53, 0.95), rgba(255, 152, 0, 0.95));
+      color: #050814;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    thead th { text-align: left; padding: 7px 10px; font-weight: 600; }
+
+    tbody tr:nth-child(odd) { background: rgba(2, 6, 22, 0.95); }
+    tbody tr:nth-child(even) { background: rgba(10, 14, 34, 0.98); }
+
+    tbody td { padding: 7px 10px; color: var(--text-muted); vertical-align: top; }
+
+    .pm-table td, .pm-table th {
+      white-space: pre-line;
+      word-break: break-word;
+    }
+
+    .pm-table a {
+      color: #fff;
+      text-decoration: underline;
+      text-decoration-color: rgba(255, 235, 59, 0.8);
+      text-underline-offset: 2px;
+    }
+
+    .pm-empty { color: var(--text-muted); font-size: 0.86rem; padding: 6px 2px; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 599px) {
+      .nav-inner { padding: 0 12px; }
+      .page-wrapper { padding-left: 12px; padding-right: 12px; }
+      .section-card { padding: 16px 14px 14px; }
+    }
+
+    @media print {
+      :root {
+        --bg-main: #ffffff;
+        --bg-elevated: #ffffff;
+        --bg-elevated-soft: #ffffff;
+        --text-main: #000000;
+        --text-muted: #333333;
+        --border-subtle: #cccccc;
+        --shadow-soft: none;
+      }
+
+      body { background: #ffffff !important; color: #000000 !important; }
+      .navbar { position: static; background: #ffffff !important; border-bottom: 1px solid #cccccc; }
+      .page-wrapper { padding-top: 12px; }
+      .section-card, .schedule-panels, .table-wrapper { background: #ffffff !important; box-shadow: none !important; border-color: #cccccc !important; }
+      a { color: #000000 !important; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo"><span>👪</span><span><em>父母会</em> スケジュール</span></div>
+      <a class="nav-link" href="index.html">⬅ 出張ページへ戻る</a>
+    </div>
+  </nav>
+
+  <main class="page-wrapper">
+    <section class="section-card">
+      <div class="section-header">
+        <h1 class="section-title"><span class="emoji">👪</span>父母会スケジュール</h1>
+        <p class="section-subtitle">Excel（父母会スケジュール.xlsx）から自動生成 / シート切替タブ</p>
+      </div>
+
+      <div class="schedule-tabs" role="tablist" aria-label="父母会スケジュール">
+        <button class="tab-button active" data-target="sheet1" role="tab" aria-selected="true" aria-controls="panel-sheet1"><strong>ホーチミン父母会</strong></button><button class="tab-button" data-target="sheet2" role="tab" aria-selected="false" aria-controls="panel-sheet2"><strong>ダナン父母会</strong></button>
+      </div>
+
+      <div class="schedule-panels">
+        <div class="schedule-panel active" id="panel-sheet1" data-panel="sheet1" role="tabpanel"><div class="table-wrapper"><table class="pm-table"><thead><tr><th >&nbsp;</th><th >開始</th><th >終了</th><th >&nbsp;</th><th >Notes</th></tr></thead><tbody><tr><td >&nbsp;</td><td >11:30</td><td >11:40</td><td >食事注文</td><td >【通訳】
+全員分の注文内容を集めて、注文する</td></tr><tr><td >&nbsp;</td><td >11:40</td><td >11:45</td><td >お金の精算
+（ホーチミンのみ）</td><td >【野田・学生・通訳】
+ご両親の航空券と宿泊費用を清算する
+①事前に費用を積算
+②領収書を受け取る
+③現金(VND)を手渡しする</td></tr><tr><td >&nbsp;</td><td >11:45</td><td >11:50</td><td >HBA側の自己紹介</td><td >【HBA】
+簡単な自己紹介をする
+簡単なベトナム語を話せる準備をしておく
+　こんにちは：Xin chào（シンチャオ）
+　私は〇〇です：Tôi tên là 〇〇（トイ テン ラ〇〇）
+　会えてうれしいです：Rất vui được làm quen（ラ ブイ ダン ラム クエン）</td></tr><tr><td >&nbsp;</td><td >11:50</td><td >11:55</td><td >学生側の自己紹介</td><td >&nbsp;</td></tr><tr><td >&nbsp;</td><td >11:55</td><td >12:05</td><td >HBAの説明</td><td >【野田】
+ベトナム語の会社案内資料(紙)を渡し、HBAについて簡単に説明
+＜伝えたいこと＞
+HBAは北海道No.1のIT企業でしっかりしている
+・会社概要の説明（社員数、拠点等）
+・長年の実績と顧客の紹介
+・リニューアルされたオフィス</td></tr><tr><td >&nbsp;</td><td >12:05</td><td >12:10</td><td >配属部署の説明</td><td >【坂見】
+資料(紙)を渡して説明
+＜伝えたいこと＞
+自分の子供がどういう部署で何をするのか、どんなキャリアを描くのか
+・イノベの紹介（席の近くにいる人・困ったときに相談できる）
+・坂見、澤谷の紹介→困ったときに相談・信頼できる人
+・他の部署に配属されても困らないスキル習得（サーバントリーダーシップ制）
+・技術と日本語を習得して、お客さん相手の重要PJにアサインされるキャリアの紹介（1年後～2年後）</td></tr><tr><td >&nbsp;</td><td >12:10</td><td >12:15</td><td >北海道の説明</td><td >【坂見】
+資料(紙)を渡して説明
+＜伝えたいこと＞
+自分の子供が安心して生活できるのか、生きていけるのか
+・坂見がいいと思った北海道の魅力を紹介</td></tr><tr><td >&nbsp;</td><td >12:15</td><td >12:45</td><td >質問対応</td><td >【通訳】
+質問内容と回答内容を通訳する
+【HBA】
+＜伝えたいこと＞
+親御さんの不安や心配要素を取り除いて安心してもらい、子供の入社を後押ししてもらう
+
+誠意に質問に回答する</td></tr><tr><td >&nbsp;</td><td >12:45</td><td >&nbsp;</td><td >写真撮る</td><td >【野田】
+質問が出なさそうなタイミングで通訳へ写真を撮りましょうと言う
+※「写真を撮る」→父母会終了の合図
+
+【通訳】
+店員を呼んで、店員に撮ってもらう
+野田のスマホを渡す</td></tr><tr><td >&nbsp;</td><td >&nbsp;</td><td >&nbsp;</td><td >ひとこと</td><td >【高橋常務】
+今日はありがとうございました。と一言お願いします。</td></tr><tr><td >&nbsp;</td><td >&nbsp;</td><td >&nbsp;</td><td >握手する</td><td >一人ずつ握手をして、お店から出てもらう
+※ベトナム人は日本人と握手をしたがるそう（握手する機会が少ないから）</td></tr><tr><td >&nbsp;</td><td >&nbsp;</td><td >&nbsp;</td><td >手土産を渡す</td><td >高橋常務が握手するタイミングで手土産を渡してもらう
+【野田 or 坂見】
+事前に高橋常務の席の近くに手土産を置いておく</td></tr><tr><td >&nbsp;</td><td >13:00</td><td >13:00</td><td >解散</td><td >&nbsp;</td></tr></tbody></table></div></div><div class="schedule-panel" id="panel-sheet2" data-panel="sheet2" role="tabpanel"><div class="table-wrapper"><table class="pm-table"><thead><tr><th >&nbsp;</th><th >開始</th><th >終了</th><th >&nbsp;</th><th >Notes</th></tr></thead><tbody><tr><td >&nbsp;</td><td >13:00</td><td >13:10</td><td >食事注文</td><td >【通訳】
+全員分の注文内容を集めて、注文する</td></tr><tr><td >&nbsp;</td><td >13:10</td><td >13:15</td><td >お金の精算
+（ホーチミンのみ）</td><td >【野田・学生・通訳】
+ご両親の航空券と宿泊費用を清算する
+①事前に費用を積算
+②領収書を受け取る
+③現金(VND)を手渡しする</td></tr><tr><td >&nbsp;</td><td >13:15</td><td >13:20</td><td >HBA側の自己紹介</td><td >【HBA】
+簡単な自己紹介をする
+簡単なベトナム語を話せる準備をしておく
+　こんにちは：Xin chào（シンチャオ）
+　私は〇〇です：Tôi tên là 〇〇（トイ テン ラ〇〇）
+　会えてうれしいです：Rất vui được làm quen（ラ ブイ ダン ラム クエン）</td></tr><tr><td >&nbsp;</td><td >13:20</td><td >13:25</td><td >学生側の自己紹介</td><td >&nbsp;</td></tr><tr><td >&nbsp;</td><td >13:25</td><td >13:35</td><td >HBAの説明</td><td >【野田】
+ベトナム語の会社案内資料(紙)を渡し、HBAについて簡単に説明
+＜伝えたいこと＞
+HBAは北海道No.1のIT企業でしっかりしている
+・会社概要の説明（社員数、拠点等）
+・長年の実績と顧客の紹介
+・リニューアルされたオフィス</td></tr><tr><td >&nbsp;</td><td >13:35</td><td >13:40</td><td >配属部署の説明</td><td >【坂見】
+資料(紙)を渡して説明
+＜伝えたいこと＞
+自分の子供がどういう部署で何をするのか、どんなキャリアを描くのか
+・イノベの紹介（席の近くにいる人・困ったときに相談できる）
+・坂見、澤谷の紹介→困ったときに相談・信頼できる人
+・他の部署に配属されても困らないスキル習得（サーバントリーダーシップ制）
+・技術と日本語を習得して、お客さん相手の重要PJにアサインされるキャリアの紹介（1年後～2年後）</td></tr><tr><td >&nbsp;</td><td >13:40</td><td >13:45</td><td >北海道の説明</td><td >【坂見】
+資料(紙)を渡して説明
+＜伝えたいこと＞
+自分の子供が安心して生活できるのか、生きていけるのか
+・坂見がいいと思った北海道の魅力を紹介</td></tr><tr><td >&nbsp;</td><td >13:45</td><td >14:15</td><td >質問対応</td><td >【通訳】
+質問内容と回答内容を通訳する
+【HBA】
+＜伝えたいこと＞
+親御さんの不安や心配要素を取り除いて安心してもらい、子供の入社を後押ししてもらう
+
+誠意に質問に回答する</td></tr><tr><td >&nbsp;</td><td >14:15</td><td >&nbsp;</td><td >写真撮る</td><td >【野田】
+質問が出なさそうなタイミングで通訳へ写真を撮りましょうと言う
+※「写真を撮る」→父母会終了の合図
+
+【通訳】
+店員を呼んで、店員に撮ってもらう
+野田のスマホを渡す</td></tr><tr><td >&nbsp;</td><td >&nbsp;</td><td >&nbsp;</td><td >ひとこと</td><td >【高橋常務】
+今日はありがとうございました。と一言お願いします。</td></tr><tr><td >&nbsp;</td><td >&nbsp;</td><td >&nbsp;</td><td >握手する</td><td >一人ずつ握手をして、お店から出てもらう
+※ベトナム人は日本人と握手をしたがるそう（握手する機会が少ないから）</td></tr><tr><td >&nbsp;</td><td >&nbsp;</td><td >&nbsp;</td><td >手土産を渡す</td><td >高橋常務が握手するタイミングで手土産を渡してもらう
+【野田 or 坂見】
+事前に高橋常務の席の近くに手土産を置いておく</td></tr><tr><td >&nbsp;</td><td >14:30</td><td >14:30</td><td >解散</td><td >&nbsp;</td></tr></tbody></table></div></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Tabs
+    (function () {
+      const tabs = document.querySelectorAll('.tab-button');
+      const panels = document.querySelectorAll('.schedule-panel');
+
+      function activate(key) {
+        tabs.forEach((t) => {
+          const active = t.dataset.target === key;
+          t.classList.toggle('active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+
+        panels.forEach((p) => {
+          const active = p.dataset.panel === key;
+          p.classList.toggle('active', active);
+        });
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => activate(tab.dataset.target));
+      });
+    })();
+  </script>
+</body>
+</html>
