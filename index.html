@@ -89,9 +89,16 @@
 
     .nav-links {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       justify-content: flex-end;
       gap: 6px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar {
+      display: none;
     }
 
     .nav-link {
@@ -1030,20 +1037,9 @@
       }
 
       .nav-links {
-        flex-wrap: nowrap;
         gap: 4px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
         max-width: 58%;
         min-width: 0;
-      }
-
-      .nav-links::-webkit-scrollbar {
-        display: none;
-      }
-
-      .nav-links {
-        scrollbar-width: none;
       }
 
       .nav-link {
