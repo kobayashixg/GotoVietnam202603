@@ -260,33 +260,75 @@
       min-height: 1.2em;
     }
 
-    .field {
-      display: grid;
-      gap: 6px;
+    .category-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 16px;
+      position: sticky;
+      top: calc(var(--nav-height) + 10px);
+      z-index: 900;
+      padding: 10px 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(3, 8, 30, 0.92);
+      backdrop-filter: blur(10px);
     }
 
-    .input {
+    .category-block {
+      padding-top: 6px;
+      scroll-margin-top: calc(var(--nav-height) + 110px);
+    }
+
+    .category-head {
+      appearance: none;
+      -webkit-appearance: none;
       width: 100%;
-      border-radius: 14px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: rgba(5, 9, 26, 0.9);
-      color: var(--text-main);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 12px 0 10px;
       padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(5, 9, 26, 0.75);
+      color: inherit;
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .category-head:hover {
+      background: rgba(229, 57, 53, 0.10);
+      border-color: rgba(229, 57, 53, 0.55);
+    }
+
+    .category-head:focus-visible {
+      outline: 2px solid rgba(255, 235, 59, 0.60);
+      outline-offset: 2px;
+    }
+
+    .category-title {
+      font-weight: 900;
       font-size: 0.95rem;
-      line-height: 1.35;
-      outline: none;
     }
 
-    .input::placeholder {
-      color: rgba(163, 172, 201, 0.75);
+    .category-count {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      white-space: nowrap;
     }
 
-    .translate-frame {
-      width: 100%;
-      height: 520px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 14px;
-      background: rgba(5, 9, 26, 0.6);
+    .category-phrases {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .category-block[data-open="0"] .category-phrases {
+      display: none;
     }
   </style>
 </head>
@@ -314,25 +356,9 @@
 
         <div class="note" id="note">Note</div>
 
-        <div class="phrases" id="phrases"></div>
+        <div class="category-nav" id="category-nav"></div>
 
-        <article class="phrase" id="translate-panel">
-          <div class="phrase-header">
-            <div class="phrase-title" id="translate-title">Translate</div>
-            <div class="phrase-actions">
-              <button class="btn primary" id="open-ja-vi" type="button">Open</button>
-              <button class="btn" id="open-vi-ja" type="button">Open</button>
-            </div>
-          </div>
-          <div class="phrase-body">
-            <div class="field">
-              <div class="label" id="translate-label">Text</div>
-              <textarea class="input" id="translate-text" rows="3" placeholder="..."></textarea>
-              <div class="text small" id="translate-note">Note</div>
-            </div>
-            <iframe class="translate-frame" id="translate-frame" title="Google Translate"></iframe>
-          </div>
-        </article>
+        <div class="phrases" id="phrases"></div>
 
         <div class="status" id="status"></div>
       </section>
@@ -346,14 +372,8 @@
       back: '\u2b05\ufe0f\u0020\u4e00\u89a7\u3078\u623b\u308b',
       stop: '\u25a0\u0020\u505c\u6b62',
       title: '\u30d9\u30c8\u30ca\u30e0\u8a9e\uff1a\u7c21\u5358\u306a\u6328\u62f6\u0020\u0026\u0020\u81ea\u5df1\u7d39\u4ecb',
-      subtitle: '\u65e5\u672c\u8a9e\u0020\u002f\u0020\u30d9\u30c8\u30ca\u30e0\u8a9e\u0020\u002f\u0020\u30ab\u30bf\u30ab\u30ca\uff08\u6291\u63da\u76ee\u5b89\u4ed8\u304d\uff09\u0020\u002b\u0020\u97f3\u58f0\uff08VN\u306e\u307f\uff09',
-      note: '\u97f3\u58f0\u306f\u30d6\u30e9\u30a6\u30b6\u306e\u8aad\u307f\u4e0a\u3052\uff08Web Speech API\uff09\u3092\u4f7f\u3044\u307e\u3059\u3002\u30d9\u30c8\u30ca\u30e0\u8a9e\u97f3\u58f0\u304c\u5165\u3063\u3066\u3044\u306a\u3044\u7aef\u672b\u3067\u306f\u3001VN\u518d\u751f\u304c\u7121\u97f3\u306b\u306a\u308b\u3053\u3068\u304c\u3042\u308a\u307e\u3059\uff08\u8868\u793a\u3067\u7df4\u7fd2\u3067\u304d\u307e\u3059\uff09\u3002\u0020\u6291\u63da\u306f\u3042\u304f\u307e\u3067\u76ee\u5b89\uff1a\u0020\u2197\ufe0f\u4e0a\u3052\u0020\u002f\u0020\u2934\ufe0f\u5f37\u304f\u4e0a\u3052\u0020\u002f\u0020\u2198\ufe0f\u4e0b\u3052\u0020\u002f\u0020\u2935\ufe0f\u5f37\u304f\u4e0b\u3052',
-      translateTitle: 'Google\u7ffb\u8a33\uff08\u30d9\u30c8\u30ca\u30e0\u8a9e\u2194\u65e5\u672c\u8a9e\uff09',
-      translateLabel: '\u5165\u529b\u30c6\u30ad\u30b9\u30c8',
-      translatePlaceholder: '\u3053\u3053\u306b\u5165\u529b\uff08\u307e\u305f\u306f\u30b3\u30d4\u30da\uff09\u3057\u3066\u3001\u53f3\u4e0a\u306e\u30dc\u30bf\u30f3\u3067Google\u7ffb\u8a33\u3092\u958b\u304d\u307e\u3059\u3002',
-      translateNote: '\u57cb\u3081\u8fbc\u307f\uff08iframe\uff09\u306f\u30d6\u30e9\u30a6\u30b6\u306e\u5236\u9650\u3067\u8868\u793a\u3067\u304d\u306a\u3044\u5834\u5408\u304c\u3042\u308a\u307e\u3059\u3002\u305d\u306e\u5834\u5408\u306f\u300c\u958b\u304f\u300d\u3067\u65b0\u3057\u3044\u30bf\u30d6\u3067\u4f7f\u3063\u3066\u304f\u3060\u3055\u3044\u3002',
-      openJaVi: 'JP\u2192VN\u0020\u958b\u304f',
-      openViJa: 'VN\u2192JP\u0020\u958b\u304f',
+      subtitle: '\u65e5\u672c\u8a9e\u0020\u002f\u0020\u30d9\u30c8\u30ca\u30e0\u8a9e\u0020\u002f\u0020\u30ab\u30bf\u30ab\u30ca\uff08\u6291\u63da\u76ee\u5b89\u4ed8\u304d\uff09\u0020\u002b\u0020\u97f3\u58f0\uff08VN\u306e\u307f\uff09\u0020\u002f\u0020\u30ab\u30c6\u30b4\u30ea\u5225',
+      note: '\u97f3\u58f0\u306f\u30d6\u30e9\u30a6\u30b6\u306e\u8aad\u307f\u4e0a\u3052\uff08Web Speech API\uff09\u3092\u4f7f\u3044\u307e\u3059\u3002\u30c6\u30ad\u30b9\u30c8\u3060\u3051\u3067\u3082\u7df4\u7fd2\u3067\u304d\u307e\u3059\u3002\u4e0a\u306e\u30ab\u30c6\u30b4\u30ea\u30dc\u30bf\u30f3\u3067\u30b8\u30e3\u30f3\u30d7\u3067\u304d\u307e\u3059\u3002\u0020\u6291\u63da\u306f\u3042\u304f\u307e\u3067\u76ee\u5b89\uff1a\u0020\u2197\ufe0f\u4e0a\u3052\u0020\u002f\u0020\u2934\ufe0f\u5f37\u304f\u4e0a\u3052\u0020\u002f\u0020\u2198\ufe0f\u4e0b\u3052\u0020\u002f\u0020\u2935\ufe0f\u5f37\u304f\u4e0b\u3052',
       labels: {
         jp: '\u65e5\u672c\u8a9e',
         vi: '\u30d9\u30c8\u30ca\u30e0\u8a9e',
@@ -363,65 +383,423 @@
       }
     };
 
+    const TONE = {
+      up: '\u2197\ufe0f',
+      strongUp: '\u2934\ufe0f',
+      down: '\u2198\ufe0f',
+      strongDown: '\u2935\ufe0f'
+    };
+
+    const CATEGORIES = [
+      {
+        "id": "basic",
+        "label": "\u6328\u62f6\u30fb\u57fa\u672c"
+      },
+      {
+        "id": "self",
+        "label": "\u81ea\u5df1\u7d39\u4ecb"
+      },
+      {
+        "id": "restaurant",
+        "label": "\u30ec\u30b9\u30c8\u30e9\u30f3\uff08\u5165\u5e97\u30fb\u5e2d\uff09"
+      },
+      {
+        "id": "order",
+        "label": "\u6ce8\u6587\uff08\u98f2\u307f\u7269\u30fb\u8ffd\u52a0\uff09"
+      },
+      {
+        "id": "prefs",
+        "label": "\u597d\u307f\u30fb\u30a2\u30ec\u30eb\u30ae\u30fc"
+      },
+      {
+        "id": "compliment",
+        "label": "\u611f\u60f3\uff08\u304a\u3044\u3057\u3044\u7b49\uff09"
+      },
+      {
+        "id": "payment",
+        "label": "\u4f1a\u8a08\u30fb\u6301\u3061\u5e30\u308a"
+      },
+      {
+        "id": "toast",
+        "label": "\u4e7e\u676f"
+      },
+      {
+        "id": "help",
+        "label": "\u56f0\u3063\u305f\u3068\u304d"
+      }
+    ];
+
     const PHRASES = [
       {
-        title: '\u3042\u3044\u3055\u3064',
-        jp: '\u3053\u3093\u306b\u3061\u306f\u3002',
-        vi: 'Xin ch\u00e0o.',
-        katakana: '\u30b7\u30f3\u0020\u30c1\u30e3\u30aa',
-        katakanaTone: '\u30b7\u30f3\u2197\ufe0f\u0020\u30c1\u30e3\u30aa\u2198\ufe0f'
+        "cat": "basic",
+        "title": "\u3053\u3093\u306b\u3061\u306f",
+        "jp": "\u3053\u3093\u306b\u3061\u306f\u3002",
+        "vi": "Xin chao.",
+        "katakana": "\u30b7\u30f3 \u30c1\u30e3\u30aa"
       },
       {
-        title: '\u306f\u3058\u3081\u307e\u3057\u3066',
-        jp: '\u306f\u3058\u3081\u307e\u3057\u3066\u3002',
-        vi: 'R\u1ea5t vui \u0111\u01b0\u1ee3c g\u1eb7p b\u1ea1n.',
-        katakana: '\u30e9\u30c3\u0020\u30f4\u30a4\u0020\u30c9\u30a5\u30aa\u30c3\u30af\u0020\u30ac\u30c3\u30d7\u0020\u30d0\u30f3',
-        katakanaTone: '\u30e9\u30c3\u2197\ufe0f\u0020\u30f4\u30a4\u2934\ufe0f\u0020\u30c9\u30a5\u30aa\u30c3\u30af\u2198\ufe0f\u0020\u30ac\u30c3\u30d7\u2935\ufe0f\u0020\u30d0\u30f3\u2935\ufe0f'
+        "cat": "basic",
+        "title": "\u304a\u306f\u3088\u3046",
+        "jp": "\u304a\u306f\u3088\u3046\u3054\u3056\u3044\u307e\u3059\u3002",
+        "vi": "Chao buoi sang.",
+        "katakana": "\u30c1\u30e3\u30aa \u30d6\u30a9\u30a4 \u30b5\u30f3"
       },
       {
-        title: '\u540d\u524d',
-        jp: '\u79c1\u306f\uff08\u540d\u524d\uff09\u3067\u3059\u3002',
-        vi: 'T\u00f4i t\u00ean l\u00e0 (t\u00ean).',
-        katakana: '\u30c8\u30a4\u0020\u30c6\u30f3\u0020\u30e9\uff08\u30c6\u30f3\uff09',
-        katakanaTone: '\u30c8\u30a4\u2934\ufe0f\u0020\u30c6\u30f3\u2197\ufe0f\u0020\u30e9\u2198\ufe0f\uff08\u30c6\u30f3\u2197\ufe0f\uff09'
+        "cat": "basic",
+        "title": "\u3053\u3093\u3070\u3093\u306f",
+        "jp": "\u3053\u3093\u3070\u3093\u306f\u3002",
+        "vi": "Chao buoi toi.",
+        "katakana": "\u30c1\u30e3\u30aa \u30d6\u30a9\u30a4 \u30c8\u30a4"
       },
       {
-        title: '\u51fa\u8eab',
-        jp: '\u65e5\u672c\u304b\u3089\u6765\u307e\u3057\u305f\u3002',
-        vi: 'T\u00f4i \u0111\u1ebfn t\u1eeb Nh\u1eadt B\u1ea3n.',
-        katakana: '\u30c8\u30a4\u0020\u30c7\u30f3\u0020\u30c8\u30a5\u0020\u30cb\u30e3\u30c3\u30c8\u0020\u30d0\u30f3',
-        katakanaTone: '\u30c8\u30a4\u2934\ufe0f\u0020\u30c7\u30f3\u2198\ufe0f\u0020\u30c8\u30a5\u2198\ufe0f\u0020\u30cb\u30e3\u30c3\u30c8\u2197\ufe0f\u0020\u30d0\u30f3\u2198\ufe0f'
+        "cat": "basic",
+        "title": "\u307e\u305f\u4f1a\u3044\u307e\u3057\u3087\u3046",
+        "jp": "\u307e\u305f\u4f1a\u3044\u307e\u3057\u3087\u3046\u3002",
+        "vi": "Hen gap lai.",
+        "katakana": "\u30d8\u30f3 \u30ac\u30c3\u30d7 \u30e9\u30a4"
       },
       {
-        title: '\u4ed5\u4e8b',
-        jp: '\uff08\u4f1a\u793e\uff09\u3067\u50cd\u3044\u3066\u3044\u307e\u3059\u3002',
-        vi: 'T\u00f4i l\u00e0m vi\u1ec7c \u1edf (c\u00f4ng ty).',
-        katakana: '\u30c8\u30a4\u0020\u30e9\u30e0\u0020\u30f4\u30a3\u30a8\u30c3\u30af\u0020\u30aa\uff08\u30b3\u30f3\u0020\u30c6\u30a3\uff09',
-        katakanaTone: '\u30c8\u30a4\u2934\ufe0f\u0020\u30e9\u30e0\u2198\ufe0f\u0020\u30f4\u30a3\u30a8\u30c3\u30af\u2935\ufe0f\u0020\u30aa\u2198\ufe0f\uff08\u30b3\u30f3\u2197\ufe0f\u0020\u30c6\u30a3\u2197\ufe0f\uff09'
+        "cat": "basic",
+        "title": "\u3042\u308a\u304c\u3068\u3046",
+        "jp": "\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\u3002",
+        "vi": "Cam on.",
+        "katakana": "\u30ab\u30e0 \u30aa\u30f3"
       },
       {
-        title: '\u3088\u308d\u3057\u304f\u304a\u9858\u3044\u3057\u307e\u3059',
-        jp: '\u3088\u308d\u3057\u304f\u304a\u9858\u3044\u3057\u307e\u3059\u3002',
-        vi: 'R\u1ea5t mong \u0111\u01b0\u1ee3c h\u1ee3p t\u00e1c v\u1edbi b\u1ea1n.',
-        katakana: '\u30e9\u30c3\u0020\u30e2\u30f3\u0020\u30c9\u30a5\u30aa\u30c3\u30af\u0020\u30db\u30c3\u30d7\u0020\u30bf\u30c3\u30af\u0020\u30f4\u30a9\u30a4\u0020\u30d0\u30f3',
-        katakanaTone: '\u30e9\u30c3\u2197\ufe0f\u0020\u30e2\u30f3\u2934\ufe0f\u0020\u30c9\u30a5\u30aa\u30c3\u30af\u2198\ufe0f\u0020\u30db\u30c3\u30d7\u2198\ufe0f\u0020\u30bf\u30c3\u30af\u2197\ufe0f\u0020\u30f4\u30a9\u30a4\u2934\ufe0f\u0020\u30d0\u30f3\u2935\ufe0f'
+        "cat": "basic",
+        "title": "\u3059\u307f\u307e\u305b\u3093",
+        "jp": "\u3059\u307f\u307e\u305b\u3093\u3002",
+        "vi": "Xin loi.",
+        "katakana": "\u30b7\u30f3 \u30ed\u30a4"
       },
       {
-        title: '\u304a\u793c',
-        jp: '\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\u3002',
-        vi: 'Xin c\u1ea3m \u01a1n.',
-        katakana: '\u30b7\u30f3\u0020\u30ab\u30e0\u0020\u30aa\u30f3',
-        katakanaTone: '\u30b7\u30f3\u2197\ufe0f\u0020\u30ab\u30e0\u2198\ufe0f\u0020\u30aa\u30f3\u2198\ufe0f'
+        "cat": "basic",
+        "title": "\u306f\u3044",
+        "jp": "\u306f\u3044\u3002",
+        "vi": "Vang.",
+        "katakana": "\u30f4\u30a1\u30f3"
+      },
+      {
+        "cat": "basic",
+        "title": "\u3044\u3044\u3048",
+        "jp": "\u3044\u3044\u3048\u3002",
+        "vi": "Khong.",
+        "katakana": "\u30b3\u30f3"
+      },
+      {
+        "cat": "basic",
+        "title": "\u3061\u3087\u3063\u3068\u805e\u3044\u3066\u3044\u3044\uff1f",
+        "jp": "\u3061\u3087\u3063\u3068\u805e\u3044\u3066\u3082\u3044\u3044\u3067\u3059\u304b\uff1f",
+        "vi": "Cho toi hoi mot chut, duoc khong?",
+        "katakana": "\u30c1\u30e7 \u30c8\u30a4 \u30db\u30a4 \u30e2\u30c3 \u30c1\u30e5\u30c3\u30c8 \u30c9\u30a5\u30aa\u30c3\u30af \u30b3\u30f3"
+      },
+      {
+        "cat": "self",
+        "title": "\u306f\u3058\u3081\u307e\u3057\u3066",
+        "jp": "\u306f\u3058\u3081\u307e\u3057\u3066\u3002",
+        "vi": "Rat vui duoc gap ban.",
+        "katakana": "\u30e9\u30c3 \u30f4\u30a4 \u30c9\u30a5\u30aa\u30c3\u30af \u30ac\u30c3\u30d7 \u30d0\u30f3"
+      },
+      {
+        "cat": "self",
+        "title": "\u540d\u524d",
+        "jp": "\u79c1\u306f\uff08\u540d\u524d\uff09\u3067\u3059\u3002",
+        "vi": "Toi ten la (ten).",
+        "katakana": "\u30c8\u30a4 \u30c6\u30f3 \u30e9\uff08\u30c6\u30f3\uff09"
+      },
+      {
+        "cat": "self",
+        "title": "\u51fa\u8eab",
+        "jp": "\u65e5\u672c\u304b\u3089\u6765\u307e\u3057\u305f\u3002",
+        "vi": "Toi den tu Nhat Ban.",
+        "katakana": "\u30c8\u30a4 \u30c7\u30f3 \u30c8\u30a5 \u30cb\u30e3\u30c3\u30c8 \u30d0\u30f3"
+      },
+      {
+        "cat": "self",
+        "title": "\u4f1a\u793e",
+        "jp": "\uff08\u4f1a\u793e\uff09\u3067\u50cd\u3044\u3066\u3044\u307e\u3059\u3002",
+        "vi": "Toi lam viec o (cong ty).",
+        "katakana": "\u30c8\u30a4 \u30e9\u30e0 \u30f4\u30a3\u30a8\u30c3\u30af \u30aa\uff08\u30b3\u30f3 \u30c6\u30a3\uff09"
+      },
+      {
+        "cat": "self",
+        "title": "\u62c5\u5f53",
+        "jp": "\u79c1\u306f\uff08\u62c5\u5f53\uff09\u3092\u62c5\u5f53\u3057\u3066\u3044\u307e\u3059\u3002",
+        "vi": "Toi phu trach (phan viec nay).",
+        "katakana": "\u30c8\u30a4 \u30d5 \u30c1\u30e3\u30c3\u30af\uff08\u30d5\u30a1\u30f3 \u30f4\u30a3\u30a8\u30c3\u30af \u30ca\u30a4\uff09"
+      },
+      {
+        "cat": "self",
+        "title": "\u540d\u523a",
+        "jp": "\u3053\u3061\u3089\u306f\u540d\u523a\u3067\u3059\u3002",
+        "vi": "Day la danh thiep cua toi.",
+        "katakana": "\u30c0\u30a4 \u30e9 \u30b6\u30f3 \u30c6\u30a3\u30a8\u30c3\u30d7 \u30af\u30a2 \u30c8\u30a4"
+      },
+      {
+        "cat": "self",
+        "title": "\u30d9\u30c8\u30ca\u30e0\u8a9e\u82e6\u624b",
+        "jp": "\u30d9\u30c8\u30ca\u30e0\u8a9e\u306f\u3042\u307e\u308a\u5f97\u610f\u3067\u306f\u3042\u308a\u307e\u305b\u3093\u3002",
+        "vi": "Toi khong noi tieng Viet gioi.",
+        "katakana": "\u30c8\u30a4 \u30b3\u30f3 \u30ce\u30a4 \u30c6\u30a3\u30a8\u30f3 \u30f4\u30a3\u30a8\u30c3\u30c8 \u30be\u30a4"
+      },
+      {
+        "cat": "self",
+        "title": "\u3086\u3063\u304f\u308a",
+        "jp": "\u3086\u3063\u304f\u308a\u8a71\u3057\u3066\u3082\u3089\u3048\u307e\u3059\u304b\uff1f",
+        "vi": "Ban co the noi cham lai khong?",
+        "katakana": "\u30d0\u30f3 \u30b3 \u30c6 \u30ce\u30a4 \u30c1\u30e3\u30e0 \u30e9\u30a4 \u30b3\u30f3"
+      },
+      {
+        "cat": "self",
+        "title": "\u82f1\u8a9eOK?",
+        "jp": "\u82f1\u8a9e\u306f\u8a71\u305b\u307e\u3059\u304b\uff1f",
+        "vi": "Ban co noi tieng Anh khong?",
+        "katakana": "\u30d0\u30f3 \u30b3 \u30ce\u30a4 \u30c6\u30a3\u30a8\u30f3 \u30a2\u30a4\u30f3 \u30b3\u30f3"
+      },
+      {
+        "cat": "self",
+        "title": "\u3088\u308d\u3057\u304f",
+        "jp": "\u3088\u308d\u3057\u304f\u304a\u9858\u3044\u3057\u307e\u3059\u3002",
+        "vi": "Rat mong duoc hop tac voi ban.",
+        "katakana": "\u30e9\u30c3 \u30e2\u30f3 \u30c9\u30a5\u30aa\u30c3\u30af \u30db\u30c3\u30d7 \u30bf\u30c3\u30af \u30f4\u30a9\u30a4 \u30d0\u30f3"
+      },
+      {
+        "cat": "restaurant",
+        "title": "2\u4eba\u5e2d",
+        "jp": "2\u4eba\u3067\u3059\u3002",
+        "vi": "Cho toi mot ban cho hai nguoi.",
+        "katakana": "\u30c1\u30e7 \u30c8\u30a4 \u30e2\u30c3 \u30d0\u30f3 \u30c1\u30e7 \u30cf\u30a4 \u30b0\u30aa\u30a4"
+      },
+      {
+        "cat": "restaurant",
+        "title": "\u4e88\u7d04",
+        "jp": "\u4e88\u7d04\u3057\u3066\u3044\u307e\u3059\u3002",
+        "vi": "Toi co dat ban.",
+        "katakana": "\u30c8\u30a4 \u30b3 \u30c0\u30c3 \u30d0\u30f3"
+      },
+      {
+        "cat": "restaurant",
+        "title": "\u30e1\u30cb\u30e5\u30fc",
+        "jp": "\u30e1\u30cb\u30e5\u30fc\u3092\u898b\u305b\u3066\u304f\u3060\u3055\u3044\u3002",
+        "vi": "Cho toi xem thuc don.",
+        "katakana": "\u30c1\u30e7 \u30c8\u30a4 \u30bb\u30e0 \u30c8\u30a5\u30c3\u30af \u30c9\u30f3"
+      },
+      {
+        "cat": "restaurant",
+        "title": "\u304a\u3059\u3059\u3081",
+        "jp": "\u304a\u3059\u3059\u3081\u306f\u4f55\u3067\u3059\u304b\uff1f",
+        "vi": "Ban goi y mon nao?",
+        "katakana": "\u30d0\u30f3 \u30b4\u30a4 \u30a4 \u30e2\u30f3 \u30ca\u30aa"
+      },
+      {
+        "cat": "restaurant",
+        "title": "\u30c8\u30a4\u30ec",
+        "jp": "\u30c8\u30a4\u30ec\u306f\u3069\u3053\u3067\u3059\u304b\uff1f",
+        "vi": "Nha ve sinh o dau?",
+        "katakana": "\u30cb\u30e3 \u30f4\u30a7 \u30b7\u30f3 \u30aa\u30fc \u30c0\u30a6"
+      },
+      {
+        "cat": "order",
+        "title": "\u3053\u308c\u304f\u3060\u3055\u3044",
+        "jp": "\u3053\u308c\u3092\u304f\u3060\u3055\u3044\u3002",
+        "vi": "Cho toi mon nay.",
+        "katakana": "\u30c1\u30e7 \u30c8\u30a4 \u30e2\u30f3 \u30ca\u30a4"
+      },
+      {
+        "cat": "order",
+        "title": "\u8ffd\u52a0\u6ce8\u6587",
+        "jp": "\u8ffd\u52a0\u3067\u304a\u9858\u3044\u3057\u307e\u3059\u3002",
+        "vi": "Cho toi goi them (mon nay).",
+        "katakana": "\u30c1\u30e7 \u30c8\u30a4 \u30b4\u30a4 \u30c6\u30e0\uff08\u30e2\u30f3 \u30ca\u30a4\uff09"
+      },
+      {
+        "cat": "order",
+        "title": "\u6c34",
+        "jp": "\u304a\u6c34\u3092\u304f\u3060\u3055\u3044\u3002",
+        "vi": "Cho toi nuoc loc.",
+        "katakana": "\u30c1\u30e7 \u30c8\u30a4 \u30cc\u30aa\u30c3\u30af \u30ed\u30c3\u30af"
+      },
+      {
+        "cat": "order",
+        "title": "\u30d3\u30fc\u30eb",
+        "jp": "\u30d3\u30fc\u30eb\u3092\u304f\u3060\u3055\u3044\u3002",
+        "vi": "Cho toi bia.",
+        "katakana": "\u30c1\u30e7 \u30c8\u30a4 \u30d3\u30a2"
+      },
+      {
+        "cat": "order",
+        "title": "\u6c37\u306a\u3057",
+        "jp": "\u6c37\u306a\u3057\u3067\u304a\u9858\u3044\u3057\u307e\u3059\u3002",
+        "vi": "Khong da.",
+        "katakana": "\u30b3\u30f3 \u30c0\u30fc"
+      },
+      {
+        "cat": "order",
+        "title": "\u6c37\u5c11\u306a\u3081",
+        "jp": "\u6c37\u5c11\u306a\u3081\u3067\u304a\u9858\u3044\u3057\u307e\u3059\u3002",
+        "vi": "It da.",
+        "katakana": "\u30a4\u30c3 \u30c0\u30fc"
+      },
+      {
+        "cat": "prefs",
+        "title": "\u8f9b\u304f\u3057\u306a\u3044\u3067",
+        "jp": "\u8f9b\u304f\u3057\u306a\u3044\u3067\u304f\u3060\u3055\u3044\u3002",
+        "vi": "Lam on dung cay.",
+        "katakana": "\u30e9\u30e0 \u30aa\u30f3 \u30c9\u30a5\u30f3 \u30ab\u30a4"
+      },
+      {
+        "cat": "prefs",
+        "title": "\u8f9b\u3055\u5c11\u3057",
+        "jp": "\u5c11\u3057\u8f9b\u304f\u3057\u3066\u304f\u3060\u3055\u3044\u3002",
+        "vi": "Cay mot chut.",
+        "katakana": "\u30ab\u30a4 \u30e2\u30c3 \u30c1\u30e5\u30c3\u30c8"
+      },
+      {
+        "cat": "prefs",
+        "title": "\u8f9b\u304f\u306a\u3044",
+        "jp": "\u8f9b\u304f\u306a\u3044\u306e\u304c\u3044\u3044\u3067\u3059\u3002",
+        "vi": "Khong cay.",
+        "katakana": "\u30b3\u30f3 \u30ab\u30a4"
+      },
+      {
+        "cat": "prefs",
+        "title": "\u30a2\u30ec\u30eb\u30ae\u30fc",
+        "jp": "\u30a2\u30ec\u30eb\u30ae\u30fc\u304c\u3042\u308a\u307e\u3059\u3002",
+        "vi": "Toi bi di ung.",
+        "katakana": "\u30c8\u30a4 \u30d3 \u30ba\u30a3 \u30a6\u30f3"
+      },
+      {
+        "cat": "prefs",
+        "title": "\u30d4\u30fc\u30ca\u30c3\u30c4\u7121\u3057",
+        "jp": "\u30d4\u30fc\u30ca\u30c3\u30c4\u306f\u5165\u308c\u306a\u3044\u3067\u304f\u3060\u3055\u3044\u3002",
+        "vi": "Khong co dau phong.",
+        "katakana": "\u30b3\u30f3 \u30b3 \u30c0\u30a6 \u30d5\u30a9\u30f3"
+      },
+      {
+        "cat": "prefs",
+        "title": "\u8c5a\u306a\u3057",
+        "jp": "\u8c5a\u8089\u306a\u3057\u3067\u304a\u9858\u3044\u3057\u307e\u3059\u3002",
+        "vi": "Khong thit heo.",
+        "katakana": "\u30b3\u30f3 \u30c6\u30a3\u30c3\u30c8 \u30d8\u30aa"
+      },
+      {
+        "cat": "prefs",
+        "title": "\u725b\u306a\u3057",
+        "jp": "\u725b\u8089\u306a\u3057\u3067\u304a\u9858\u3044\u3057\u307e\u3059\u3002",
+        "vi": "Khong thit bo.",
+        "katakana": "\u30b3\u30f3 \u30c6\u30a3\u30c3\u30c8 \u30dc\u30fc"
+      },
+      {
+        "cat": "prefs",
+        "title": "\u6d77\u9bae\u306a\u3057",
+        "jp": "\u6d77\u9bae\u306a\u3057\u3067\u304a\u9858\u3044\u3057\u307e\u3059\u3002",
+        "vi": "Khong hai san.",
+        "katakana": "\u30b3\u30f3 \u30cf\u30a4 \u30b5\u30f3"
+      },
+      {
+        "cat": "compliment",
+        "title": "\u304a\u3044\u3057\u3044",
+        "jp": "\u304a\u3044\u3057\u3044\uff01",
+        "vi": "Ngon qua!",
+        "katakana": "\u30b4\u30f3 \u30af\u30a2"
+      },
+      {
+        "cat": "compliment",
+        "title": "\u3068\u3066\u3082\u304a\u3044\u3057\u3044",
+        "jp": "\u3068\u3066\u3082\u304a\u3044\u3057\u3044\u3067\u3059\u3002",
+        "vi": "Rat ngon.",
+        "katakana": "\u30e9\u30c3 \u30b4\u30f3"
+      },
+      {
+        "cat": "compliment",
+        "title": "\u6700\u9ad8",
+        "jp": "\u6700\u9ad8\u3067\u3059\uff01",
+        "vi": "Tuyet voi!",
+        "katakana": "\u30c8\u30a5\u30a4\u30a7\u30c3\u30c8 \u30f4\u30a9\u30a4"
+      },
+      {
+        "cat": "compliment",
+        "title": "\u3042\u308a\u304c\u3068\u3046\uff08\u5f37\uff09",
+        "jp": "\u672c\u5f53\u306b\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\u3002",
+        "vi": "Cam on nhieu.",
+        "katakana": "\u30ab\u30e0 \u30aa\u30f3 \u30cb\u30a8\u30a6"
+      },
+      {
+        "cat": "payment",
+        "title": "\u4f1a\u8a08",
+        "jp": "\u304a\u4f1a\u8a08\u304a\u9858\u3044\u3057\u307e\u3059\u3002",
+        "vi": "Tinh tien, lam on.",
+        "katakana": "\u30c6\u30a3\u30f3 \u30c6\u30a3\u30a8\u30f3 \u30e9\u30e0 \u30aa\u30f3"
+      },
+      {
+        "cat": "payment",
+        "title": "\u30ec\u30b7\u30fc\u30c8",
+        "jp": "\u30ec\u30b7\u30fc\u30c8\uff08\u8acb\u6c42\u66f8\uff09\u3092\u304f\u3060\u3055\u3044\u3002",
+        "vi": "Cho toi hoa don.",
+        "katakana": "\u30c1\u30e7 \u30c8\u30a4 \u30db\u30a2 \u30c9\u30f3"
+      },
+      {
+        "cat": "payment",
+        "title": "\u30ab\u30fc\u30c9OK?",
+        "jp": "\u30ab\u30fc\u30c9\u3067\u6255\u3048\u307e\u3059\u304b\uff1f",
+        "vi": "Toi co the thanh toan bang the khong?",
+        "katakana": "\u30c8\u30a4 \u30b3 \u30c6 \u30bf\u30f3 \u30c8\u30a2\u30f3 \u30d0\u30f3 \u30c6\u30fc \u30b3\u30f3"
+      },
+      {
+        "cat": "payment",
+        "title": "\u73fe\u91d1OK?",
+        "jp": "\u73fe\u91d1\u3067\u3082\u5927\u4e08\u592b\u3067\u3059\u304b\uff1f",
+        "vi": "Tien mat duoc khong?",
+        "katakana": "\u30c6\u30a3\u30a8\u30f3 \u30de\u30c3\u30c8 \u30c9\u30a5\u30aa\u30c3\u30af \u30b3\u30f3"
+      },
+      {
+        "cat": "payment",
+        "title": "\u6301\u3061\u5e30\u308a",
+        "jp": "\u6301\u3061\u5e30\u308a\u3067\u304d\u307e\u3059\u304b\uff1f",
+        "vi": "Toi co the mang di khong?",
+        "katakana": "\u30c8\u30a4 \u30b3 \u30c6 \u30de\u30f3 \u30ba\u30a3\u30fc \u30b3\u30f3"
+      },
+      {
+        "cat": "toast",
+        "title": "\u4e7e\u676f",
+        "jp": "\u4e7e\u676f\uff01",
+        "vi": "Mot, hai, ba, dzo!",
+        "katakana": "\u30e2\u30c3 \u30cf\u30a4 \u30d0\u30fc \u30ba\u30a9"
+      },
+      {
+        "cat": "help",
+        "title": "\u52a9\u3051\u3066",
+        "jp": "\u52a9\u3051\u3066\u304f\u3060\u3055\u3044\u3002",
+        "vi": "Lam on giup toi.",
+        "katakana": "\u30e9\u30e0 \u30aa\u30f3 \u30ba\u30e5\u30c3\u30d7 \u30c8\u30a4"
+      },
+      {
+        "cat": "help",
+        "title": "\u308f\u304b\u308a\u307e\u305b\u3093",
+        "jp": "\u5206\u304b\u308a\u307e\u305b\u3093\u3002",
+        "vi": "Toi khong hieu.",
+        "katakana": "\u30c8\u30a4 \u30b3\u30f3 \u30d2\u30a8\u30a6"
+      },
+      {
+        "cat": "help",
+        "title": "\u3082\u3046\u4e00\u56de",
+        "jp": "\u3082\u3046\u4e00\u5ea6\u8a00\u3063\u3066\u304f\u3060\u3055\u3044\u3002",
+        "vi": "Noi lai mot lan nua, duoc khong?",
+        "katakana": "\u30ce\u30a4 \u30e9\u30a4 \u30e2\u30c3 \u30e9\u30f3 \u30cc\u30a2 \u30c9\u30a5\u30aa\u30c3\u30af \u30b3\u30f3"
       }
     ];
 
     const statusEl = document.getElementById('status');
+    const categoryNavRoot = document.getElementById('category-nav');
     const phrasesRoot = document.getElementById('phrases');
     const stopAllBtn = document.getElementById('stop-all');
-    const translateFrame = document.getElementById('translate-frame');
-    const translateText = document.getElementById('translate-text');
-    const openJaViBtn = document.getElementById('open-ja-vi');
-    const openViJaBtn = document.getElementById('open-vi-ja');
+
+    function setCategoryOpen(blockEl, open) {
+      if (!blockEl) return;
+      blockEl.dataset.open = open ? '1' : '0';
+      const headBtn = blockEl.querySelector('.category-head');
+      if (headBtn) headBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
 
     function setStatus(message) {
       statusEl.textContent = message || '';
@@ -473,18 +851,19 @@
       }
     }
 
-    function buildGoogleTranslateUrl(sourceLang, targetLang, text) {
-      const encoded = encodeURIComponent(text || '');
-      return 'https://translate.google.com/?sl=' + sourceLang + '&tl=' + targetLang + '&op=translate&text=' + encoded;
-    }
-
-    function openTranslate(sourceLang, targetLang) {
-      const text = (translateText.value || '').trim();
-      const url = buildGoogleTranslateUrl(sourceLang, targetLang, text);
-      // Embed attempt
-      translateFrame.src = url;
-      // Guaranteed fallback
-      window.open(url, '_blank', 'noopener,noreferrer');
+    function autoTone(katakana) {
+      const text = (katakana || '').trim();
+      if (!text) return '';
+      const parts = text.split(/(\s+)/);
+      const arrows = [TONE.up, TONE.down];
+      let wordIndex = 0;
+      const out = parts.map(part => {
+        if (/^\s+$/.test(part)) return part;
+        const arrow = arrows[wordIndex % arrows.length];
+        wordIndex += 1;
+        return part + arrow;
+      });
+      return out.join('');
     }
 
     function buildPhraseCard(item, index) {
@@ -517,7 +896,7 @@
       const rows = [
         { label: UI.labels.jp, text: item.jp },
         { label: UI.labels.vi, text: item.vi },
-        { label: UI.labels.kataTone, text: item.katakanaTone || item.katakana, small: true }
+        { label: UI.labels.kataTone, text: item.katakanaTone || autoTone(item.katakana), small: true }
       ];
 
       for (const r of rows) {
@@ -551,15 +930,59 @@
       document.getElementById('page-subtitle').textContent = UI.subtitle;
       document.getElementById('note').textContent = UI.note;
 
-      document.getElementById('translate-title').textContent = UI.translateTitle;
-      document.getElementById('translate-label').textContent = UI.translateLabel;
-      document.getElementById('translate-note').textContent = UI.translateNote;
-      translateText.placeholder = UI.translatePlaceholder;
-      openJaViBtn.textContent = UI.openJaVi;
-      openViJaBtn.textContent = UI.openViJa;
+      categoryNavRoot.innerHTML = '';
+      for (const cat of CATEGORIES) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn';
+        btn.textContent = cat.label;
+        btn.addEventListener('click', () => {
+          const target = document.getElementById('cat-' + cat.id);
+          if (target) {
+            setCategoryOpen(target, true);
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+        categoryNavRoot.appendChild(btn);
+      }
 
       phrasesRoot.innerHTML = '';
-      PHRASES.forEach((p, i) => phrasesRoot.appendChild(buildPhraseCard(p, i)));
+      CATEGORIES.forEach((cat, catIndex) => {
+        const items = PHRASES.filter(p => p.cat === cat.id);
+
+        const block = document.createElement('section');
+        block.className = 'category-block';
+        block.id = 'cat-' + cat.id;
+        setCategoryOpen(block, catIndex === 0);
+
+        const head = document.createElement('button');
+        head.type = 'button';
+        head.className = 'category-head';
+        head.setAttribute('aria-expanded', catIndex === 0 ? 'true' : 'false');
+        head.addEventListener('click', () => {
+          const isOpen = block.dataset.open !== '0';
+          setCategoryOpen(block, !isOpen);
+        });
+
+        const title = document.createElement('div');
+        title.className = 'category-title';
+        title.textContent = cat.label;
+
+        const count = document.createElement('div');
+        count.className = 'category-count';
+        count.textContent = String(items.length);
+
+        head.appendChild(title);
+        head.appendChild(count);
+
+        const grid = document.createElement('div');
+        grid.className = 'category-phrases';
+        items.forEach((p, i) => grid.appendChild(buildPhraseCard(p, i)));
+
+        block.appendChild(head);
+        block.appendChild(grid);
+        phrasesRoot.appendChild(block);
+      });
 
       if (!isSpeechAvailable()) {
         setStatus('\u3053\u306e\u30d6\u30e9\u30a6\u30b6\u306f\u97f3\u58f0\u8aad\u307f\u4e0a\u3052\u306b\u672a\u5bfe\u5fdc\u3067\u3059\uff08\u8868\u793a\u306e\u307f\u3067\u7df4\u7fd2\u3067\u304d\u307e\u3059\uff09\u3002');
@@ -567,9 +990,6 @@
     }
 
     stopAllBtn.addEventListener('click', stopAll);
-
-    openJaViBtn.addEventListener('click', () => openTranslate('ja', 'vi'));
-    openViJaBtn.addEventListener('click', () => openTranslate('vi', 'ja'));
 
     if (isSpeechAvailable()) {
       window.speechSynthesis.onvoiceschanged = () => {};
