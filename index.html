@@ -629,6 +629,16 @@
       white-space: pre-line;
     }
 
+    .schedule-note a.schedule-link {
+      color: var(--accent-yellow);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .schedule-note a.schedule-link:hover {
+      opacity: 0.92;
+    }
+
     .schedule-item.is-group {
       background: linear-gradient(135deg, rgba(229, 57, 53, 0.55), rgba(5, 8, 20, 0.92));
       border-color: rgba(255, 255, 255, 0.14);
@@ -1886,6 +1896,14 @@
               <span class="icon-right">📍</span>
             </a>
 
+            <a class="map-button" href="https://www.google.com/maps/place/%E3%82%AF%E3%83%83%E3%82%AF+%E3%82%AC%E3%83%83%E3%82%AF+%E3%82%AF%E3%82%A2%E3%83%B3/@10.792844,106.6864286,17z/data=!3m1!4b1!4m6!3m5!1s0x317528cd9a13a0a5:0x8b18b057ab3b248b!8m2!3d10.792844!4d106.6890089!16s%2Fg%2F1thp5h63?authuser=2&entry=tts&g_ep=EgoyMDI2MDIyMy4wIPu8ASoASAFQAw%3D%3D&skid=7342c6f4-0e98-4085-a52d-6d2f8b8e81a1" target="_blank" rel="noopener noreferrer">
+              <div class="label">
+                <span class="main">クック ガック クアン（OCC会食）</span>
+                <span class="sub">Ho Chi Minh</span>
+              </div>
+              <span class="icon-right">📍</span>
+            </a>
+
             <a class="map-button" href="https://maps.app.goo.gl/xhg256MhUk6tLiXA9" target="_blank" rel="noopener noreferrer">
               <div class="label">
                 <span class="main">ICD</span>
@@ -2568,8 +2586,8 @@
         "e": "19:00",
         "g": "森岡・渡辺・小林",
         "k": "🍴食事",
-        "a": "ベトナムOCC懇親\n　HBA負担　支払担当：高野\n　負担先：役員",
-        "m": "お店：ベトナム料理のお店でベトナムOCCが選定中\n\n関係者:\nOCCベトナム\n・比嘉社長\n・ハンスウェーさん"
+        "a": "OCCとの会食\n　HBA負担　支払担当：高野\n　負担先：役員",
+        "m": "店名：Cục Gạch Quán（クック ガック クアン）\n場所：https://www.google.com/maps/place/%E3%82%AF%E3%83%83%E3%82%AF+%E3%82%AC%E3%83%83%E3%82%AF+%E3%82%AF%E3%82%A2%E3%83%B3/@10.792844,106.6864286,17z/data=!3m1!4b1!4m6!3m5!1s0x317528cd9a13a0a5:0x8b18b057ab3b248b!8m2!3d10.792844!4d106.6890089!16s%2Fg%2F1thp5h63?authuser=2&entry=tts&g_ep=EgoyMDI2MDIyMy4wIPu8ASoASAFQAw%3D%3D&skid=7342c6f4-0e98-4085-a52d-6d2f8b8e81a1\n\n関係者:\nOCCベトナム\n・比嘉社長\n・ハンスウェーさん"
       }
     ]
   },
@@ -2945,6 +2963,68 @@
           .replaceAll("'", '&#39;');
       }
 
+      function safeUrl(value) {
+        const raw = String(value ?? '').trim();
+        if (!raw) return '';
+        if (/^https?:\/\//i.test(raw)) return raw;
+        return '';
+      }
+
+      function classifyUrl(url) {
+        const u = String(url ?? '').toLowerCase();
+        if (!u) return 'link';
+        if (u.includes('maps.app.goo.gl') || u.includes('google.com/maps')) return 'maps';
+        if (u.includes('canva.com')) return 'doc';
+        if (u.includes('note.com')) return 'ref';
+        if (u.includes('marriott.com')) return 'official';
+        return 'link';
+      }
+
+      function extractPlaceName(text) {
+        const raw = String(text ?? '').replace(/\r\n/g, '\n');
+        const m = raw.match(/店名\s*[:：]\s*([^\n]+)/);
+        if (m && m[1]) return String(m[1]).trim();
+        return '';
+      }
+
+      function urlLabel(kind, placeName) {
+        if (kind === 'maps') return placeName || 'Google Maps';
+        if (kind === 'doc') return '資料';
+        if (kind === 'ref') return '参考';
+        if (kind === 'official') return '公式HP';
+        return 'リンク';
+      }
+
+      function linkifyText(text) {
+        const raw = String(text ?? '').replace(/\r\n/g, '\n');
+        if (!raw.trim()) return '';
+
+        const placeName = extractPlaceName(raw);
+        const urlRe = /(https?:\/\/[^\s<>\"]+)/g;
+
+        let out = '';
+        let lastIndex = 0;
+        let match;
+        while ((match = urlRe.exec(raw)) !== null) {
+          const start = match.index;
+          const url = match[0];
+          out += escapeHtml(raw.slice(lastIndex, start));
+
+          const safe = safeUrl(url);
+          if (!safe) {
+            out += escapeHtml(url);
+          } else {
+            const kind = classifyUrl(safe);
+            const label = urlLabel(kind, kind === 'maps' ? placeName : '');
+            out += `<a class="schedule-link" href="${escapeHtml(safe)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+          }
+
+          lastIndex = start + url.length;
+        }
+        out += escapeHtml(raw.slice(lastIndex));
+        return out;
+      }
+
       function formatTime(start, end) {
         const s = (start || '').trim();
         const e = (end || '').trim();
@@ -3005,8 +3085,8 @@
           const memo = (item.m || '').trim();
 
           const detailBlocks = [];
-          if (activityDetail) detailBlocks.push(`<div class="schedule-note">${escapeHtml(activityDetail)}</div>`);
-          if (memo) detailBlocks.push(`<div class="schedule-note">${escapeHtml(memo)}</div>`);
+          if (activityDetail) detailBlocks.push(`<div class="schedule-note">${linkifyText(activityDetail)}</div>`);
+          if (memo) detailBlocks.push(`<div class="schedule-note">${linkifyText(memo)}</div>`);
 
           li.innerHTML = `
             <div class="schedule-time">${escapeHtml(formatTime(item.s, item.e))}</div>
