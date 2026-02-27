@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vietnamese Intro Practice</title>
+  <style>
+    :root {
+      --bg-main: #050814;
+      --bg-elevated: #0d1020;
+      --bg-elevated-soft: #121527;
+      --accent-red: #e53935;
+      --accent-yellow: #ffeb3b;
+      --text-main: #f5f7ff;
+      --text-muted: #a3acc9;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.65);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --nav-height: 64px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Noto Sans JP", sans-serif;
+      background: radial-gradient(circle at top left, #101633 0, #050814 45%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to right, rgba(5, 8, 20, 0.94), rgba(2, 3, 8, 0.96));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-inner {
+      width: 100%;
+      max-width: 1120px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      min-width: 0;
+    }
+
+    .nav-logo em { font-style: normal; font-weight: 700; color: var(--accent-yellow); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .nav-link {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+      background: rgba(5, 9, 26, 0.9);
+      cursor: pointer;
+    }
+
+    .nav-link:hover {
+      background: rgba(229, 57, 53, 0.16);
+      border-color: rgba(229, 57, 53, 0.8);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .nav-link.nav-primary {
+      background: linear-gradient(135deg, var(--accent-red), #ff9800);
+      border-color: transparent;
+      color: #050814;
+      font-weight: 900;
+    }
+
+    .page-wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: calc(var(--nav-height) + 18px) 20px 40px;
+    }
+
+    .section-card {
+      background: linear-gradient(145deg, rgba(7, 10, 30, 0.98), rgba(4, 6, 18, 0.98));
+      border-radius: var(--radius-lg);
+      padding: 20px 18px 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .note {
+      margin: 12px 0 16px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(3, 8, 30, 0.9);
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .phrases {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .phrase {
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(3, 8, 30, 0.9);
+      overflow: hidden;
+    }
+
+    .phrase-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 12px 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(5, 9, 26, 0.86);
+    }
+
+    .phrase-title {
+      font-weight: 900;
+      font-size: 0.95rem;
+    }
+
+    .phrase-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 6px 10px;
+      font-size: 0.78rem;
+      background: rgba(5, 9, 26, 0.9);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      user-select: none;
+    }
+
+    .btn:hover {
+      background: rgba(229, 57, 53, 0.16);
+      border-color: rgba(229, 57, 53, 0.8);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent-red), #ff9800);
+      border-color: transparent;
+      color: #050814;
+      font-weight: 900;
+    }
+
+    .phrase-body {
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    @media (max-width: 520px) {
+      .row { grid-template-columns: 96px 1fr; }
+    }
+
+    .label {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      padding-top: 2px;
+      white-space: nowrap;
+    }
+
+    .text {
+      line-height: 1.35;
+      font-size: 1rem;
+      word-break: break-word;
+    }
+
+    .text.small {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .status {
+      margin-top: 10px;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      min-height: 1.2em;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .input {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(5, 9, 26, 0.9);
+      color: var(--text-main);
+      padding: 10px 12px;
+      font-size: 0.95rem;
+      line-height: 1.35;
+      outline: none;
+    }
+
+    .input::placeholder {
+      color: rgba(163, 172, 201, 0.75);
+    }
+
+    .translate-frame {
+      width: 100%;
+      height: 520px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 14px;
+      background: rgba(5, 9, 26, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span><em id="nav-accent">HBA</em></span>
+        <span id="nav-title">Vietnam Trip</span>
+      </div>
+      <div class="nav-actions">
+        <a class="nav-link" href="index.html" id="back-link">Back</a>
+        <button class="nav-link nav-primary" id="stop-all" type="button">Stop</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-wrapper">
+    <main>
+      <section class="section-card">
+        <div class="section-header">
+          <h1 class="section-title" id="page-title">Title</h1>
+          <p class="section-subtitle" id="page-subtitle">Subtitle</p>
+        </div>
+
+        <div class="note" id="note">Note</div>
+
+        <div class="phrases" id="phrases"></div>
+
+        <article class="phrase" id="translate-panel">
+          <div class="phrase-header">
+            <div class="phrase-title" id="translate-title">Translate</div>
+            <div class="phrase-actions">
+              <button class="btn primary" id="open-ja-vi" type="button">Open</button>
+              <button class="btn" id="open-vi-ja" type="button">Open</button>
+            </div>
+          </div>
+          <div class="phrase-body">
+            <div class="field">
+              <div class="label" id="translate-label">Text</div>
+              <textarea class="input" id="translate-text" rows="3" placeholder="..."></textarea>
+              <div class="text small" id="translate-note">Note</div>
+            </div>
+            <iframe class="translate-frame" id="translate-frame" title="Google Translate"></iframe>
+          </div>
+        </article>
+
+        <div class="status" id="status"></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const UI = {
+      navAccent: '\u0056\u0069\u0065\u0074\u006e\u0061\u006d\u0065\u0073\u0065',
+      navTitle: '\u0049\u006e\u0074\u0072\u006f\u0020\u0050\u0072\u0061\u0063\u0074\u0069\u0063\u0065',
+      back: '\u2b05\ufe0f\u0020\u4e00\u89a7\u3078\u623b\u308b',
+      stop: '\u25a0\u0020\u505c\u6b62',
+      title: '\u30d9\u30c8\u30ca\u30e0\u8a9e\uff1a\u7c21\u5358\u306a\u6328\u62f6\u0020\u0026\u0020\u81ea\u5df1\u7d39\u4ecb',
+      subtitle: '\u65e5\u672c\u8a9e\u0020\u002f\u0020\u30d9\u30c8\u30ca\u30e0\u8a9e\u0020\u002f\u0020\u30ab\u30bf\u30ab\u30ca\uff08\u6291\u63da\u76ee\u5b89\u4ed8\u304d\uff09\u0020\u002b\u0020\u97f3\u58f0\uff08VN\u306e\u307f\uff09',
+      note: '\u97f3\u58f0\u306f\u30d6\u30e9\u30a6\u30b6\u306e\u8aad\u307f\u4e0a\u3052\uff08Web Speech API\uff09\u3092\u4f7f\u3044\u307e\u3059\u3002\u30d9\u30c8\u30ca\u30e0\u8a9e\u97f3\u58f0\u304c\u5165\u3063\u3066\u3044\u306a\u3044\u7aef\u672b\u3067\u306f\u3001VN\u518d\u751f\u304c\u7121\u97f3\u306b\u306a\u308b\u3053\u3068\u304c\u3042\u308a\u307e\u3059\uff08\u8868\u793a\u3067\u7df4\u7fd2\u3067\u304d\u307e\u3059\uff09\u3002\u0020\u6291\u63da\u306f\u3042\u304f\u307e\u3067\u76ee\u5b89\uff1a\u0020\u2197\ufe0f\u4e0a\u3052\u0020\u002f\u0020\u2934\ufe0f\u5f37\u304f\u4e0a\u3052\u0020\u002f\u0020\u2198\ufe0f\u4e0b\u3052\u0020\u002f\u0020\u2935\ufe0f\u5f37\u304f\u4e0b\u3052',
+      translateTitle: 'Google\u7ffb\u8a33\uff08\u30d9\u30c8\u30ca\u30e0\u8a9e\u2194\u65e5\u672c\u8a9e\uff09',
+      translateLabel: '\u5165\u529b\u30c6\u30ad\u30b9\u30c8',
+      translatePlaceholder: '\u3053\u3053\u306b\u5165\u529b\uff08\u307e\u305f\u306f\u30b3\u30d4\u30da\uff09\u3057\u3066\u3001\u53f3\u4e0a\u306e\u30dc\u30bf\u30f3\u3067Google\u7ffb\u8a33\u3092\u958b\u304d\u307e\u3059\u3002',
+      translateNote: '\u57cb\u3081\u8fbc\u307f\uff08iframe\uff09\u306f\u30d6\u30e9\u30a6\u30b6\u306e\u5236\u9650\u3067\u8868\u793a\u3067\u304d\u306a\u3044\u5834\u5408\u304c\u3042\u308a\u307e\u3059\u3002\u305d\u306e\u5834\u5408\u306f\u300c\u958b\u304f\u300d\u3067\u65b0\u3057\u3044\u30bf\u30d6\u3067\u4f7f\u3063\u3066\u304f\u3060\u3055\u3044\u3002',
+      openJaVi: 'JP\u2192VN\u0020\u958b\u304f',
+      openViJa: 'VN\u2192JP\u0020\u958b\u304f',
+      labels: {
+        jp: '\u65e5\u672c\u8a9e',
+        vi: '\u30d9\u30c8\u30ca\u30e0\u8a9e',
+        kataTone: '\u30ab\u30bf\u30ab\u30ca\u002b\u6291\u63da',
+        playVN: '\u25b6\u0020VN',
+        playJP: ''
+      }
+    };
+
+    const PHRASES = [
+      {
+        title: '\u3042\u3044\u3055\u3064',
+        jp: '\u3053\u3093\u306b\u3061\u306f\u3002',
+        vi: 'Xin ch\u00e0o.',
+        katakana: '\u30b7\u30f3\u0020\u30c1\u30e3\u30aa',
+        katakanaTone: '\u30b7\u30f3\u2197\ufe0f\u0020\u30c1\u30e3\u30aa\u2198\ufe0f'
+      },
+      {
+        title: '\u306f\u3058\u3081\u307e\u3057\u3066',
+        jp: '\u306f\u3058\u3081\u307e\u3057\u3066\u3002',
+        vi: 'R\u1ea5t vui \u0111\u01b0\u1ee3c g\u1eb7p b\u1ea1n.',
+        katakana: '\u30e9\u30c3\u0020\u30f4\u30a4\u0020\u30c9\u30a5\u30aa\u30c3\u30af\u0020\u30ac\u30c3\u30d7\u0020\u30d0\u30f3',
+        katakanaTone: '\u30e9\u30c3\u2197\ufe0f\u0020\u30f4\u30a4\u2934\ufe0f\u0020\u30c9\u30a5\u30aa\u30c3\u30af\u2198\ufe0f\u0020\u30ac\u30c3\u30d7\u2935\ufe0f\u0020\u30d0\u30f3\u2935\ufe0f'
+      },
+      {
+        title: '\u540d\u524d',
+        jp: '\u79c1\u306f\uff08\u540d\u524d\uff09\u3067\u3059\u3002',
+        vi: 'T\u00f4i t\u00ean l\u00e0 (t\u00ean).',
+        katakana: '\u30c8\u30a4\u0020\u30c6\u30f3\u0020\u30e9\uff08\u30c6\u30f3\uff09',
+        katakanaTone: '\u30c8\u30a4\u2934\ufe0f\u0020\u30c6\u30f3\u2197\ufe0f\u0020\u30e9\u2198\ufe0f\uff08\u30c6\u30f3\u2197\ufe0f\uff09'
+      },
+      {
+        title: '\u51fa\u8eab',
+        jp: '\u65e5\u672c\u304b\u3089\u6765\u307e\u3057\u305f\u3002',
+        vi: 'T\u00f4i \u0111\u1ebfn t\u1eeb Nh\u1eadt B\u1ea3n.',
+        katakana: '\u30c8\u30a4\u0020\u30c7\u30f3\u0020\u30c8\u30a5\u0020\u30cb\u30e3\u30c3\u30c8\u0020\u30d0\u30f3',
+        katakanaTone: '\u30c8\u30a4\u2934\ufe0f\u0020\u30c7\u30f3\u2198\ufe0f\u0020\u30c8\u30a5\u2198\ufe0f\u0020\u30cb\u30e3\u30c3\u30c8\u2197\ufe0f\u0020\u30d0\u30f3\u2198\ufe0f'
+      },
+      {
+        title: '\u4ed5\u4e8b',
+        jp: '\uff08\u4f1a\u793e\uff09\u3067\u50cd\u3044\u3066\u3044\u307e\u3059\u3002',
+        vi: 'T\u00f4i l\u00e0m vi\u1ec7c \u1edf (c\u00f4ng ty).',
+        katakana: '\u30c8\u30a4\u0020\u30e9\u30e0\u0020\u30f4\u30a3\u30a8\u30c3\u30af\u0020\u30aa\uff08\u30b3\u30f3\u0020\u30c6\u30a3\uff09',
+        katakanaTone: '\u30c8\u30a4\u2934\ufe0f\u0020\u30e9\u30e0\u2198\ufe0f\u0020\u30f4\u30a3\u30a8\u30c3\u30af\u2935\ufe0f\u0020\u30aa\u2198\ufe0f\uff08\u30b3\u30f3\u2197\ufe0f\u0020\u30c6\u30a3\u2197\ufe0f\uff09'
+      },
+      {
+        title: '\u3088\u308d\u3057\u304f\u304a\u9858\u3044\u3057\u307e\u3059',
+        jp: '\u3088\u308d\u3057\u304f\u304a\u9858\u3044\u3057\u307e\u3059\u3002',
+        vi: 'R\u1ea5t mong \u0111\u01b0\u1ee3c h\u1ee3p t\u00e1c v\u1edbi b\u1ea1n.',
+        katakana: '\u30e9\u30c3\u0020\u30e2\u30f3\u0020\u30c9\u30a5\u30aa\u30c3\u30af\u0020\u30db\u30c3\u30d7\u0020\u30bf\u30c3\u30af\u0020\u30f4\u30a9\u30a4\u0020\u30d0\u30f3',
+        katakanaTone: '\u30e9\u30c3\u2197\ufe0f\u0020\u30e2\u30f3\u2934\ufe0f\u0020\u30c9\u30a5\u30aa\u30c3\u30af\u2198\ufe0f\u0020\u30db\u30c3\u30d7\u2198\ufe0f\u0020\u30bf\u30c3\u30af\u2197\ufe0f\u0020\u30f4\u30a9\u30a4\u2934\ufe0f\u0020\u30d0\u30f3\u2935\ufe0f'
+      },
+      {
+        title: '\u304a\u793c',
+        jp: '\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\u3002',
+        vi: 'Xin c\u1ea3m \u01a1n.',
+        katakana: '\u30b7\u30f3\u0020\u30ab\u30e0\u0020\u30aa\u30f3',
+        katakanaTone: '\u30b7\u30f3\u2197\ufe0f\u0020\u30ab\u30e0\u2198\ufe0f\u0020\u30aa\u30f3\u2198\ufe0f'
+      }
+    ];
+
+    const statusEl = document.getElementById('status');
+    const phrasesRoot = document.getElementById('phrases');
+    const stopAllBtn = document.getElementById('stop-all');
+    const translateFrame = document.getElementById('translate-frame');
+    const translateText = document.getElementById('translate-text');
+    const openJaViBtn = document.getElementById('open-ja-vi');
+    const openViJaBtn = document.getElementById('open-vi-ja');
+
+    function setStatus(message) {
+      statusEl.textContent = message || '';
+    }
+
+    function isSpeechAvailable() {
+      return 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+    }
+
+    function findVoice(preferredLang) {
+      const voices = window.speechSynthesis.getVoices();
+      if (!voices || voices.length === 0) return null;
+      const match = voices.find(v => (v.lang || '').toLowerCase().startsWith(preferredLang.toLowerCase()));
+      return match || null;
+    }
+
+    function speak(text, lang) {
+      if (!isSpeechAvailable()) {
+        setStatus('\u3053\u306e\u30d6\u30e9\u30a6\u30b6\u306f\u97f3\u58f0\u8aad\u307f\u4e0a\u3052\u306b\u672a\u5bfe\u5fdc\u3067\u3059\u3002');
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = lang;
+      utterance.rate = (lang || '').toLowerCase().startsWith('vi') ? 0.92 : 0.98;
+      utterance.pitch = 1.0;
+
+      const voice = findVoice(lang);
+      if (voice) utterance.voice = voice;
+
+      utterance.onstart = () => setStatus('\u518d\u751f\u4e2d: ' + lang + ' / ' + text);
+      utterance.onend = () => setStatus('');
+      utterance.onerror = () => setStatus('\u97f3\u58f0\u306e\u518d\u751f\u306b\u5931\u6557\u3057\u307e\u3057\u305f\uff08\u74b0\u5883\u306e\u97f3\u58f0\u8a2d\u5b9a\u3092\u3054\u78ba\u8a8d\u304f\u3060\u3055\u3044\uff09\u3002');
+
+      window.speechSynthesis.speak(utterance);
+
+      if (!voice && (lang || '').toLowerCase().startsWith('vi')) {
+        setStatus('\u6ce8\u610f: \u30d9\u30c8\u30ca\u30e0\u8a9e\u97f3\u58f0\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f\uff08\u7aef\u672b\u306b\u97f3\u58f0\u304c\u7121\u3044\u53ef\u80fd\u6027\u304c\u3042\u308a\u307e\u3059\uff09\u3002');
+      }
+    }
+
+    function stopAll() {
+      if (isSpeechAvailable()) {
+        window.speechSynthesis.cancel();
+        setStatus('\u505c\u6b62\u3057\u307e\u3057\u305f\u3002');
+        setTimeout(() => setStatus(''), 800);
+      }
+    }
+
+    function buildGoogleTranslateUrl(sourceLang, targetLang, text) {
+      const encoded = encodeURIComponent(text || '');
+      return 'https://translate.google.com/?sl=' + sourceLang + '&tl=' + targetLang + '&op=translate&text=' + encoded;
+    }
+
+    function openTranslate(sourceLang, targetLang) {
+      const text = (translateText.value || '').trim();
+      const url = buildGoogleTranslateUrl(sourceLang, targetLang, text);
+      // Embed attempt
+      translateFrame.src = url;
+      // Guaranteed fallback
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    function buildPhraseCard(item, index) {
+      const wrap = document.createElement('article');
+      wrap.className = 'phrase';
+
+      const header = document.createElement('div');
+      header.className = 'phrase-header';
+
+      const title = document.createElement('div');
+      title.className = 'phrase-title';
+      title.textContent = (index + 1) + '. ' + item.title;
+
+      const actions = document.createElement('div');
+      actions.className = 'phrase-actions';
+
+      const vnBtn = document.createElement('button');
+      vnBtn.className = 'btn primary';
+      vnBtn.type = 'button';
+      vnBtn.textContent = UI.labels.playVN;
+      vnBtn.addEventListener('click', () => speak(item.vi, 'vi-VN'));
+      actions.appendChild(vnBtn);
+
+      header.appendChild(title);
+      header.appendChild(actions);
+
+      const body = document.createElement('div');
+      body.className = 'phrase-body';
+
+      const rows = [
+        { label: UI.labels.jp, text: item.jp },
+        { label: UI.labels.vi, text: item.vi },
+        { label: UI.labels.kataTone, text: item.katakanaTone || item.katakana, small: true }
+      ];
+
+      for (const r of rows) {
+        const row = document.createElement('div');
+        row.className = 'row';
+
+        const label = document.createElement('div');
+        label.className = 'label';
+        label.textContent = r.label;
+
+        const text = document.createElement('div');
+        text.className = r.small ? 'text small' : 'text';
+        text.textContent = r.text;
+
+        row.appendChild(label);
+        row.appendChild(text);
+        body.appendChild(row);
+      }
+
+      wrap.appendChild(header);
+      wrap.appendChild(body);
+      return wrap;
+    }
+
+    function render() {
+      document.getElementById('nav-accent').textContent = UI.navAccent;
+      document.getElementById('nav-title').textContent = UI.navTitle;
+      document.getElementById('back-link').textContent = UI.back;
+      stopAllBtn.textContent = UI.stop;
+      document.getElementById('page-title').textContent = UI.title;
+      document.getElementById('page-subtitle').textContent = UI.subtitle;
+      document.getElementById('note').textContent = UI.note;
+
+      document.getElementById('translate-title').textContent = UI.translateTitle;
+      document.getElementById('translate-label').textContent = UI.translateLabel;
+      document.getElementById('translate-note').textContent = UI.translateNote;
+      translateText.placeholder = UI.translatePlaceholder;
+      openJaViBtn.textContent = UI.openJaVi;
+      openViJaBtn.textContent = UI.openViJa;
+
+      phrasesRoot.innerHTML = '';
+      PHRASES.forEach((p, i) => phrasesRoot.appendChild(buildPhraseCard(p, i)));
+
+      if (!isSpeechAvailable()) {
+        setStatus('\u3053\u306e\u30d6\u30e9\u30a6\u30b6\u306f\u97f3\u58f0\u8aad\u307f\u4e0a\u3052\u306b\u672a\u5bfe\u5fdc\u3067\u3059\uff08\u8868\u793a\u306e\u307f\u3067\u7df4\u7fd2\u3067\u304d\u307e\u3059\uff09\u3002');
+      }
+    }
+
+    stopAllBtn.addEventListener('click', stopAll);
+
+    openJaViBtn.addEventListener('click', () => openTranslate('ja', 'vi'));
+    openViJaBtn.addEventListener('click', () => openTranslate('vi', 'ja'));
+
+    if (isSpeechAvailable()) {
+      window.speechSynthesis.onvoiceschanged = () => {};
+    }
+
+    render();
+  </script>
+</body>
+</html>
